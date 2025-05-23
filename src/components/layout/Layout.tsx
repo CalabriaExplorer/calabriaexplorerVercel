@@ -35,7 +35,7 @@ const Layout = ({ children, colorScheme = "default" }: LayoutProps) => {
                 <Link to="#" className="font-medium">Contact</Link>
               </NavigationMenuItem>
               <NavigationMenuItem className="px-2">
-                <Button variant="outline" size="sm">EN | IT</Button>
+                <Button variant="outline" size="sm">EN | RU</Button>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
