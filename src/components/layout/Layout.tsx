@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import { MapPin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,9 +11,15 @@ interface LayoutProps {
 }
 
 const Layout = ({ children, colorScheme = "default" }: LayoutProps) => {
+  const { language, setLanguage, t } = useLanguage();
+  
   const headerAccentColor = 
     colorScheme === "tourist" ? "border-[#0077B6]" :
     colorScheme === "relocator" ? "border-[#E2725B]" : "border-gray-200";
+
+  const toggleLanguage = () => {
+    setLanguage(language === "en" ? "ru" : "en");
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -26,16 +33,18 @@ const Layout = ({ children, colorScheme = "default" }: LayoutProps) => {
           <NavigationMenu>
             <NavigationMenuList className="hidden md:flex">
               <NavigationMenuItem className="px-2">
-                <Link to="/" className="font-medium">Home</Link>
+                <Link to="/" className="font-medium">{t("home")}</Link>
               </NavigationMenuItem>
               <NavigationMenuItem className="px-2">
-                <Link to="#" className="font-medium">About</Link>
+                <Link to="#" className="font-medium">{t("about")}</Link>
               </NavigationMenuItem>
               <NavigationMenuItem className="px-2">
-                <Link to="#" className="font-medium">Contact</Link>
+                <Link to="#" className="font-medium">{t("contact")}</Link>
               </NavigationMenuItem>
               <NavigationMenuItem className="px-2">
-                <Button variant="outline" size="sm">EN | RU</Button>
+                <Button variant="outline" size="sm" onClick={toggleLanguage}>
+                  {language === "en" ? "EN | RU" : "RU | EN"}
+                </Button>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
@@ -53,21 +62,21 @@ const Layout = ({ children, colorScheme = "default" }: LayoutProps) => {
           <div className="grid md:grid-cols-3 gap-8">
             <div>
               <h3 className="font-serif text-xl font-bold mb-4">Calabria Explorer</h3>
-              <p className="text-gray-300 mb-4">Discover Italy's hidden gem - pristine beaches, rich culture, and authentic living</p>
+              <p className="text-gray-300 mb-4">{t("footer.description")}</p>
             </div>
             
             <div>
-              <h4 className="font-bold mb-4">Quick Links</h4>
+              <h4 className="font-bold mb-4">{t("footer.quicklinks")}</h4>
               <ul className="space-y-2">
-                <li><Link to="/" className="text-gray-300 hover:text-white">Home</Link></li>
-                <li><Link to="#" className="text-gray-300 hover:text-white">Tourist Guide</Link></li>
-                <li><Link to="#" className="text-gray-300 hover:text-white">Relocation</Link></li>
-                <li><Link to="#" className="text-gray-300 hover:text-white">Contact</Link></li>
+                <li><Link to="/" className="text-gray-300 hover:text-white">{t("home")}</Link></li>
+                <li><Link to="#" className="text-gray-300 hover:text-white">{t("footer.tourist")}</Link></li>
+                <li><Link to="#" className="text-gray-300 hover:text-white">{t("footer.relocation")}</Link></li>
+                <li><Link to="#" className="text-gray-300 hover:text-white">{t("contact")}</Link></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-bold mb-4">Connect With Us</h4>
+              <h4 className="font-bold mb-4">{t("footer.connect")}</h4>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-300 hover:text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
@@ -89,7 +98,7 @@ const Layout = ({ children, colorScheme = "default" }: LayoutProps) => {
           </div>
           
           <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} Calabria Explorer. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Calabria Explorer. {t("footer.copyright")}</p>
           </div>
         </div>
       </footer>

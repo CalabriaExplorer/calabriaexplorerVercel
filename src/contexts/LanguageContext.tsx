@@ -1,0 +1,159 @@
+
+import React, { createContext, useState, useContext, ReactNode } from "react";
+
+type Language = "en" | "ru";
+
+interface LanguageContextType {
+  language: Language;
+  setLanguage: (language: Language) => void;
+  t: (key: string) => string;
+}
+
+const translations = {
+  en: {
+    // Home
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    
+    // Hero
+    "hero.title": "Calabria: Where La Dolce Vita Meets Affordability",
+    "hero.subtitle": "Discover Italy's hidden gem - pristine beaches, rich culture, and authentic living",
+    
+    // Audience Selection
+    "audience.title": "How would you like to experience Calabria?",
+    "tourist.title": "Explore as a Tourist",
+    "tourist.description": "Discover beautiful beaches, historical sites, local cuisine, and authentic experiences.",
+    "tourist.button": "Start Exploring",
+    "relocator.title": "Relocate Here",
+    "relocator.description": "Everything you need to know about moving to and living in this affordable Mediterranean paradise.",
+    "relocator.button": "Plan Your Move",
+    
+    // Tourist Section
+    "tourist.section.title": "Discover Calabria",
+    "tourist.explore.title": "Explore Map",
+    "tourist.explore.description": "Find beaches, historical sites, and hidden gems",
+    "tourist.calendar.title": "Event Calendar",
+    "tourist.calendar.description": "Discover local festivals and cultural events",
+    "tourist.itineraries.title": "Itineraries",
+    "tourist.itineraries.description": "Pre-planned routes for the perfect vacation",
+    "tourist.secrets.title": "Local Secrets",
+    "tourist.secrets.description": "Stories and tips from Calabrian residents",
+    "tourist.plan": "Start Planning Your Trip",
+    
+    // Relocator Section
+    "relocator.section.title": "Relocate to Calabria",
+    "relocator.guide.title": "Relocation Guide",
+    "relocator.guide.description": "Step-by-step checklist for your move",
+    "relocator.estate.title": "Real Estate",
+    "relocator.estate.description": "Find your new home in Calabria",
+    "relocator.forum.title": "Expat Forum",
+    "relocator.forum.description": "Connect with others who've made the move",
+    "relocator.calculator.title": "Cost Calculator",
+    "relocator.calculator.description": "Plan your budget for Calabrian living",
+    "relocator.begin": "Begin Your Relocation Journey",
+    
+    // Why Calabria
+    "why.title": "Why Calabria?",
+    "why.sunny": "Sunny days per year",
+    "why.espresso": "Average price for an espresso",
+    "why.coastline": "Of pristine coastline",
+    
+    // Social
+    "social.title": "#MyCalabria",
+    "social.description": "See Calabria through the eyes of visitors and locals",
+    
+    // Footer
+    "footer.description": "Discover Italy's hidden gem - pristine beaches, rich culture, and authentic living",
+    "footer.quicklinks": "Quick Links",
+    "footer.tourist": "Tourist Guide",
+    "footer.relocation": "Relocation",
+    "footer.connect": "Connect With Us",
+    "footer.copyright": "All rights reserved.",
+  },
+  ru: {
+    // Home
+    "home": "Главная",
+    "about": "О нас",
+    "contact": "Контакты",
+    
+    // Hero
+    "hero.title": "Калабрия: Где La Dolce Vita Встречается с Доступностью",
+    "hero.subtitle": "Откройте для себя скрытую жемчужину Италии - нетронутые пляжи, богатую культуру и аутентичную жизнь",
+    
+    // Audience Selection
+    "audience.title": "Как бы вы хотели узнать Калабрию?",
+    "tourist.title": "Изучить как Турист",
+    "tourist.description": "Откройте для себя прекрасные пляжи, исторические места, местную кухню и аутентичные впечатления.",
+    "tourist.button": "Начать Исследование",
+    "relocator.title": "Переехать Сюда",
+    "relocator.description": "Всё, что нужно знать о переезде и жизни в этом доступном средиземноморском раю.",
+    "relocator.button": "Планировать Переезд",
+    
+    // Tourist Section
+    "tourist.section.title": "Откройте для себя Калабрию",
+    "tourist.explore.title": "Карта Исследования",
+    "tourist.explore.description": "Найдите пляжи, исторические места и скрытые жемчужины",
+    "tourist.calendar.title": "Календарь Событий",
+    "tourist.calendar.description": "Откройте для себя местные фестивали и культурные мероприятия",
+    "tourist.itineraries.title": "Маршруты",
+    "tourist.itineraries.description": "Заранее спланированные маршруты для идеального отпуска",
+    "tourist.secrets.title": "Местные Секреты",
+    "tourist.secrets.description": "Истории и советы от жителей Калабрии",
+    "tourist.plan": "Начать Планировать Поездку",
+    
+    // Relocator Section
+    "relocator.section.title": "Переехать в Калабрию",
+    "relocator.guide.title": "Руководство по Переезду",
+    "relocator.guide.description": "Пошаговый контрольный список для вашего переезда",
+    "relocator.estate.title": "Недвижимость",
+    "relocator.estate.description": "Найдите свой новый дом в Калабрии",
+    "relocator.forum.title": "Форум Экспатов",
+    "relocator.forum.description": "Общайтесь с другими, кто уже переехал",
+    "relocator.calculator.title": "Калькулятор Расходов",
+    "relocator.calculator.description": "Планируйте свой бюджет для жизни в Калабрии",
+    "relocator.begin": "Начать Ваш Путь к Переезду",
+    
+    // Why Calabria
+    "why.title": "Почему Калабрия?",
+    "why.sunny": "Солнечных дней в году",
+    "why.espresso": "Средняя цена за эспрессо",
+    "why.coastline": "Нетронутой береговой линии",
+    
+    // Social
+    "social.title": "#МояКалабрия",
+    "social.description": "Увидите Калабрию глазами посетителей и местных жителей",
+    
+    // Footer
+    "footer.description": "Откройте для себя скрытую жемчужину Италии - нетронутые пляжи, богатую культуру и аутентичную жизнь",
+    "footer.quicklinks": "Быстрые Ссылки",
+    "footer.tourist": "Туристический Гид",
+    "footer.relocation": "Переезд",
+    "footer.connect": "Свяжитесь с Нами",
+    "footer.copyright": "Все права защищены.",
+  }
+};
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+export const LanguageProvider: React.FC<{children: ReactNode}> = ({ children }) => {
+  const [language, setLanguage] = useState<Language>("en");
+
+  const t = (key: string): string => {
+    return translations[language][key] || key;
+  };
+
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
+
+export const useLanguage = (): LanguageContextType => {
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error("useLanguage must be used within a LanguageProvider");
+  }
+  return context;
+};
