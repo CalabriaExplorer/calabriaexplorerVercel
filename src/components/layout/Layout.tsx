@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-import { MapPin, Facebook, Instagram, Linkedin, Github, Phone, Mail } from "lucide-react";
+import { MapPin, Instagram, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect } from "react";
 
@@ -49,16 +49,6 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
           href: "https://www.instagram.com/maria_nedvizimost_calabria?igsh=b3h1aHBzeWhpeG4z",
           icon: Instagram,
           label: "Follow us on Instagram"
-        },
-        {
-          href: "https://www.linkedin.com/company/calabria-explorer",
-          icon: Linkedin,
-          label: "Connect on LinkedIn"
-        },
-        {
-          href: "https://github.com/calabria-explorer",
-          icon: Github,
-          label: "View on GitHub"
         }
       ];
     } else {
