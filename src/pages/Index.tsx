@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from "@/components/ui/navigation-menu";
@@ -152,9 +151,11 @@ const Index = () => {
             </div>
             
             <div className="text-center">
-              <Button className="bg-[#0077B6] hover:bg-[#005f92]">
-                {t("tourist.plan")}
-              </Button>
+              <Link to="/tours">
+                <Button className="bg-[#0077B6] hover:bg-[#005f92]">
+                  {t("tourist.plan")}
+                </Button>
+              </Link>
             </div>
           </div>
         </section>

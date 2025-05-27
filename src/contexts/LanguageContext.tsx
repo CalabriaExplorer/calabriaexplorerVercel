@@ -15,6 +15,7 @@ const translations = {
     "home": "Home",
     "about": "About",
     "contact": "Contact",
+    "tours": "Tours",
     
     // Hero
     "hero.title": "Calabria: Where La Dolce Vita Meets Affordability",
@@ -35,11 +36,11 @@ const translations = {
     "tourist.explore.description": "Find beaches, historical sites, and hidden gems",
     "tourist.calendar.title": "Event Calendar",
     "tourist.calendar.description": "Discover local festivals and cultural events",
-    "tourist.itineraries.title": "Itineraries",
-    "tourist.itineraries.description": "Pre-planned routes for the perfect vacation",
+    "tourist.itineraries.title": "Guided Tours",
+    "tourist.itineraries.description": "Pre-planned routes and expert-guided experiences",
     "tourist.secrets.title": "Local Secrets",
     "tourist.secrets.description": "Stories and tips from Calabrian residents",
-    "tourist.plan": "Start Planning Your Trip",
+    "tourist.plan": "Explore Our Tours",
     
     // Relocator Section
     "relocator.section.title": "Relocate to Calabria",
@@ -76,6 +77,7 @@ const translations = {
     "home": "Главная",
     "about": "О нас",
     "contact": "Контакты",
+    "tours": "Экскурсии",
     
     // Hero
     "hero.title": "Калабрия: Где La Dolce Vita Встречается с Доступностью",
@@ -96,11 +98,11 @@ const translations = {
     "tourist.explore.description": "Найдите пляжи, исторические места и скрытые жемчужины",
     "tourist.calendar.title": "Календарь Событий",
     "tourist.calendar.description": "Откройте для себя местные фестивали и культурные мероприятия",
-    "tourist.itineraries.title": "Маршруты",
-    "tourist.itineraries.description": "Заранее спланированные маршруты для идеального отпуска",
+    "tourist.itineraries.title": "Экскурсии с Гидом",
+    "tourist.itineraries.description": "Заранее спланированные маршруты и экспертные туры",
     "tourist.secrets.title": "Местные Секреты",
     "tourist.secrets.description": "Истории и советы от жителей Калабрии",
-    "tourist.plan": "Начать Планировать Поездку",
+    "tourist.plan": "Посмотреть Наши Экскурсии",
     
     // Relocator Section
     "relocator.section.title": "Переехать в Калабрию",

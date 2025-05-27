@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
@@ -95,6 +94,9 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
                 <Link to="/" className="font-medium" aria-label="Home page">{t("home")}</Link>
               </NavigationMenuItem>
               <NavigationMenuItem className="px-2">
+                <Link to="/tours" className="font-medium" aria-label="Tours and excursions">{t("tours")}</Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem className="px-2">
                 <Link to="#about" className="font-medium" aria-label="About Calabria">{t("about")}</Link>
               </NavigationMenuItem>
               <NavigationMenuItem className="px-2">
@@ -169,6 +171,7 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
               <nav aria-label="Footer navigation">
                 <ul className="space-y-2">
                   <li><Link to="/" className="text-gray-300 hover:text-white">{t("home")}</Link></li>
+                  <li><Link to="/tours" className="text-gray-300 hover:text-white">{t("tours")}</Link></li>
                   <li><Link to="#tourist" className="text-gray-300 hover:text-white">{t("footer.tourist")}</Link></li>
                   <li><Link to="#relocation" className="text-gray-300 hover:text-white">{t("footer.relocation")}</Link></li>
                   <li><Link to="#contact" className="text-gray-300 hover:text-white">{t("contact")}</Link></li>
