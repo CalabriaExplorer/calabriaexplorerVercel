@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 const Tours = () => {
   const { language, t } = useLanguage();
+  const [videoError, setVideoError] = useState(false);
 
   const tourContent = {
     en: {
@@ -128,24 +129,44 @@ const Tours = () => {
           <h2 className="font-serif text-3xl font-bold text-center mb-8">{content.videoTitle}</h2>
           <div className="max-w-4xl mx-auto">
             <AspectRatio ratio={16/9} className="bg-gray-100 rounded-lg overflow-hidden">
-              <div className="flex items-center justify-center h-full bg-gradient-to-br from-gray-200 to-gray-300">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-[#0077B6] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
+              {!videoError ? (
+                <iframe
+                  src="https://www.flickr.com/gp/140055029@N06/u21ZM195S0/player"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  allowFullScreen
+                  title="Umbriatico Video"
+                  className="w-full h-full"
+                  onError={() => setVideoError(true)}
+                />
+              ) : (
+                <div className="flex items-center justify-center h-full bg-gradient-to-br from-gray-200 to-gray-300">
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-[#0077B6] rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </div>
+                    <p className="text-gray-600">
+                      {language === "en" ? "Video loading..." : "Загрузка видео..."}
+                    </p>
+                    <p className="text-sm text-gray-500 mt-2">
+                      <a 
+                        href="https://www.flickr.com/gp/140055029@N06/u21ZM195S0" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-[#0077B6] hover:underline"
+                      >
+                        {language === "en" 
+                          ? "Watch on Flickr" 
+                          : "Смотреть на Flickr"
+                        }
+                      </a>
+                    </p>
                   </div>
-                  <p className="text-gray-600">
-                    {language === "en" ? "Video coming soon" : "Видео скоро будет доступно"}
-                  </p>
-                  <p className="text-sm text-gray-500 mt-2">
-                    {language === "en" 
-                      ? "Experience Umbriatico through our guided tour preview" 
-                      : "Познакомьтесь с Умбриатико через предварительный просмотр нашей экскурсии"
-                    }
-                  </p>
                 </div>
-              </div>
+              )}
             </AspectRatio>
           </div>
         </div>
