@@ -131,7 +131,7 @@ const Tours = () => {
             <AspectRatio ratio={16/9} className="bg-gray-100 rounded-lg overflow-hidden">
               {!videoError ? (
                 <iframe
-                  src="https://www.flickr.com/gp/140055029@N06/u21ZM195S0/player"
+                  src="https://odysee.com/$/embed/UMBRIATICO/4"
                   width="100%"
                   height="100%"
                   frameBorder="0"
@@ -153,14 +153,14 @@ const Tours = () => {
                     </p>
                     <p className="text-sm text-gray-500 mt-2">
                       <a 
-                        href="https://www.flickr.com/gp/140055029@N06/u21ZM195S0" 
+                        href="https://odysee.com/UMBRIATICO:4" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="text-[#0077B6] hover:underline"
                       >
                         {language === "en" 
-                          ? "Watch on Flickr" 
-                          : "Смотреть на Flickr"
+                          ? "Watch on Odysee" 
+                          : "Смотреть на Odysee"
                         }
                       </a>
                     </p>
@@ -208,7 +208,7 @@ const Tours = () => {
         </div>
       </section>
 
-      {/* Photo Gallery Placeholder */}
+      {/* Photo Gallery */}
       <section className="py-16 bg-[#F8FBFE]">
         <div className="container mx-auto px-4">
           <h2 className="font-serif text-3xl font-bold text-center mb-12">
@@ -217,18 +217,46 @@ const Tours = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
             <AspectRatio ratio={4/3} className="overflow-hidden rounded-lg">
               <img 
-                src="/lovable-uploads/6d3b6b08-c072-43d0-9bb7-4a32452ce1e1.png"
-                alt="Umbriatico at night"
-                className="object-cover w-full h-full hover:scale-105 transition-transform"
+                src="/lovable-uploads/bbf53f58-00ce-4565-9b79-54cce8d12868.png"
+                alt={language === "en" ? "Umbriatico hilltown with bridge" : "Город Умбриатико с мостом"}
+                className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
               />
             </AspectRatio>
-            {[1,2,3,4,5].map((index) => (
-              <AspectRatio key={index} ratio={4/3} className="overflow-hidden rounded-lg bg-gray-200">
-                <div className="flex items-center justify-center h-full">
-                  <Camera className="w-8 h-8 text-gray-400" />
-                </div>
-              </AspectRatio>
-            ))}
+            <AspectRatio ratio={4/3} className="overflow-hidden rounded-lg">
+              <img 
+                src="/lovable-uploads/25dc2f21-31f0-4475-a614-6b9b16b01057.png"
+                alt={language === "en" ? "Traditional Calabrian costume in museum" : "Традиционный калабрийский костюм в музее"}
+                className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
+              />
+            </AspectRatio>
+            <AspectRatio ratio={4/3} className="overflow-hidden rounded-lg">
+              <img 
+                src="/lovable-uploads/d310f5fa-3d93-4307-b982-9e2ff5b15586.png"
+                alt={language === "en" ? "Byzantine fresco in ancient chapel" : "Византийская фреска в древней часовне"}
+                className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
+              />
+            </AspectRatio>
+            <AspectRatio ratio={4/3} className="overflow-hidden rounded-lg">
+              <img 
+                src="/lovable-uploads/824f1b02-3221-48ff-99a1-63ec57202a6c.png"
+                alt={language === "en" ? "Poetry on the streets of Umbriatico" : "Поэзия на улицах Умбриатико"}
+                className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
+              />
+            </AspectRatio>
+            <AspectRatio ratio={4/3} className="overflow-hidden rounded-lg">
+              <img 
+                src="/lovable-uploads/16769ace-5283-4656-96c1-b8fcf024abc2.png"
+                alt={language === "en" ? "Religious shrine in Umbriatico" : "Религиозная святыня в Умбриатико"}
+                className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
+              />
+            </AspectRatio>
+            <AspectRatio ratio={4/3} className="overflow-hidden rounded-lg">
+              <img 
+                src="/lovable-uploads/6d3b6b08-c072-43d0-9bb7-4a32452ce1e1.png"
+                alt={language === "en" ? "Umbriatico at night" : "Умбриатико ночью"}
+                className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
+              />
+            </AspectRatio>
           </div>
         </div>
       </section>
@@ -352,7 +380,12 @@ const Tours = () => {
       {/* Admin Section */}
       <section className="py-8 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center">
+          <div className="text-center space-y-4">
+            <Link to="/tours/melissa">
+              <Button variant="outline" className="border-[#0077B6] text-[#0077B6] hover:bg-[#0077B6] hover:text-white mr-4">
+                {language === "en" ? "Melissa Tour" : "Экскурсия в Мелиссу"}
+              </Button>
+            </Link>
             <Button variant="outline" className="border-[#0077B6] text-[#0077B6] hover:bg-[#0077B6] hover:text-white">
               {content.addTour}
             </Button>

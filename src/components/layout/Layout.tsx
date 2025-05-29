@@ -1,9 +1,11 @@
+
 import { Link } from "react-router-dom";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import { MapPin, Instagram, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect } from "react";
+import MobileLanguageToggle from "@/components/ui/mobile-language-toggle";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -121,6 +123,9 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
       <main className="flex-grow" role="main">
         {children}
       </main>
+
+      {/* Mobile Language Toggle */}
+      <MobileLanguageToggle />
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12" role="contentinfo">
