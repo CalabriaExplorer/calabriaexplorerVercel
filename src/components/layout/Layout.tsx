@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import { MapPin, Instagram, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect } from "react";
 import MobileLanguageToggle from "@/components/ui/mobile-language-toggle";
+import MobileMenu from "@/components/ui/mobile-menu";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -90,8 +90,10 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
             <MapPin className={colorScheme === "relocator" ? "text-[#E2725B]" : "text-[#0077B6]"} aria-hidden="true" />
             <h1 className="text-xl md:text-2xl font-bold font-serif">Calabria Explorer</h1>
           </Link>
-          <NavigationMenu>
-            <NavigationMenuList className="hidden md:flex" role="navigation" aria-label="Main navigation">
+          
+          {/* Desktop Navigation */}
+          <NavigationMenu className="hidden md:flex">
+            <NavigationMenuList role="navigation" aria-label="Main navigation">
               <NavigationMenuItem className="px-2">
                 <Link to="/" className="font-medium" aria-label="Home page">{t("home")}</Link>
               </NavigationMenuItem>
@@ -116,6 +118,9 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
+          
+          {/* Mobile Menu */}
+          <MobileMenu />
         </div>
       </header>
       
