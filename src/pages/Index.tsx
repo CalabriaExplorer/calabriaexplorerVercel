@@ -126,6 +126,36 @@ const Index = () => {
               </Card>
             </div>
             
+            {/* Featured Tours */}
+            <div className="mt-12">
+              <h3 className="font-serif text-2xl font-bold text-center mb-8 text-[#0077B6]">
+                Популярные экскурсии
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <Link to="/tours/melissa">
+                  <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                    <CardHeader>
+                      <CardTitle className="text-[#0077B6]">🎨 Экскурсия "МЕЛИССА"</CardTitle>
+                      <CardDescription>
+                        Город Овидия, муралов и пчел. Откройте уникальную галерею под открытым небом!
+                      </CardDescription>
+                    </CardHeader>
+                  </Card>
+                </Link>
+                
+                <Link to="/tours/umbriatico">
+                  <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                    <CardHeader>
+                      <CardTitle className="text-[#0077B6]">🏰 Умбриатико</CardTitle>
+                      <CardDescription>
+                        Средневековый городок с захватывающими видами на Ионическое море
+                      </CardDescription>
+                    </CardHeader>
+                  </Card>
+                </Link>
+              </div>
+            </div>
+            
             <div className="text-center mt-8">
               <Link to="/tours">
                 <Button size="lg" className="bg-[#0077B6] hover:bg-[#005A8A] text-white">
@@ -176,6 +206,34 @@ const Index = () => {
                   <CardDescription>{t("relocator.calculator.description")}</CardDescription>
                 </CardHeader>
               </Card>
+            </div>
+            
+            {/* Featured Guides */}
+            <div className="mt-12">
+              <h3 className="font-serif text-2xl font-bold text-center mb-8 text-[#E2725B]">
+                Полезные гайды
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <Link to="/guides/ten-steps">
+                  <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                    <CardHeader>
+                      <CardTitle className="text-[#E2725B]">🏡 10 шагов перед поиском квартиры в Италии</CardTitle>
+                      <CardDescription>
+                        Полный чек-лист для подготовки к покупке недвижимости в Италии
+                      </CardDescription>
+                    </CardHeader>
+                  </Card>
+                </Link>
+                
+                <Card className="hover:shadow-lg transition-shadow opacity-50">
+                  <CardHeader>
+                    <CardTitle className="text-gray-500">📋 Документы для переезда</CardTitle>
+                    <CardDescription className="text-gray-400">
+                      Скоро появится - полный список документов и процедур
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              </div>
             </div>
             
             <div className="text-center mt-8">
