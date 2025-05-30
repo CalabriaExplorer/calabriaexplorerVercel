@@ -11,6 +11,26 @@ const Index = () => {
   const [selectedAudience, setSelectedAudience] = useState<"tourist" | "relocator" | null>(null);
   const { t } = useLanguage();
 
+  // Calabria images for the social gallery
+  const calabriaImages = [
+    {
+      src: "/lovable-uploads/6d3b6b08-c072-43d0-9bb7-4a32452ce1e1.png",
+      alt: "Beautiful Calabrian coastline"
+    },
+    {
+      src: "/lovable-uploads/25dc2f21-31f0-4475-a614-6b9b16b01057.png", 
+      alt: "Traditional Calabrian architecture"
+    },
+    {
+      src: "/lovable-uploads/d310f5fa-3d93-4307-b982-9e2ff5b15586.png",
+      alt: "Calabrian mountain landscape"
+    },
+    {
+      src: "/lovable-uploads/bbf53f58-00ce-4565-9b79-54cce8d12868.png",
+      alt: "Calabrian cultural heritage"
+    }
+  ];
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -272,11 +292,27 @@ const Index = () => {
           <h2 className="font-serif text-3xl font-bold mb-4">{t("social.title")}</h2>
           <p className="text-gray-600 mb-8">{t("social.description")}</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {[1, 2, 3, 4].map((index) => (
-              <div key={index} className="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
-                <Instagram className="w-8 h-8 text-gray-400" />
+            {calabriaImages.map((image, index) => (
+              <div key={index} className="aspect-square rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 shadow-lg">
+                <img 
+                  src={image.src} 
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
             ))}
+          </div>
+          <div className="mt-8">
+            <a 
+              href="https://www.instagram.com/maria_nedvizimost_calabria?igsh=b3h1aHBzeWhpeG4z" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-[#0077B6] hover:text-[#005A8A] font-medium"
+            >
+              <Instagram className="w-5 h-5" />
+              #MyCalabria
+            </a>
           </div>
         </div>
       </section>
