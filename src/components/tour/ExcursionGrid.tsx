@@ -61,7 +61,7 @@ const ExcursionGrid: React.FC = () => {
     {
       id: "umbriatico",
       title: {
-        en: "Umbriatico Medieval",
+        en: "Umbriatico: Town on the Edge of Time",
         ru: "Средневековый Умбриатико"
       },
       description: {
@@ -81,31 +81,6 @@ const ExcursionGrid: React.FC = () => {
       location: {
         en: "Umbriatico",
         ru: "Умбриатико"
-      }
-    },
-    {
-      id: "senatore-vini",
-      title: {
-        en: "Senatore Vini Wine Tasting",
-        ru: "Дегустация Senatore Vini"
-      },
-      description: {
-        en: "Historic wine cellar tour with tasting of 5 local wine varieties and stories of traditional winemaking.",
-        ru: "Дегустация вин в историческом погребе с рассказом о традициях виноделия."
-      },
-      price: 55,
-      duration: {
-        en: "2.5 hours",
-        ru: "2.5 часа"
-      },
-      image: "/lovable-uploads/d310f5fa-3d93-4307-b982-9e2ff5b15586.png",
-      groupSize: {
-        en: "Max 8 people",
-        ru: "Макс. 8 человек"
-      },
-      location: {
-        en: "Piazza del Vino",
-        ru: "Пьяцца дель Вино"
       }
     }
   ];
