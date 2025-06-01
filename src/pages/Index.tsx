@@ -14,20 +14,20 @@ const Index = () => {
   // Calabria images for the social gallery
   const calabriaImages = [
     {
-      src: "/lovable-uploads/6d3b6b08-c072-43d0-9bb7-4a32452ce1e1.png",
-      alt: "Beautiful Calabrian coastline"
+      src: "/lovable-uploads/9bfe8180-86f4-40c8-8fdf-aa965d9be96b.png",
+      alt: "Осенний лес в Калабрии с деревянными ступеньками"
     },
     {
-      src: "/lovable-uploads/25dc2f21-31f0-4475-a614-6b9b16b01057.png", 
-      alt: "Traditional Calabrian architecture"
+      src: "/lovable-uploads/f22f9e69-8576-48b3-b798-a05bba1e9d41.png", 
+      alt: "Средневековый замок на побережье Калабрии"
     },
     {
-      src: "/lovable-uploads/d310f5fa-3d93-4307-b982-9e2ff5b15586.png",
-      alt: "Calabrian mountain landscape"
+      src: "/lovable-uploads/e5c600ba-1e0e-4e1f-a9cf-219223e213dd.png",
+      alt: "Горный городок в Калабрии с древним мостом"
     },
     {
-      src: "/lovable-uploads/bbf53f58-00ce-4565-9b79-54cce8d12868.png",
-      alt: "Calabrian cultural heritage"
+      src: "/lovable-uploads/6cd2d603-fa70-4f33-82a1-9155ab825253.png",
+      alt: "Кайтсерфинг на побережье Калабрии"
     }
   ];
 
