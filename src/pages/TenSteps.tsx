@@ -79,7 +79,8 @@ const TenSteps = () => {
       ],
       videoTitle: "Complete Italian Home Guide",
       backToGuides: "Back to Guides",
-      relocationSection: "Relocation Guides"
+      relocationSection: "Relocation Guides",
+      showVideo: false
     },
     ru: {
       title: "10 шагов перед поиском квартиры в Италии. Чек-лист",
@@ -149,7 +150,8 @@ const TenSteps = () => {
       ],
       videoTitle: "Полный гайд по переезду в Италию",
       backToGuides: "Назад к гайдам",
-      relocationSection: "Гайды по переезду"
+      relocationSection: "Гайды по переезду",
+      showVideo: true
     }
   };
 
@@ -178,25 +180,27 @@ const TenSteps = () => {
         </div>
       </section>
 
-      {/* Video Section */}
-      <section className="py-12 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="font-serif text-3xl font-bold text-center mb-8">{currentContent.videoTitle}</h2>
-          <div className="max-w-4xl mx-auto">
-            <AspectRatio ratio={16/9} className="bg-gray-100 rounded-lg overflow-hidden">
-              <iframe
-                src="https://www.youtube.com/embed/GR7e4QVM8As"
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                allowFullScreen
-                title="10 Steps Italian Home Guide"
-                className="w-full h-full"
-              />
-            </AspectRatio>
+      {/* Video Section - Only for Russian */}
+      {currentContent.showVideo && (
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="font-serif text-3xl font-bold text-center mb-8">{currentContent.videoTitle}</h2>
+            <div className="max-w-4xl mx-auto">
+              <AspectRatio ratio={16/9} className="bg-gray-100 rounded-lg overflow-hidden">
+                <iframe
+                  src="https://www.youtube.com/embed/GR7e4QVM8As"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  allowFullScreen
+                  title="10 Steps Italian Home Guide"
+                  className="w-full h-full"
+                />
+              </AspectRatio>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Introduction */}
       <section className="py-12 bg-[#FDF8F6]">
