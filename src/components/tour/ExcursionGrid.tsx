@@ -48,7 +48,7 @@ const ExcursionGrid: React.FC = () => {
         en: "3 hours",
         ru: "3 часа"
       },
-      image: "/lovable-uploads/25dc2f21-31f0-4475-a614-6b9b16b01057.png",
+      image: "/lovable-uploads/2ca0f4d4-ee1c-4971-94d5-c9a8219e9c36.png",
       groupSize: {
         en: "Small groups",
         ru: "Малые группы"
