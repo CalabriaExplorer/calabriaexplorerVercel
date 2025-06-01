@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   const [selectedAudience, setSelectedAudience] = useState<"tourist" | "relocator" | null>(null);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   // Calabria images for the social gallery
   const calabriaImages = [
@@ -30,6 +30,42 @@ const Index = () => {
       alt: "Кайтсерфинг на побережье Калабрии"
     }
   ];
+
+  // Guide content based on language
+  const guideContent = {
+    en: {
+      title: "Helpful Guides",
+      guides: [
+        {
+          title: "🏡 10 Steps to Your Italian Dream Home",
+          description: "Complete no-stress guide before apartment hunting in Italy",
+          link: "/guides/ten-steps"
+        },
+        {
+          title: "📋 Relocation Documents",
+          description: "Coming soon - complete list of documents and procedures",
+          link: null
+        }
+      ]
+    },
+    ru: {
+      title: "Полезные гайды",
+      guides: [
+        {
+          title: "🏡 10 шагов перед поиском квартиры в Италии",
+          description: "Полный чек-лист для подготовки к покупке недвижимости в Италии",
+          link: "/guides/ten-steps"
+        },
+        {
+          title: "📋 Документы для переезда",
+          description: "Скоро появится - полный список документов и процедур",
+          link: null
+        }
+      ]
+    }
+  };
+
+  const currentGuideContent = guideContent[language];
 
   return (
     <Layout>
@@ -231,28 +267,34 @@ const Index = () => {
             {/* Featured Guides */}
             <div className="mt-12">
               <h3 className="font-serif text-2xl font-bold text-center mb-8 text-[#E2725B]">
-                Полезные гайды
+                {currentGuideContent.title}
               </h3>
               <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                <Link to="/guides/ten-steps">
-                  <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-                    <CardHeader>
-                      <CardTitle className="text-[#E2725B]">🏡 10 шагов перед поиском квартиры в Италии</CardTitle>
-                      <CardDescription>
-                        Полный чек-лист для подготовки к покупке недвижимости в Италии
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
-                </Link>
-                
-                <Card className="hover:shadow-lg transition-shadow opacity-50">
-                  <CardHeader>
-                    <CardTitle className="text-gray-500">📋 Документы для переезда</CardTitle>
-                    <CardDescription className="text-gray-400">
-                      Скоро появится - полный список документов и процедур
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
+                {currentGuideContent.guides.map((guide, index) => (
+                  <div key={index}>
+                    {guide.link ? (
+                      <Link to={guide.link}>
+                        <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                          <CardHeader>
+                            <CardTitle className="text-[#E2725B]">{guide.title}</CardTitle>
+                            <CardDescription>
+                              {guide.description}
+                            </CardDescription>
+                          </CardHeader>
+                        </Card>
+                      </Link>
+                    ) : (
+                      <Card className="hover:shadow-lg transition-shadow opacity-50">
+                        <CardHeader>
+                          <CardTitle className="text-gray-500">{guide.title}</CardTitle>
+                          <CardDescription className="text-gray-400">
+                            {guide.description}
+                          </CardDescription>
+                        </CardHeader>
+                      </Card>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
             
