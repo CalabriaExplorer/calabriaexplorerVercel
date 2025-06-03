@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Layout from '@/components/layout/Layout';
 import PeriodFilters, { FilterOptions } from '@/components/analytics/PeriodFilters';
@@ -6,6 +5,9 @@ import KPICards, { KPIData } from '@/components/analytics/KPICards';
 import InteractiveChart, { ChartDataPoint } from '@/components/analytics/InteractiveChart';
 import DataTable from '@/components/analytics/DataTable';
 import PageStatsTable from '@/components/analytics/PageStatsTable';
+import ReferralSourcesTable from '@/components/analytics/ReferralSourcesTable';
+import GeographicStats from '@/components/analytics/GeographicStats';
+import TimeOnPageStats from '@/components/analytics/TimeOnPageStats';
 import { toast } from '@/hooks/use-toast';
 import { format, subDays } from 'date-fns';
 
@@ -20,6 +22,10 @@ const Analytics = () => {
   const [chartData, setChartData] = useState<ChartDataPoint[]>([]);
   const [kpiData, setKpiData] = useState<KPIData[]>([]);
   const [pageStats, setPageStats] = useState<any[]>([]);
+  const [referralSources, setReferralSources] = useState<any[]>([]);
+  const [countryData, setCountryData] = useState<any[]>([]);
+  const [cityData, setCityData] = useState<any[]>([]);
+  const [timeOnPageData, setTimeOnPageData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
   // Pages to track
@@ -120,6 +126,92 @@ const Analytics = () => {
     ];
   };
 
+  // Mock data generator for referral sources
+  const generateMockReferralSources = (): any[] => {
+    const sources = [
+      { source: 'Google', type: 'search' },
+      { source: 'Yandex', type: 'search' },
+      { source: 'Facebook', type: 'social' },
+      { source: 'Instagram', type: 'social' },
+      { source: 'Прямые переходы', type: 'direct' },
+      { source: 'booking.com', type: 'referral' },
+      { source: 'tripadvisor.com', type: 'referral' },
+      { source: 'airbnb.com', type: 'referral' }
+    ];
+
+    return sources.map(source => {
+      const visits = Math.floor(Math.random() * 500) + 20;
+      const change = Math.floor(Math.random() * 40) - 20;
+      const percentage = Number(((visits / 2000) * 100).toFixed(1));
+      
+      return {
+        ...source,
+        visits,
+        change,
+        percentage
+      };
+    }).sort((a, b) => b.visits - a.visits);
+  };
+
+  // Mock data generator for geographic stats
+  const generateMockGeographicData = () => {
+    const countries = [
+      { country: 'Россия', flag: '🇷🇺' },
+      { country: 'Италия', flag: '🇮🇹' },
+      { country: 'Германия', flag: '🇩🇪' },
+      { country: 'Франция', flag: '🇫🇷' },
+      { country: 'США', flag: '🇺🇸' },
+      { country: 'Великобритания', flag: '🇬🇧' },
+      { country: 'Испания', flag: '🇪🇸' },
+      { country: 'Украина', flag: '🇺🇦' }
+    ];
+
+    const cities = [
+      { city: 'Москва', country: 'Россия' },
+      { city: 'Рим', country: 'Италия' },
+      { city: 'Милан', country: 'Италия' },
+      { city: 'Берлин', country: 'Германия' },
+      { city: 'Париж', country: 'Франция' },
+      { city: 'Лондон', country: 'Великобритания' },
+      { city: 'Нью-Йорк', country: 'США' },
+      { city: 'Санкт-Петербург', country: 'Россия' }
+    ];
+
+    const countryStats = countries.map(country => {
+      const visits = Math.floor(Math.random() * 800) + 50;
+      const percentage = Number(((visits / 3000) * 100).toFixed(1));
+      return { ...country, visits, percentage };
+    }).sort((a, b) => b.visits - a.visits);
+
+    const cityStats = cities.map(city => {
+      const visits = Math.floor(Math.random() * 400) + 30;
+      const percentage = Number(((visits / 1500) * 100).toFixed(1));
+      return { ...city, visits, percentage };
+    }).sort((a, b) => b.visits - a.visits);
+
+    return { countryStats, cityStats };
+  };
+
+  // Mock data generator for time on page
+  const generateMockTimeOnPageData = (): any[] => {
+    return trackedPages.map(page => {
+      const totalSeconds = Math.floor(Math.random() * 300) + 30; // 30-330 seconds
+      const avgTimeMinutes = Math.floor(totalSeconds / 60);
+      const avgTimeSeconds = totalSeconds % 60;
+      const bounceRate = Math.floor(Math.random() * 70) + 10; // 10-80%
+      const visits = Math.floor(Math.random() * 1000) + 50;
+      
+      return {
+        page: page.name,
+        path: page.path,
+        avgTimeMinutes,
+        avgTimeSeconds,
+        bounceRate,
+        visits
+      };
+    }).sort((a, b) => (b.avgTimeMinutes * 60 + b.avgTimeSeconds) - (a.avgTimeMinutes * 60 + a.avgTimeSeconds));
+  };
+
   const loadData = async () => {
     setLoading(true);
     
@@ -129,10 +221,17 @@ const Analytics = () => {
       const newChartData = generateMockData(filters);
       const newKpiData = generateKPIData(newChartData);
       const newPageStats = generateMockPageStats();
+      const newReferralSources = generateMockReferralSources();
+      const { countryStats, cityStats } = generateMockGeographicData();
+      const newTimeOnPageData = generateMockTimeOnPageData();
       
       setChartData(newChartData);
       setKpiData(newKpiData);
       setPageStats(newPageStats);
+      setReferralSources(newReferralSources);
+      setCountryData(countryStats);
+      setCityData(cityStats);
+      setTimeOnPageData(newTimeOnPageData);
       
       toast({
         title: "Данные обновлены",
@@ -195,6 +294,72 @@ const Analytics = () => {
     });
   };
 
+  const handleExportReferralSources = () => {
+    const csvContent = [
+      ['Источник', 'Тип', 'Посещения', 'Изменение (%)', 'Доля (%)'].join(','),
+      ...referralSources.map(row => [
+        row.source,
+        row.type,
+        row.visits,
+        row.change,
+        row.percentage
+      ].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `referral_sources_${format(new Date(), 'yyyy-MM-dd')}.csv`;
+    link.click();
+
+    toast({
+      title: "Экспорт завершен",
+      description: "Источники трафика сохранены в CSV файл"
+    });
+  };
+
+  const handleExportGeographicData = () => {
+    const csvContent = [
+      ['Страна/Город', 'Посещения', 'Доля (%)'].join(','),
+      ...countryData.map(row => [row.country, row.visits, row.percentage].join(',')),
+      ...cityData.map(row => [`${row.city}, ${row.country}`, row.visits, row.percentage].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `geographic_data_${format(new Date(), 'yyyy-MM-dd')}.csv`;
+    link.click();
+
+    toast({
+      title: "Экспорт завершен",
+      description: "Географические данные сохранены в CSV файл"
+    });
+  };
+
+  const handleExportTimeOnPage = () => {
+    const csvContent = [
+      ['Страница', 'Время (секунды)', 'Показатель отказов (%)', 'Посещения'].join(','),
+      ...timeOnPageData.map(row => [
+        row.page,
+        row.avgTimeMinutes * 60 + row.avgTimeSeconds,
+        row.bounceRate,
+        row.visits
+      ].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `time_on_page_${format(new Date(), 'yyyy-MM-dd')}.csv`;
+    link.click();
+
+    toast({
+      title: "Экспорт завершен",
+      description: "Время на странице сохранено в CSV файл"
+    });
+  };
+
   const getPeriodTitle = () => {
     if (!filters.startDate || !filters.endDate) return 'Статистика';
     
@@ -244,6 +409,26 @@ const Analytics = () => {
               <PageStatsTable
                 data={pageStats}
                 onExport={handleExportPageStats}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+              <ReferralSourcesTable
+                data={referralSources}
+                onExport={handleExportReferralSources}
+              />
+              
+              <TimeOnPageStats
+                data={timeOnPageData}
+                onExport={handleExportTimeOnPage}
+              />
+            </div>
+
+            <div className="mb-6">
+              <GeographicStats
+                countryData={countryData}
+                cityData={cityData}
+                onExport={handleExportGeographicData}
               />
             </div>
 
