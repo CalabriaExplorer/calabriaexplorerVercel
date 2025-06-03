@@ -85,10 +85,21 @@ const ExcursionGrid: React.FC = () => {
     }
   ];
 
+  // Temporary hide Umbriatico excursion for 20 days (until 2025-06-23)
+  const hideUmbriaticoUntil = new Date('2025-06-23');
+  const currentDate = new Date();
+  
+  const visibleExcursions = excursions.filter(excursion => {
+    if (excursion.id === 'umbriatico' && currentDate < hideUmbriaticoUntil) {
+      return false;
+    }
+    return true;
+  });
+
   return (
     <div className="excursion-grid">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-        {excursions.map((excursion, index) => (
+        {visibleExcursions.map((excursion, index) => (
           <div 
             key={excursion.id}
             className="animate-fade-in"
