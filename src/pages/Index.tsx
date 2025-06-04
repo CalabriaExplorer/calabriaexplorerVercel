@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,6 +5,7 @@ import { MapPin, Calendar, Route, Users, Calculator, Home, Instagram, Phone, Mai
 import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
+import OptimizedImage from "@/components/ui/optimized-image";
 
 const Index = () => {
   const [selectedAudience, setSelectedAudience] = useState<"tourist" | "relocator" | null>(null);
@@ -336,11 +336,12 @@ const Index = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {calabriaImages.map((image, index) => (
               <div key={index} className="aspect-square rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 shadow-lg">
-                <img 
-                  src={image.src} 
+                <OptimizedImage
+                  src={image.src}
                   alt={image.alt}
                   className="w-full h-full object-cover"
                   loading="lazy"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
               </div>
             ))}

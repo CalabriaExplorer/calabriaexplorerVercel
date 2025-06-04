@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Clock, Users, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
+import OptimizedImage from "@/components/ui/optimized-image";
 
 interface ExcursionCardProps {
   id: string;
@@ -51,9 +52,12 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
       <Card className="excursion-card overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 relative">
         {/* Image Container with Parallax Effect */}
         <div className="relative h-48 md:h-56 overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-            style={{ backgroundImage: `url(${image})` }}
+          <OptimizedImage
+            src={image}
+            alt={`${title} - ${location || 'Calabria'} excursion`}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
