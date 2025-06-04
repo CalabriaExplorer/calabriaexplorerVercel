@@ -59,6 +59,31 @@ const ExcursionGrid: React.FC = () => {
       }
     },
     {
+      id: "pallagorio",
+      title: {
+        en: "Vercino & Pallagorio Heritage",
+        ru: "Верцино и Паллагорио"
+      },
+      description: {
+        en: "Discover Byzantine caves with ancient frescoes, traditional honey tasting, and Albanian-Calabrian cultural heritage.",
+        ru: "Откройте византийские пещеры с древними фресками, дегустацию меда и албано-калабрийское культурное наследие."
+      },
+      price: 85,
+      duration: {
+        en: "8 hours",
+        ru: "8 часов"
+      },
+      image: "/lovable-uploads/a7a13b83-eb08-4c06-94da-a9b7574bfd65.png",
+      groupSize: {
+        en: "Small groups",
+        ru: "Малые группы"
+      },
+      location: {
+        en: "Vercino & Pallagorio",
+        ru: "Верцино и Паллагорио"
+      }
+    },
+    {
       id: "umbriatico",
       title: {
         en: "Umbriatico: Town on the Edge of Time",
