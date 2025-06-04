@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 
 interface OptimizedImageProps {
   src: string;
@@ -22,22 +22,68 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   loading = 'lazy',
   sizes
 }) => {
-  // Generate WebP source if not provided (assuming we have WebP versions)
-  const webpSource = webpSrc || src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
-  
+  const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // Fix potential path issues
+  const fixImagePath = (imageSrc: string) => {
+    if (imageSrc.startsWith('//')) {
+      return 'https:' + imageSrc;
+    }
+    return imageSrc;
+  };
+
+  const fixedSrc = fixImagePath(src);
+  const fixedWebpSrc = webpSrc ? fixImagePath(webpSrc) : fixedSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+
+  const handleImageError = () => {
+    console.error('Image failed to load:', fixedSrc);
+    setImageError(true);
+  };
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
+  if (imageError) {
+    return (
+      <div className={`bg-gray-200 flex items-center justify-center ${className}`}>
+        <div className="text-center p-4">
+          <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-2">
+            <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <p className="text-xs text-gray-500">Image not available</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <picture>
-      <source srcSet={webpSource} type="image/webp" sizes={sizes} />
-      <img
-        src={src}
-        alt={alt}
-        className={className}
-        width={width}
-        height={height}
-        loading={loading}
-        sizes={sizes}
-      />
-    </picture>
+    <div className={`relative ${className}`}>
+      {/* Loading placeholder */}
+      {!imageLoaded && (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+          <div className="w-8 h-8 bg-gray-300 rounded-full animate-spin border-2 border-gray-400 border-t-transparent"></div>
+        </div>
+      )}
+      
+      <picture className="tour-page-image">
+        <source srcSet={fixedWebpSrc} type="image/webp" sizes={sizes} />
+        <img
+          src={fixedSrc}
+          alt={alt}
+          className={`${className} ${!imageLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+          width={width}
+          height={height}
+          loading={loading}
+          sizes={sizes}
+          onError={handleImageError}
+          onLoad={handleImageLoad}
+        />
+      </picture>
+    </div>
   );
 };
 

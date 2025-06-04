@@ -6,6 +6,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Clock, Users, MapPin, Calendar, Euro, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
+import OptimizedImage from "@/components/ui/optimized-image";
 
 const Umbriatico = () => {
   const { language } = useLanguage();
@@ -84,9 +85,10 @@ const Umbriatico = () => {
       {/* Hero Section */}
       <section className="relative">
         <AspectRatio ratio={16/9} className="w-full">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(/lovable-uploads/bbf53f58-00ce-4565-9b79-54cce8d12868.png)` }}
+          <OptimizedImage
+            src="/lovable-uploads/bbf53f58-00ce-4565-9b79-54cce8d12868.png"
+            alt={content.title}
+            className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
           <div className="relative h-full flex items-end p-8">
