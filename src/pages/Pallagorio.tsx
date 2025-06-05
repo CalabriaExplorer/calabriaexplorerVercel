@@ -7,6 +7,7 @@ import { MapPin, Clock, Users, Camera, Mail, Phone, Mountain } from "lucide-reac
 import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
+import OptimizedImage from "@/components/ui/optimized-image";
 
 const Pallagorio = () => {
   const { language, t } = useLanguage();
@@ -20,7 +21,8 @@ const Pallagorio = () => {
       highlights: [
         {
           title: "Vercino Caves",
-          description: "Descend into mysterious Byzantine caves adorned with ancient frescoes. These historic underground chambers reveal centuries of religious art and spiritual significance in the heart of medieval Calabria."
+          description: "Descend into mysterious Byzantine caves adorned with ancient frescoes. These historic underground chambers reveal centuries of religious art and spiritual significance in the heart of medieval Calabria.",
+          image: "/lovable-uploads/c2c23b51-173c-4a9c-8157-d52e550a63ac.png"
         },
         {
           title: "Apiary Visit & Honey Tasting",
@@ -28,7 +30,8 @@ const Pallagorio = () => {
         },
         {
           title: "Giuseppe Lapietra's Workshop",
-          description: "Uncover the fascinating secrets of Calabrian & Albanian \"magic\" (traditions, folklore), preserved for centuries. Dive into unique culture over lunch featuring authentic 15th-century dishes."
+          description: "Uncover the fascinating secrets of Calabrian & Albanian \"magic\" (traditions, folklore), preserved for centuries. Dive into unique culture over lunch featuring authentic 15th-century dishes.",
+          image: "/lovable-uploads/0885b9d9-1c10-4b4b-9eaa-af4ead64256e.png"
         }
       ],
       details: {
@@ -56,7 +59,8 @@ const Pallagorio = () => {
       highlights: [
         {
           title: "Гроты Верцино",
-          description: "Спуститесь в таинственные византийские пещеры с древними фресками. Эти исторические подземные камеры раскрывают столетия религиозного искусства и духовного значения в сердце средневековой Калабрии."
+          description: "Спуститесь в таинственные византийские пещеры с древними фресками. Эти исторические подземные камеры раскрывают столетия религиозного искусства и духовного значения в сердце средневековой Калабрии.",
+          image: "/lovable-uploads/c2c23b51-173c-4a9c-8157-d52e550a63ac.png"
         },
         {
           title: "Посещение пасеки и дегустация меда",
@@ -64,7 +68,8 @@ const Pallagorio = () => {
         },
         {
           title: "Мастерская Джузеппе Лапьетры",
-          description: "Раскройте удивительные секреты калабрийской и албанской \"магии\" (традиции, фольклор), пронесенные через века. Погрузитесь в уникальную культуру за обедом с блюдами по рецептам XV века."
+          description: "Раскройте удивительные секреты калабрийской и албанской \"магии\" (традиции, фольклор), пронесенные через века. Погрузитесь в уникальную культуру за обедом с блюдами по рецептам XV века.",
+          image: "/lovable-uploads/0885b9d9-1c10-4b4b-9eaa-af4ead64256e.png"
         }
       ],
       details: {
@@ -166,6 +171,16 @@ const Pallagorio = () => {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {content.highlights.map((highlight, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow">
+                {highlight.image && (
+                  <div className="w-full h-48 overflow-hidden rounded-t-lg">
+                    <OptimizedImage
+                      src={highlight.image}
+                      alt={highlight.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
                 <CardHeader>
                   <CardTitle className="text-xl font-serif text-[#E2725B]">
                     {highlight.title}
