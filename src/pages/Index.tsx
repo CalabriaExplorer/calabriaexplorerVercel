@@ -11,23 +11,23 @@ const Index = () => {
   const [selectedAudience, setSelectedAudience] = useState<"tourist" | "relocator" | null>(null);
   const { t, language } = useLanguage();
 
-  // Calabria images for the social gallery
+  // Calabria images for the social gallery - updated with new photos
   const calabriaImages = [
     {
-      src: "/lovable-uploads/9bfe8180-86f4-40c8-8fdf-aa965d9be96b.png",
-      alt: "Осенний лес в Калабрии с деревянными ступеньками"
+      src: "/lovable-uploads/35e65215-5e81-44a4-9211-5cd7b4017e43.png",
+      alt: "Древние руины замка на побережье Калабрии с видом на море"
     },
     {
-      src: "/lovable-uploads/f22f9e69-8576-48b3-b798-a05bba1e9d41.png", 
-      alt: "Средневековый замок на побережье Калабрии"
+      src: "/lovable-uploads/970bdffc-0417-41c0-bb6b-8bb12b88feeb.png", 
+      alt: "Исторический каменный мост в горном городке Калабрии"
     },
     {
-      src: "/lovable-uploads/e5c600ba-1e0e-4e1f-a9cf-219223e213dd.png",
-      alt: "Горный городок в Калабрии с древним мостом"
+      src: "/lovable-uploads/978a0639-7ff8-4a35-8752-e081322900e0.png",
+      alt: "Традиционная калабрийская колбасная тарелка с прошутто и деликатесами"
     },
     {
-      src: "/lovable-uploads/6cd2d603-fa70-4f33-82a1-9155ab825253.png",
-      alt: "Кайтсерфинг на побережье Калабрии"
+      src: "/lovable-uploads/380a07ab-5d68-46f5-8aff-84f77e276641.png",
+      alt: "Коллекция местных калабрийских вин от винодельни Donnafugata"
     }
   ];
 
