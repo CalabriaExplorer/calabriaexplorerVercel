@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
@@ -91,10 +92,9 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
   const isBlogPost = title && /blog/i.test(title) && typeof window !== "undefined" && window.location.pathname.startsWith("/blog/");
   const isTour = typeof window !== "undefined" && window.location.pathname.startsWith("/tours/");
   const schema = React.useMemo(() => {
-    // Структура Organization и Website — для главной всегда
     if (typeof window === "undefined") return undefined;
     if (window.location.pathname === "/") {
-      return {
+      return JSON.stringify({
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Calabria Explorer",
@@ -106,11 +106,10 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
           "@type": "Organization",
           "name": "Calabria Explorer"
         }
-      };
+      });
     }
-    // BlogPosting
     if (isBlogPost) {
-      return {
+      return JSON.stringify({
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": title,
@@ -121,11 +120,10 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
         "publisher": { "@type": "Organization", "name": "Calabria Explorer" },
         "datePublished": new Date().toISOString().slice(0, 10),
         "inLanguage": language
-      };
+      });
     }
-    // TouristTrip/Product для туров
     if (isTour) {
-      return {
+      return JSON.stringify({
         "@context": "https://schema.org",
         "@type": "TouristTrip",
         "name": title,
@@ -137,9 +135,9 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
           "priceCurrency": "EUR",
           "availability": "https://schema.org/InStock"
         }
-      };
+      });
     }
-    // Breadcrumb для всего остального (сформировать путь)
+    // BreadcrumbList для остального
     const pathChunks = window.location.pathname
       .split("/")
       .filter(Boolean);
@@ -150,11 +148,11 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
         "name": decodeURIComponent(part),
         "item": window.location.origin + "/" + pathChunks.slice(0, i + 1).join("/")
       }));
-      return {
+      return JSON.stringify({
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": items
-      };
+      });
     }
     return undefined;
   }, [title, description, language, isBlogPost, isTour ]);
