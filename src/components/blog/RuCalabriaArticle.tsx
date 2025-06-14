@@ -1,4 +1,3 @@
-
 import React from "react";
 
 const RuCalabriaArticle = () => (
@@ -50,49 +49,47 @@ const RuCalabriaArticle = () => (
     <div
       className="
         mt-7 mb-6
+        w-full
         rounded-2xl
-        p-[2px]
-        bg-gradient-to-tr from-calabria-terracotta/80 via-yellow-200 to-calabria-blue/70
-        shadow-lg
-        animate-fade-in
+        bg-gradient-to-tr from-calabria-terracotta/90 via-yellow-100 to-calabria-blue/80
+        shadow-xl
+        flex flex-col items-center px-2 py-6 sm:py-8 animate-fade-in
       "
     >
-      <div
-        className="
-          bg-[#FFFDF7]/90 rounded-2xl
-          px-6 py-6 sm:py-7 flex flex-col items-center text-center gap-2
-        "
-      >
-        <h3 className="text-2xl sm:text-3xl mb-3 font-extrabold font-serif text-calabria-blue flex items-center justify-center gap-2 animate-fade-in">
-          <span aria-label="sparkles" role="img" className="animate-pulse">✨</span>
+      <h3 className="text-2xl sm:text-3xl font-extrabold font-serif mb-3 flex items-center justify-center gap-2 text-calabria-blue drop-shadow animate-fade-in">
+        <span className="text-2xl sm:text-3xl animate-pulse">✨</span>
+        <span className="tracking-wide whitespace-nowrap">
           РАСКРОЙТЕ СЕКРЕТЫ КАЛАБРИИ!
-          <span aria-label="sparkles" role="img" className="animate-pulse">✨</span>
-        </h3>
-        <ul className="text-lg md:text-xl space-y-1 leading-relaxed mb-3">
-          <li className="flex items-center justify-center gap-2">
-            <span className="text-2xl">🌊</span> Хотите попробовать самые свежие морепродукты?
-          </li>
-          <li className="flex items-center justify-center gap-2">
-            <span className="text-2xl">🏝️</span> Мечтаете об уединённых пляжах?
-          </li>
-          <li className="flex items-center justify-center gap-2">
-            <span className="text-2xl">🍤</span> Ищете нетуристические места?
-          </li>
-        </ul>
-        <div className="w-full flex justify-center">
-          <span className="
-              inline-block rounded-xl bg-gradient-to-r from-calabria-blue via-calabria-terracotta to-amber-400
-              px-6 py-2 text-lg font-bold text-white
-              shadow hover:scale-105 transition-transform
-              animate-scale-in
-            ">
-            👉 ЗАДАЙТЕ ВОПРОС → ПОЛУЧИТЕ БЕСПЛАТНЫЙ ПЕРСОНАЛЬНЫЙ СОВЕТ!
-          </span>
-        </div>
-        <p className="mt-3 text-base sm:text-lg text-calabria-blue/80 font-medium">
-          Местные секреты • Потаённые уголки • Рекомендации под ваш запрос
-        </p>
+        </span>
+        <span className="text-2xl sm:text-3xl animate-pulse">✨</span>
+      </h3>
+      <ul className="max-w-md w-full mx-auto text-lg md:text-xl mt-2 mb-4 space-y-3">
+        <li className="flex items-center gap-3">
+          <span className="text-2xl">🌊</span>
+          <span>Хотите попробовать самые свежие морепродукты?</span>
+        </li>
+        <li className="flex items-center gap-3">
+          <span className="text-2xl">🏝️</span>
+          <span>Мечтаете об уединённых пляжах?</span>
+        </li>
+        <li className="flex items-center gap-3">
+          <span className="text-2xl">🍤</span>
+          <span>Ищете нетуристические места?</span>
+        </li>
+      </ul>
+      <div className="w-full flex justify-center">
+        <span className="
+          inline-block rounded-lg bg-gradient-to-r from-calabria-blue via-calabria-terracotta to-amber-400
+          px-6 py-2 text-lg font-bold text-white shadow-lg
+          hover:scale-105 transition-transform
+          animate-scale-in
+        ">
+          👉 ЗАДАЙТЕ ВОПРОС → ПОЛУЧИТЕ БЕСПЛАТНЫЙ ПЕРСОНАЛЬНЫЙ СОВЕТ!
+        </span>
       </div>
+      <p className="mt-3 text-base sm:text-lg text-calabria-blue/80 font-medium text-center">
+        Местные секреты &bull; Потаённые уголки &bull; Рекомендации под ваш запрос
+      </p>
     </div>
     <p className="text-center text-lg font-bold mt-8">🌞 До встречи в Калабрии — земле солнца, вина и настоящих эмоций!</p>
   </div>
