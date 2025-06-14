@@ -20,7 +20,7 @@ const SCHEMA_ORG = (lang: "ru" | "en") => JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": lang === "ru" ? "🌊 ВОДА ИЛИ ЖИДКАЯ ГАДОСТЬ?" : "🌊 WATER OR SWAMP JUICE?",
-  "description": lang === "ru" ? "Жёсткий гид по морям: как отличить курорт от лужи, где вода пахнет борщом и канализацией. Мемный обзор." : "A brutal guide to seas: how to spot a beach vs. an algae swamp. Meme-based survival tips.",
+  "description": lang === "ru" ? "Жёсткий гид по выживанию в морях, которые пахнут как лук из борща" : "A brutal guide to seas: how to spot a beach vs. an algae swamp. Meme-based survival tips.",
   "mainEntityOfPage": typeof window !== "undefined" ? window.location.href : "https://calabria-explorer.lovable.app/blog/water-or-swamp-juice",
   "image": articleImages.map(img => typeof window !== "undefined" ? window.location.origin + img.src : "https://calabria-explorer.lovable.app" + img.src),
   "author": {
@@ -107,8 +107,7 @@ const article = {
       <div className="font-bold bg-yellow-50 border-l-4 border-yellow-400 p-3 my-4">
         ⚠️ WARNING: If you enjoy water smelling like gym socks - this article will trigger you.
       </div>
-
-      {articleImages.map((img, idx) => {})}
+      {/* УДАЛЁН map без возврата: {articleImages.map((img, idx) => {})} */}
 
       <p>
         Born near the sea soup called Black Sea - where water has the eternal aroma of "grandma's flooded basement". Raised near Barents Sea where swimming = extreme sport "survive 1 minute without hypothermia". Then I wanted exotic: Tierra del Fuego (spoiler: no fire, just icy kick in the guts), Bali (where "paradise water" sometimes smells like a sloth's aquarium), and Persian Gulf - the only place where water doesn't resemble "toilet after spicy food festival".
