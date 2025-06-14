@@ -72,7 +72,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     FAVICON_SIZES.forEach(({ rel, sizes, href }) => {
       const link = document.createElement("link");
       link.rel = rel;
-      if (sizes) link.sizes = sizes;
+      if (sizes !== undefined) link.setAttribute("sizes", sizes);
       link.href = href;
       document.head.appendChild(link);
     });
