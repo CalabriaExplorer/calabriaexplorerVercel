@@ -63,10 +63,9 @@ const RuCalabriaArticle = () => (
         backdrop-blur-md
       `}
       style={{
-        background:
-          "linear-gradient(90deg, #21a1df 0%, #a8daef 54%, #e3f6fd 100%)",
-        border: "1.5px solid #e3f2fd",
-        boxShadow: "0 10px 40px 0 #b2c4d926, 0 2px 10px 0 #9de0fc33",
+        background: "linear-gradient(120deg, #b8f5fc 0%, #40d8ef 100%)",
+        border: "1.5px solid #c3ecfa",
+        boxShadow: "0 8px 36px 0 #87e3f446, 0 2px 10px 0 #40d8ef33",
       }}
     >
       <style>
@@ -79,14 +78,20 @@ const RuCalabriaArticle = () => (
           .seabreeze-mist-block:focus-within,
           .seabreeze-mist-block:active {
             transform: translateY(-7px) scale(1.015) rotate(-0.7deg);
-            box-shadow: 0 16px 42px 0 #9de0fc52, 0 6px 24px 0 #acd7faaa;
+            box-shadow: 0 16px 42px 0 #6fd7f452, 0 6px 24px 0 #b8f5fcaa;
           }
         `}
       </style>
-      <h3 className="text-center w-full text-2xl sm:text-3xl font-extrabold font-serif mb-5 text-calabria-blue flex items-center justify-center gap-2 tracking-wide drop-shadow-lg">
-        РАСКРОЙТЕ СЕКРЕТЫ КАЛАБРИИ!
+      <h3
+        className="text-center w-full text-2xl sm:text-3xl font-extrabold font-serif mb-5"
+        style={{
+          color: "#054263",
+          textShadow: "0 1px 6px #e2fafc, 0 0px 2px #fff"
+        }}>
+        РАСКРОЙТЕ СЕКРЕТЫ КАЛАБРИИ
       </h3>
-      <ul className="w-full max-w-md text-lg md:text-xl mb-5 mt-1 space-y-3 text-center sm:text-left flex flex-col gap-2 font-sans">
+      <ul className="w-full max-w-md text-lg md:text-xl mb-5 mt-1 space-y-3 text-center sm:text-left flex flex-col gap-2 font-sans"
+        style={{ color: "#12637c", textShadow: "0 1px 4px #d8f8fc80" }}>
         <li className="flex items-center gap-3 justify-center sm:justify-start">
           <span>Хотите попробовать самые свежие морепродукты?</span>
         </li>
@@ -99,15 +104,22 @@ const RuCalabriaArticle = () => (
       </ul>
       <div className="mt-1 mb-1 w-full flex justify-center">
         <span className="
-          inline-block rounded-lg bg-calabria-blue px-6 py-2
-          text-lg font-bold text-white shadow-md hover:scale-105 transition-transform
-          animate-scale-in
-        ">
-          👉 ЗАДАЙТЕ ВОПРОС → ПОЛУЧИТЕ БЕСПЛАТНЫЙ ПЕРСОНАЛЬНЫЙ СОВЕТ!
+          inline-block rounded-lg bg-[#40d8ef] px-7 py-2
+          text-lg font-bold text-white shadow hover:scale-105 transition-transform
+          hover:shadow-lg
+        "
+          style={{
+            textShadow: "0 2px 6px #18c5dd66, 0 0 1px #fff"
+          }}>
+          ЗАДАЙТЕ ВОПРОС — ПОЛУЧИТЕ ПЕРСОНАЛЬНЫЙ СОВЕТ!
         </span>
       </div>
-      <p className="mt-4 text-base sm:text-lg text-calabria-blue/80 font-medium text-center">
-        Местные секреты &bull; Потаённые уголки &bull; Рекомендации под ваш запрос
+      <p className="mt-4 text-base sm:text-lg font-medium text-center"
+         style={{
+           color: "#197aac",
+           textShadow: "0 1px 5px #f0fdff90"
+         }}>
+        Местные секреты • Потаённые уголки • Рекомендации под ваш запрос
       </p>
     </div>
     <p className="text-center text-lg font-bold mt-8">🌞 До встречи в Калабрии — земле солнца, вина и настоящих эмоций!</p>
