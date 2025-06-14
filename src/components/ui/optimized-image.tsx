@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 interface OptimizedImageProps {
@@ -25,7 +24,6 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Fix potential path issues
   const fixImagePath = (imageSrc: string) => {
     if (imageSrc.startsWith('//')) {
       return 'https:' + imageSrc;
@@ -34,7 +32,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   };
 
   const fixedSrc = fixImagePath(src);
-  const fixedWebpSrc = webpSrc ? fixImagePath(webpSrc) : fixedSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+  const fixedWebpSrc = webpSrc ? fixImagePath(webpSrc) : undefined;
 
   const handleImageError = () => {
     console.error('Image failed to load:', fixedSrc);
@@ -70,7 +68,9 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       )}
       
       <picture className="tour-page-image">
-        <source srcSet={fixedWebpSrc} type="image/webp" sizes={sizes} />
+        {fixedWebpSrc && (
+          <source srcSet={fixedWebpSrc} type="image/webp" sizes={sizes} />
+        )}
         <img
           src={fixedSrc}
           alt={alt}
