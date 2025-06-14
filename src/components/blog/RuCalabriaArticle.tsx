@@ -49,28 +49,28 @@ const RuCalabriaArticle = () => (
     {/* Refined “Секреты Калабрии” block */}
     <div
       className="
-        mt-7 mb-6 w-full
-        rounded-xl
-        shadow-xl
+        mt-8 mb-7 w-full
+        rounded-2xl
+        shadow-md
         flex flex-col items-center
-        px-4 py-7
-        sm:py-10
+        px-6 py-10
         transition
         animate-fade-in
         glass-gradient
-        "
+      "
       style={{
-        background: `linear-gradient(135deg, #E2725Bd6 0%, #F5F0E6cc 90%)`,
-        backdropFilter: 'blur(3px)',
-        WebkitBackdropFilter: 'blur(3px)',
+        background: "linear-gradient(135deg, #B6D0E2 0%, #F5F0E6 100%)",
+        backdropFilter: "blur(9px)",
+        WebkitBackdropFilter: "blur(9px)",
+        border: "1.5px solid #e0e4ea22",
       }}
     >
-      <h3 className="text-center w-full text-2xl sm:text-3xl font-extrabold font-serif mb-4 text-calabria-blue flex items-center justify-center gap-2 tracking-wide drop-shadow-lg">
+      <h3 className="text-center w-full text-2xl sm:text-3xl font-extrabold font-serif mb-5 text-calabria-blue flex items-center justify-center gap-2 tracking-wide drop-shadow-lg">
         <span className="text-2xl sm:text-3xl animate-pulse">✨</span>
         РАСКРОЙТЕ СЕКРЕТЫ КАЛАБРИИ!
         <span className="text-2xl sm:text-3xl animate-pulse">✨</span>
       </h3>
-      <ul className="w-full max-w-md text-lg md:text-xl mb-4 mt-2 space-y-3 text-center sm:text-left flex flex-col gap-2 font-sans">
+      <ul className="w-full max-w-md text-lg md:text-xl mb-5 mt-1 space-y-3 text-center sm:text-left flex flex-col gap-2 font-sans">
         <li className="flex items-center gap-3 justify-center sm:justify-start">
           <span className="text-2xl">🌊</span>
           <span>Хотите попробовать самые свежие морепродукты?</span>
@@ -93,7 +93,7 @@ const RuCalabriaArticle = () => (
           👉 ЗАДАЙТЕ ВОПРОС → ПОЛУЧИТЕ БЕСПЛАТНЫЙ ПЕРСОНАЛЬНЫЙ СОВЕТ!
         </span>
       </div>
-      <p className="mt-3 text-base sm:text-lg text-calabria-blue/80 font-medium text-center">
+      <p className="mt-4 text-base sm:text-lg text-calabria-blue/80 font-medium text-center">
         Местные секреты &bull; Потаённые уголки &bull; Рекомендации под ваш запрос
       </p>
     </div>
