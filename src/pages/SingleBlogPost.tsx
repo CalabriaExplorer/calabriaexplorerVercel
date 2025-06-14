@@ -1,9 +1,9 @@
-
 import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
 import { useNavigate } from "react-router-dom";
 import OptimizedImage from "@/components/ui/optimized-image";
+import Gallery from "@/components/ui/Gallery";
 
 const articleImages = [
   {
@@ -183,15 +183,56 @@ const SingleBlogPost: React.FC = () => {
 
   return (
     <Layout title={language === "ru" ? "🍇 Неизвестные вина Италии!" : "🍇 Hidden Gems of Italian Wine!"}>
-      <section className="w-full min-h-[calc(100vh-250px)] bg-white pb-8">
+      <section className="w-full min-h-[calc(100vh-250px)] bg-calabria-sand pb-8">
         <div className="max-w-2xl mx-auto pt-3">
           <button
             onClick={() => navigate("/blog")}
-            className="mb-6 text-sm text-blue-700 hover:underline"
+            className="mb-6 text-sm text-calabria-blue hover:underline"
           >
             {language === "ru" ? "← Назад к блогу" : "← Back to blog"}
           </button>
-          {article[language]}
+          
+          {/* Галерея */}
+          <Gallery images={articleImages} />
+
+          {/* Акцентный текстовый блок */}
+          <div className="rounded-2xl bg-white/90 shadow-lg px-4 py-6 mb-6 border border-calabria-terracotta">
+            <h2 className="text-3xl mb-2 text-calabria-terracotta font-serif font-bold text-center animate-fade-in">
+              {language === "ru"
+                ? "🍇 Неизвестные вина Италии!"
+                : "🍇 Hidden Gems of Italian Wine!"}
+            </h2>
+            <p className="text-center text-gray-700 mb-5 animate-fade-in">
+              {language === "ru"
+                ? "Погрузитесь в атмосферу Калабрии — региона, где вино, история и солнце сливаются в идеальное путешествие! "
+                : "Immerse yourself in Calabria – where wine, history, and sunshine blend into the perfect journey!"}
+            </p>
+            <hr className="border-t-2 border-calabria-terracotta my-4 w-16 mx-auto" />
+            {/* Оригинальный текст статьи */}
+            <div className="prose max-w-full mx-auto pt-2 pb-4 text-[1.04rem] text-gray-800">
+              {article[language]}
+            </div>
+          </div>
+
+          {/* Call-to-action */}
+          <div className="bg-gradient-to-r from-calabria-terracotta/90 to-calabria-blue/80 rounded-xl shadow-lg p-6 mt-8 animate-fade-in">
+            <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-2 text-center drop-shadow">
+              {language === "ru"
+                ? "Откройте свой авторский маршрут по Калабрии!"
+                : "Get Your Exclusive Calabria Itinerary!"}
+            </h3>
+            <p className="text-center text-white/90 mb-2">
+              {language === "ru"
+                ? "Пишите на почту — получайте консультацию бесплатно:"
+                : "Write to my email for a free consultation:"}
+            </p>
+            <a
+              href="mailto:mariamarinaciro@gmail.com"
+              className="block mx-auto w-max px-6 py-3 rounded-lg font-bold shadow transition-all bg-white text-calabria-terracotta hover:bg-calabria-terracotta hover:text-white ring-2 ring-white ring-offset-2 hover:ring-terracotta focus:ring-terracotta"
+            >
+              mariamarinaciro@gmail.com
+            </a>
+          </div>
         </div>
       </section>
     </Layout>
