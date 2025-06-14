@@ -1,3 +1,4 @@
+
 import React from "react";
 
 const RuCalabriaArticle = () => (
@@ -50,21 +51,26 @@ const RuCalabriaArticle = () => (
       className="
         mt-7 mb-6 w-full
         rounded-xl
-        bg-white/90
-        shadow-md
+        shadow-xl
         flex flex-col items-center
         px-4 py-7
         sm:py-10
         transition
         animate-fade-in
-      "
+        glass-gradient
+        "
+      style={{
+        background: `linear-gradient(135deg, #E2725Bd6 0%, #F5F0E6cc 90%)`,
+        backdropFilter: 'blur(3px)',
+        WebkitBackdropFilter: 'blur(3px)',
+      }}
     >
-      <h3 className="text-center w-full text-2xl sm:text-3xl font-extrabold font-serif mb-4 text-calabria-blue flex items-center justify-center gap-2 tracking-wide">
+      <h3 className="text-center w-full text-2xl sm:text-3xl font-extrabold font-serif mb-4 text-calabria-blue flex items-center justify-center gap-2 tracking-wide drop-shadow-lg">
         <span className="text-2xl sm:text-3xl animate-pulse">✨</span>
         РАСКРОЙТЕ СЕКРЕТЫ КАЛАБРИИ!
         <span className="text-2xl sm:text-3xl animate-pulse">✨</span>
       </h3>
-      <ul className="w-full max-w-md text-lg md:text-xl mb-4 mt-2 space-y-3 text-center sm:text-left flex flex-col gap-2">
+      <ul className="w-full max-w-md text-lg md:text-xl mb-4 mt-2 space-y-3 text-center sm:text-left flex flex-col gap-2 font-sans">
         <li className="flex items-center gap-3 justify-center sm:justify-start">
           <span className="text-2xl">🌊</span>
           <span>Хотите попробовать самые свежие морепродукты?</span>
@@ -81,7 +87,7 @@ const RuCalabriaArticle = () => (
       <div className="mt-1 mb-1 w-full flex justify-center">
         <span className="
           inline-block rounded-lg bg-calabria-blue px-6 py-2
-          text-lg font-bold text-white shadow hover:scale-105 transition-transform
+          text-lg font-bold text-white shadow-md hover:scale-105 transition-transform
           animate-scale-in
         ">
           👉 ЗАДАЙТЕ ВОПРОС → ПОЛУЧИТЕ БЕСПЛАТНЫЙ ПЕРСОНАЛЬНЫЙ СОВЕТ!
