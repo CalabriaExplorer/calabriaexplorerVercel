@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -120,7 +119,7 @@ const TenSteps = () => {
         {
           number: "6️⃣",
           title: "Ритм жизни",
-          description: "Сицилия = \"mañana\", Ломбардия = \"эффективность до 17:00\". Ваш выбор?",
+          description: "Сицилия = \"domani\", Ломбардия = \"эффективность до 17:00\". Ваш выбор?",
           icon: Clock
         },
         {
