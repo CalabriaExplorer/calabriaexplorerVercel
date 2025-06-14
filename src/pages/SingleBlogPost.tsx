@@ -3,6 +3,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
 import { useNavigate } from "react-router-dom";
 import Gallery from "@/components/ui/Gallery";
+import RuCalabriaArticle from "@/components/blog/RuCalabriaArticle";
+import EnCalabriaArticle from "@/components/blog/EnCalabriaArticle";
 
 const articleImages = [
   {
@@ -197,9 +199,8 @@ const SingleBlogPost: React.FC = () => {
                 : "Immerse yourself in Calabria – where wine, history, and sunshine blend into the perfect journey!"}
             </p>
             <hr className="border-t-2 border-calabria-terracotta my-4 w-16 mx-auto" />
-            {/* Оригинальный текст статьи */}
             <div className="prose max-w-full mx-auto pt-2 pb-4 text-[1.04rem] text-gray-800">
-              {article[language]}
+              {language === "ru" ? <RuCalabriaArticle /> : <EnCalabriaArticle />}
             </div>
           </div>
 
