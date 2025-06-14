@@ -180,11 +180,31 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
               <h4 className="font-bold mb-4">{t("footer.quicklinks")}</h4>
               <nav aria-label="Footer navigation">
                 <ul className="space-y-2">
-                  <li><Link to="/" className="text-gray-300 hover:text-white">{t("home")}</Link></li>
-                  <li><Link to="/tours" className="text-gray-300 hover:text-white">{t("tours")}</Link></li>
-                  <li><Link to="#tourist" className="text-gray-300 hover:text-white">{t("footer.tourist")}</Link></li>
-                  <li><Link to="#relocation" className="text-gray-300 hover:text-white">{t("footer.relocation")}</Link></li>
-                  <li><Link to="#contact" className="text-gray-300 hover:text-white">{t("contact")}</Link></li>
+                  <li>
+                    <Link to="/" className="text-gray-300 hover:text-white">{t("home")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/tours" className="text-gray-300 hover:text-white">{t("tours")}</Link>
+                  </li>
+                  <li>
+                    <Link to="#tourist" className="text-gray-300 hover:text-white">{t("footer.tourist")}</Link>
+                  </li>
+                  <li>
+                    <Link to="#relocation" className="text-gray-300 hover:text-white">{t("footer.relocation")}</Link>
+                  </li>
+                  <li>
+                    <Link to="#contact" className="text-gray-300 hover:text-white">{t("contact")}</Link>
+                  </li>
+                  <li>
+                    <a
+                      href="https://ciro-flight.lovable.app/flights"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-300 hover:text-white"
+                    >
+                      {language === "en" ? "How to get there" : "Как добраться"}
+                    </a>
+                  </li>
                 </ul>
               </nav>
             </div>
