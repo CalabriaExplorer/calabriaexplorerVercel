@@ -9,4 +9,12 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://calabria-explorer.lovable.app/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://calabria-explorer.lovable.app/?lang=ru" />
   </url>
+  <url>
+    <loc>https://calabria-explorer.lovable.app/blog/water-or-swamp-juice</loc>
+    <lastmod>2024-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://calabria-explorer.lovable.app/blog/water-or-swamp-juice" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://calabria-explorer.lovable.app/blog/water-or-swamp-juice?lang=ru" />
+  </url>
 </urlset>
