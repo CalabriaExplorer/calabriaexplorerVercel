@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
@@ -6,19 +5,19 @@ import SEOHead from "@/components/SEOHead";
 
 const articleImages = [
   {
-    src: "/lovable-uploads/cdbc2b78-c117-4170-a71f-a75d08f9c6bf.png",
+    src: "/lovable-uploads/e23f8b3b-f1dc-4a17-a7fe-cd2896aaea08.png",
     alt_ru: "Кристально чистая вода и галька на пляже Калабрии",
     alt_en: "Crystal clear water and pebbles on a Calabrian beach",
   },
   {
-    src: "/lovable-uploads/2c003f6f-01cf-4ff9-91e0-6d9bdd3950fa.png",
-    alt_ru: "Пляж и море под голубым небом в Италии",
-    alt_en: "Beach and sea under a blue Italian sky",
+    src: "/lovable-uploads/5932a9cb-86cb-4fbc-a3af-c1a63738d965.png",
+    alt_ru: "Галька, море и небо с облаками на пляже Калабрии",
+    alt_en: "Pebbles, sea and sky with clouds on Calabria's beach",
   },
   {
-    src: "/lovable-uploads/20133435-3978-4191-a150-e35f93923bca.png",
-    alt_ru: "Ныряльщик в чистой воде у холмов Калабрии",
-    alt_en: "Diver in clean water near Calabria hills",
+    src: "/lovable-uploads/890e6bee-280e-4cef-aff9-ef043e6972ce.png",
+    alt_ru: "Дайвер в чистой воде у живописных холмов Калабрии",
+    alt_en: "Diver in clean water with scenic Calabria hills",
   },
 ];
 
