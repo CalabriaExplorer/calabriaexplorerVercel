@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -41,18 +40,40 @@ const Tours = () => {
       title={`${content.title} - Calabria Explorer`}
       description={content.intro}
     >
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#0077B6] via-[#00A9E6] to-[#0077B6] text-white py-16 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/lovable-uploads/6d3b6b08-c072-43d0-9bb7-4a32452ce1e1.png')] bg-cover bg-center opacity-10" />
+      {/* Hero Section UPDATED */}
+      <section
+        className="relative py-16 overflow-hidden"
+        style={{
+          background: "linear-gradient(135deg, #2196F3 0%, #21a1df 35%, #19adde 100%)"
+        }}
+      >
         <div className="relative container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-serif text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
+            <h1
+              className="font-serif text-4xl md:text-6xl font-bold mb-6"
+              style={{
+                color: "#fff",
+                textShadow: "0 2px 14px rgba(0,0,0,0.18), 0 1px 2px rgba(0,0,0,0.12)"
+              }}
+            >
               {content.title}
             </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+            <p
+              className="text-xl md:text-2xl mb-8"
+              style={{
+                color: "#fff",
+                textShadow: "0 1px 7px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.08)"
+              }}
+            >
               {content.subtitle}
             </p>
-            <p className="text-lg mb-8 opacity-80 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: "0.4s" }}>
+            <p
+              className="text-lg mb-8 max-w-3xl mx-auto"
+              style={{
+                color: "#fff",
+                textShadow: "0 1px 4px rgba(0,0,0,0.15)"
+              }}
+            >
               {content.intro}
             </p>
           </div>
@@ -63,7 +84,7 @@ const Tours = () => {
       <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <h2 className="font-serif text-3xl font-bold mb-4">
               {content.allToursTitle}
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-[#0077B6] to-[#00A9E6] mx-auto rounded-full" />
