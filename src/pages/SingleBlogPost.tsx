@@ -103,16 +103,13 @@ const article = {
   ),
   en: (
     <div className="prose max-w-full sm:mx-auto px-2 py-2">
-      <OptimizedImage src={articleImages[0].src} alt={articleImages[0].alt} className="mx-auto mb-6 rounded-lg max-w-md w-full" width={640} height={480} />
       <h2 className="text-2xl font-bold text-[#8B0000]">🍇 Hidden Gems of Italian Wine!</h2>
-      <OptimizedImage src={articleImages[1].src} alt={articleImages[1].alt} className="mx-auto mb-6 rounded-lg max-w-md w-full" width={640} height={480} />
-      <h3 className="text-lg font-bold text-[#4B0082]">Calabria — Where Wine & History Dance in a Flavor Fiesta! 🎉</h3>
+      <h3 className="text-lg font-bold text-[#4B0082]">Calabria — Where Wine &amp; History Dance in a Flavor Fiesta! 🎉</h3>
       <p>
         Discover Calabria — a land where every day becomes a <strong>culinary adventure</strong>! 🌊⛰️<br />
         Between turquoise seas and green hills, wines with character are born: ✨ <strong>170+ native grape varieties</strong>, including legendary <em>Gaglioppo</em> — served to Olympic gods according to myths!
       </p>
-      <OptimizedImage src={articleImages[2].src} alt={articleImages[2].alt} className="mx-auto mb-6 rounded-lg max-w-md w-full" width={640} height={480} />
-      <h4 className="font-bold mt-4">🍷 Why Calabria is a Wine Lover's Must?</h4>
+      <h4 className="font-bold mt-4">🍷 Why Calabria is a Wine Lover&apos;s Must?</h4>
       <p>🏛️ <strong>History in every glass</strong>: Taste <em>Ciro</em> — wine steeped in legends with rich flavor and deep tannins.</p>
       <h4 className="font-bold mt-4">🏆 Top Wineries:</h4>
       <ul className="list-disc list-inside space-y-1">
@@ -121,13 +118,11 @@ const article = {
         <li><a href="https://www.tenutaiuzzolini.kr.it" className="text-[#8B0000] underline">Luzzolini</a> 🏺</li>
         <li><a href="https://zito.it" className="text-[#8B0000] underline">Zito</a> 🌞</li>
       </ul>
-      <OptimizedImage src={articleImages[3].src} alt={articleImages[3].alt} className="mx-auto mb-6 rounded-lg max-w-md w-full" width={640} height={480} />
-      <p>🎉 Not just tastings—true celebrations of flavor & culture!</p>
-      <h4 className="font-bold mt-4">📍 Where & When to Go?</h4>
+      <p>🎉 Not just tastings—true celebrations of flavor &amp; culture!</p>
+      <h4 className="font-bold mt-4">📍 Where &amp; When to Go?</h4>
       <p>
         <strong>Hotspots</strong>: Ciro, Ciro Marina, Locri, Strongoli (Crotone) — Calabria’s <strong>wine tourism heart</strong>! 💖
       </p>
-      <OptimizedImage src={articleImages[4].src} alt={articleImages[4].alt} className="mx-auto mb-6 rounded-lg max-w-md w-full" width={640} height={480} />
       <h4 className="font-bold mt-4">⏰ Best Time:</h4>
       <ul className="list-disc list-inside space-y-1">
         <li><strong>May–October</strong>: Beach season 🏖️, wine festivals, tours</li>
@@ -136,14 +131,14 @@ const article = {
       </ul>
       <h4 className="font-bold mt-4">✈️ Getting Here:</h4>
       <ul className="list-disc list-inside space-y-1">
-        <li><strong>Crotone-Sant'Anna Airport (CRV)</strong>: Direct flights from Rome, Milan, Dusseldorf</li>
+        <li><strong>Crotone-Sant&apos;Anna Airport (CRV)</strong>: Direct flights from Rome, Milan, Dusseldorf</li>
         <li><strong>Lamezia Terme (SUF)</strong>: Perfect for car rentals 🚗 or private transfers</li>
       </ul>
       <h4 className="font-bold mt-4">🛏️ Accommodation:</h4>
       <p>Boutique hotels, seaside villas, mountain retreats—find your perfect stay!</p>
       <h4 className="font-bold mt-4">💡 Pro Tips:</h4>
       <ul className="list-disc list-inside space-y-1">
-        <li>Combine wine tours with beach time & ancient city explorations!</li>
+        <li>Combine wine tours with beach time &amp; ancient city explorations!</li>
         <li>Try local delicacies: <em>Nduja</em> 🌶️, <em>Sardella</em>, fresh seafood 🐟</li>
         <li>Use <a href="https://mtvcalabria.it" className="text-[#8B0000] underline">mtvcalabria.it</a>, <a href="https://winalist.com" className="text-[#8B0000] underline">winalist.com</a>, <a href="https://turismo.reggiocal.it" className="text-[#8B0000] underline">turismo.reggiocal.it</a> for tours</li>
       </ul>
@@ -157,7 +152,7 @@ const article = {
         <h3 className="font-bold mb-2">✨ Crave Authentic Calabria?</h3>
         <p>
           <strong>Let a local expert craft your dream trip!</strong> 🗺️<br />
-          I'll create your <strong>personalized itinerary</strong>:<br />
+          I&apos;ll create your <strong>personalized itinerary</strong>:<br />
           • Family winery tastings 🍷<br />
           • Seaside dinners 🌅<br />
           • Ancient city tours 🏛️<br />
