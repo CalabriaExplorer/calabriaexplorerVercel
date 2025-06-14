@@ -104,6 +104,11 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
                 <Link to="#about" className="font-medium" aria-label="About Calabria">{t("about")}</Link>
               </NavigationMenuItem>
               <NavigationMenuItem className="px-2">
+                <Link to="/blog" className="font-medium" aria-label={language === "en" ? "Blog" : "Блог"}>
+                  {language === "en" ? "Blog" : "Блог"}
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem className="px-2">
                 <Link to="#contact" className="font-medium" aria-label="Contact us">{t("contact")}</Link>
               </NavigationMenuItem>
               <NavigationMenuItem className="px-2">

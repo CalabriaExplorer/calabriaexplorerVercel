@@ -62,7 +62,7 @@ const article = {
         </p>
         <p className="mt-2"><strong>📩 Свяжитесь со мной:</strong><br />
           <a href="mailto:mariamarinaciro@gmail.com" className="text-blue-600 underline">mariamarinaciro@gmail.com</a>
-           — получите <strong>бесплатную консультацию</strong>!
+          — получите <strong>бесплатную консультацию</strong>!
         </p>
       </div>
       <p className="text-center text-lg font-bold mt-8">🌞 До встречи в Калабрии — земле солнца, вина и настоящих эмоций!</p>
