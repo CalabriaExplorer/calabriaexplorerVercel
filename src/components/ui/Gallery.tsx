@@ -17,18 +17,17 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
       {images.map((img, i) => (
         <div
           key={img.src}
-          className={`relative transition-transform duration-300 group rounded-lg shadow-lg overflow-hidden bg-white flex items-center justify-center ${
-            i === 0 ? "sm:col-span-2 h-64 sm:h-96" : "h-56 sm:h-80"
-          }`}
-          style={{
-            minHeight: i === 0 ? '16rem' : '14rem',
-            background: '#f8fafc'
-          }}
+          className={
+            `relative transition-transform duration-300 group rounded-lg shadow-lg overflow-hidden bg-white flex items-center justify-center ` +
+            (i === 0
+              ? "sm:col-span-2 aspect-[3/2] max-h-[420px]"
+              : "aspect-[5/4] max-h-[350px]")
+          }
         >
           <OptimizedImage
             src={img.src}
             alt={img.alt}
-            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300 mx-auto"
+            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300 bg-white"
             width={800}
             height={600}
             loading={i === 0 ? "eager" : "lazy"}
