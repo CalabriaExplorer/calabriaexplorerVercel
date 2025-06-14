@@ -15,6 +15,10 @@ const dogLifeTitles = {
   ru: "🐶 Жизнь собачника в Италии: балконы, гавкоты и сиеста",
   en: "🐶 Dog Owner Life in Italy: Balconies, Barkfests & Siestas"
 };
+const waterOrSwampJuiceTitles = {
+  ru: "🌊 ВОДА ИЛИ ЖИДКАЯ ГАДОСТЬ?",
+  en: "🌊 WATER OR SWAMP JUICE?"
+};
 
 const Blog: React.FC = () => {
   const { language, t } = useLanguage();
@@ -25,6 +29,14 @@ const Blog: React.FC = () => {
           <h1 className="text-3xl sm:text-4xl font-serif font-bold mb-2 text-center">{t("blog.title")}</h1>
           <p className="mb-4 text-gray-600 text-center">{t("blog.description")}</p>
           <ul>
+            <li>
+              <a
+                href="/blog/water-or-swamp-juice"
+                className="block text-xl font-bold text-[#2981F2] underline hover:text-[#3d2eff] transition-colors duration-200 py-4 text-center"
+              >
+                {waterOrSwampJuiceTitles[language]}
+              </a>
+            </li>
             <li>
               <a
                 href="/blog/hidden-gems-of-italian-wine"

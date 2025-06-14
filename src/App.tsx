@@ -16,6 +16,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import SingleBlogPost from "./pages/SingleBlogPost";
 import LeCastellaPost from "./pages/LeCastellaPost";
 import DogLifePost from "./pages/DogLifePost";
+import WaterOrSwampJuicePost from "./pages/WaterOrSwampJuicePost";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/tours/pallagorio" element={<Pallagorio />} />
             <Route path="/guides/ten-steps" element={<TenSteps />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/water-or-swamp-juice" element={<WaterOrSwampJuicePost />} />
             <Route path="/blog/hidden-gems-of-italian-wine" element={<SingleBlogPost />} />
             <Route path="/blog/le-castella" element={<LeCastellaPost />} />
             <Route path="/blog/dog-life-in-italy" element={<DogLifePost />} />
