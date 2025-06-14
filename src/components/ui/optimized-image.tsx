@@ -1,5 +1,6 @@
-
 import React, { useState } from 'react';
+import ImageZoomModal from "./ImageZoomModal";
+
 interface OptimizedImageProps {
   src: string;
   alt: string;
@@ -56,33 +57,35 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   }
 
   return (
-    <div className={`relative ${className}`}>
-      {/* Loading placeholder */}
-      {!imageLoaded && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
-          <div className="w-8 h-8 bg-gray-300 rounded-full animate-spin border-2 border-gray-400 border-t-transparent"></div>
-        </div>
-      )}
+    <ImageZoomModal src={fixedSrc} alt={alt} className={`relative ${className}`}>
+      <div className={`relative ${className}`}>
+        {/* Loading placeholder */}
+        {!imageLoaded && (
+          <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+            <div className="w-8 h-8 bg-gray-300 rounded-full animate-spin border-2 border-gray-400 border-t-transparent"></div>
+          </div>
+        )}
 
-      <picture>
-        {/* WebP source for browsers that support it */}
-        {fixedWebpSrc && <source srcSet={fixedWebpSrc} type="image/webp" sizes={sizes} />}
-        <img
-          src={fixedSrc}
-          alt={alt}
-          width={width}
-          height={height}
-          loading={loading}
-          sizes={sizes}
-          className={`object-cover w-full h-full ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
-          onLoad={handleImageLoad}
-          onError={handleImageError}
-          decoding="async"
-          style={{ display: 'block' }}
-        />
-      </picture>
-    </div>
+        <picture>
+          {/* WebP source for browsers that support it */}
+          {fixedWebpSrc && <source srcSet={fixedWebpSrc} type="image/webp" sizes={sizes} />}
+          <img
+            src={fixedSrc}
+            alt={alt}
+            width={width}
+            height={height}
+            loading={loading}
+            sizes={sizes}
+            className={`object-cover w-full h-full ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+            onLoad={handleImageLoad}
+            onError={handleImageError}
+            decoding="async"
+            style={{ display: 'block' }}
+            draggable={false}
+          />
+        </picture>
+      </div>
+    </ImageZoomModal>
   );
 };
 export default OptimizedImage;
-
