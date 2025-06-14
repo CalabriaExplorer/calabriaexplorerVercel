@@ -274,7 +274,7 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
                     <Link to="/tours" className="text-gray-300 hover:text-white">{t("tours")}</Link>
                   </li>
                   <li>
-                    <Link to="#tourist" className="text-gray-300 hover:text-white">{t("footer.tourist")}</Link>
+                    <Link to="/guides/ten-steps" className="text-gray-300 hover:text-white">{t("footer.tourist")}</Link>
                   </li>
                   <li>
                     <Link to="#relocation" className="text-gray-300 hover:text-white">{t("footer.relocation")}</Link>
