@@ -1,5 +1,7 @@
+
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext"; // добавить импорт
 
 interface SEOHeadProps {
   title?: string;
@@ -31,6 +33,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   noIndex,
 }) => {
   const location = useLocation();
+  const { language } = useLanguage(); // получить язык из контекста
   const url = canonical || absoluteUrl(location.pathname);
 
   // Google Analytics (gtag.js)
@@ -215,3 +218,4 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   return null;
 };
 export default SEOHead;
+
