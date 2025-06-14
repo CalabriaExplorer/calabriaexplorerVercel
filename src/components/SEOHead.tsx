@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useLocation } from "react-router-dom";
 
@@ -118,7 +117,101 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     }
   }, [title, description, noIndex]);
 
+  // Динамические OG / Twitter / hreflang и theme-color
+  React.useEffect(() => {
+    // --- OG и Twitter ---
+    const head = document.head;
+
+    const setMetaTag = (name: string, content: string, propType: "name" | "property" = "property") => {
+      let selector = propType === "property" ? `meta[property='${name}']` : `meta[name='${name}']`;
+      let tag = head.querySelector(selector);
+      if (!tag) {
+        tag = document.createElement("meta");
+        (tag as any)[propType] = name;
+        head.appendChild(tag);
+      }
+      (tag as HTMLMetaElement).setAttribute("content", content);
+    };
+
+    // --- Ограничения на длину для meta данных ---
+    const cut = (s?: string, max = 200) => s ? String(s).slice(0, max) : "";
+
+    const imageUrl = image 
+      ? absoluteUrl(image) 
+      : absoluteUrl("/favicon.ico");
+
+    // OG
+    setMetaTag("og:title", cut(title || "Calabria Explorer", 60));
+    setMetaTag("og:description", cut(description || "Travel in Calabria, Italy: Tours, guides, relocation support.", 160));
+    setMetaTag("og:type", type || "website");
+    setMetaTag("og:url", url);
+    setMetaTag("og:image", imageUrl);
+    setMetaTag("og:site_name", "Calabria Explorer");
+    setMetaTag("og:locale", language === "ru" ? "ru_RU" : "en_US");
+    // alternate locale
+    setMetaTag("og:locale:alternate", language === "ru" ? "en_US" : "ru_RU");
+
+    // Twitter
+    setMetaTag("twitter:card", "summary_large_image", "name");
+    setMetaTag("twitter:title", cut(title || "Calabria Explorer", 60), "name");
+    setMetaTag("twitter:description", cut(description || "Travel in Calabria, Italy: Tours, guides, relocation support.", 160), "name");
+    setMetaTag("twitter:image", imageUrl, "name");
+    setMetaTag("twitter:site", "@calabriaexplorer", "name"); // Замените, если есть реальный твиттер
+
+    // --- theme-color ---
+    const theme = document.querySelector("meta[name='theme-color']") as HTMLMetaElement;
+    if (!theme) {
+      const meta = document.createElement("meta");
+      meta.name = "theme-color";
+      meta.content = "#0077B6";
+      head.appendChild(meta);
+    } else {
+      theme.content = "#0077B6";
+    }
+
+    // --- hreflang/alternate ---
+    // Очистим предыдущие rel="alternate" 
+    Array.from(document.querySelectorAll("link[rel='alternate']")).forEach(l => l.remove());
+    const origin = typeof window !== "undefined" ? window.location.origin : "https://calabriaexplorer.app";
+
+    // Поддержка двух языков: ru и en
+    const locales = [
+      { code: "ru", hreflang: "ru", url: `${origin}${location.pathname.replace(/^\/en/, "")}` },
+      { code: "en", hreflang: "en", url: `${origin}/en${location.pathname.replace(/^\/en/, "")}` }
+    ];
+    locales.forEach(loc => {
+      if (loc.code === language) return; // не дублировать текущий язык
+      const link = document.createElement("link");
+      link.rel = "alternate";
+      link.hreflang = loc.hreflang;
+      link.href = loc.url;
+      head.appendChild(link);
+    });
+    // x-default
+    const linkX = document.createElement("link");
+    linkX.rel = "alternate";
+    linkX.hreflang = "x-default";
+    linkX.href = url;
+    head.appendChild(linkX);
+
+    // --- robots доп. защита ---
+    let robotsTag = document.querySelector("meta[name='robots']");
+    if (!robotsTag) {
+      robotsTag = document.createElement("meta");
+      (robotsTag as HTMLMetaElement).name = "robots";
+      document.head.appendChild(robotsTag);
+    }
+    (robotsTag as HTMLMetaElement).content = noIndex ? "noindex, nofollow" : "index, follow";
+
+    // Чистка "висящих" старых тегов (оставим только свежие)
+    // Очищать дополнительные OG/twitter/hreflang если потребуется
+
+    return () => {
+      // Очистка alternate при SPA-переходах
+      Array.from(document.querySelectorAll("link[rel='alternate']")).forEach(l => l.remove());
+    };
+  }, [title, description, url, image, type, language, noIndex, location.pathname]);
+
   return null;
 };
 export default SEOHead;
-
