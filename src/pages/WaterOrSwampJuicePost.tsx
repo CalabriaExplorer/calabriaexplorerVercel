@@ -3,61 +3,43 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
 import SEOHead from "@/components/SEOHead";
 import Gallery from "@/components/ui/Gallery";
-
-const articleImages = [
-  {
-    src: "/lovable-uploads/e23f8b3b-f1dc-4a17-a7fe-cd2896aaea08.png",
-    alt_ru: "Кристально чистая вода и галька на пляже Калабрии",
-    alt_en: "Crystal clear water and pebbles on a Calabrian beach",
+const articleImages = [{
+  src: "/lovable-uploads/e23f8b3b-f1dc-4a17-a7fe-cd2896aaea08.png",
+  alt_ru: "Кристально чистая вода и галька на пляже Калабрии",
+  alt_en: "Crystal clear water and pebbles on a Calabrian beach"
+}, {
+  src: "/lovable-uploads/5932a9cb-86cb-4fbc-a3af-c1a63738d965.png",
+  alt_ru: "Галька, море и небо с облаками на пляже Калабрии",
+  alt_en: "Pebbles, sea and sky with clouds on Calabria's beach"
+}, {
+  src: "/lovable-uploads/890e6bee-280e-4cef-aff9-ef043e6972ce.png",
+  alt_ru: "Дайвер в чистой воде у живописных холмов Калабрии",
+  alt_en: "Diver in clean water with scenic Calabria hills"
+}];
+const SCHEMA_ORG = (lang: "ru" | "en") => JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": lang === "ru" ? "🌊 ВОДА ИЛИ ЖИДКАЯ ГАДОСТЬ?" : "🌊 WATER OR SWAMP JUICE?",
+  "description": lang === "ru" ? "Жёсткий гид по морям: как отличить курорт от лужи, где вода пахнет борщом и канализацией. Мемный обзор." : "A brutal guide to seas: how to spot a beach vs. an algae swamp. Meme-based survival tips.",
+  "mainEntityOfPage": typeof window !== "undefined" ? window.location.href : "https://calabria-explorer.lovable.app/blog/water-or-swamp-juice",
+  "image": articleImages.map(img => typeof window !== "undefined" ? window.location.origin + img.src : "https://calabria-explorer.lovable.app" + img.src),
+  "author": {
+    "@type": "Person",
+    "name": "Мария (Maria)"
   },
-  {
-    src: "/lovable-uploads/5932a9cb-86cb-4fbc-a3af-c1a63738d965.png",
-    alt_ru: "Галька, море и небо с облаками на пляже Калабрии",
-    alt_en: "Pebbles, sea and sky with clouds on Calabria's beach",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Calabria Explorer"
   },
-  {
-    src: "/lovable-uploads/890e6bee-280e-4cef-aff9-ef043e6972ce.png",
-    alt_ru: "Дайвер в чистой воде у живописных холмов Калабрии",
-    alt_en: "Diver in clean water with scenic Calabria hills",
-  },
-];
-
-const SCHEMA_ORG = (lang: "ru" | "en") =>
-  JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline":
-      lang === "ru"
-        ? "🌊 ВОДА ИЛИ ЖИДКАЯ ГАДОСТЬ?"
-        : "🌊 WATER OR SWAMP JUICE?",
-    "description":
-      lang === "ru"
-        ? "Жёсткий гид по морям: как отличить курорт от лужи, где вода пахнет борщом и канализацией. Мемный обзор."
-        : "A brutal guide to seas: how to spot a beach vs. an algae swamp. Meme-based survival tips.",
-    "mainEntityOfPage":
-      typeof window !== "undefined"
-        ? window.location.href
-        : "https://calabria-explorer.lovable.app/blog/water-or-swamp-juice",
-    "image": articleImages.map((img) =>
-      typeof window !== "undefined"
-        ? window.location.origin + img.src
-        : "https://calabria-explorer.lovable.app" + img.src
-    ),
-    "author": { "@type": "Person", "name": "Мария (Maria)" },
-    "publisher": { "@type": "Organization", "name": "Calabria Explorer" },
-    "datePublished": "2024-06-14",
-    "inLanguage": lang,
-  });
-
-const getGalleryImages = (lang: "ru" | "en") =>
-  articleImages.map(img => ({
-    src: img.src,
-    alt: lang === "ru" ? img.alt_ru : img.alt_en
-  }));
-
+  "datePublished": "2024-06-14",
+  "inLanguage": lang
+});
+const getGalleryImages = (lang: "ru" | "en") => articleImages.map(img => ({
+  src: img.src,
+  alt: lang === "ru" ? img.alt_ru : img.alt_en
+}));
 const article = {
-  ru: (
-    <div className="prose max-w-full px-2 py-2">
+  ru: <div className="prose max-w-full px-2 py-2">
       {/* Галерея фото ТОЛЬКО в начале */}
       <Gallery images={getGalleryImages("ru")} />
       <h2 className="text-2xl font-bold text-[#0077B6] mb-2">🌊 ВОДА ИЛИ ЖИДКАЯ ГАДОСТЬ?</h2>
@@ -114,10 +96,8 @@ const article = {
         Настоящая вода не нуждается в фильтрах для фото. Она кристальна, как слёзы рекламного менеджера в отпуске.
       </div>
       <p className="mt-3">P.S. Если после прочтения вы всё ещё хотите в Черное море — мне вас жаль. Или вы мазохист? 😈</p>
-    </div>
-  ),
-  en: (
-    <div className="prose max-w-full px-2 py-2">
+    </div>,
+  en: <div className="prose max-w-full px-2 py-2">
       {/* Галерея фото */}
       <Gallery images={getGalleryImages("en")} />
       <h2 className="text-2xl font-bold text-[#0077B6] mb-2">🌊 WATER OR SWAMP JUICE?</h2>
@@ -128,14 +108,7 @@ const article = {
         ⚠️ WARNING: If you enjoy water smelling like gym socks - this article will trigger you.
       </div>
 
-      {articleImages.map((img, idx) => (
-        <img
-          key={img.src}
-          src={img.src}
-          alt={img.alt_en}
-          className="my-4 rounded-md shadow-md border"
-        />
-      ))}
+      {articleImages.map((img, idx) => {})}
 
       <p>
         Born near the sea soup called Black Sea - where water has the eternal aroma of "grandma's flooded basement". Raised near Barents Sea where swimming = extreme sport "survive 1 minute without hypothermia". Then I wanted exotic: Tierra del Fuego (spoiler: no fire, just icy kick in the guts), Bali (where "paradise water" sometimes smells like a sloth's aquarium), and Persian Gulf - the only place where water doesn't resemble "toilet after spicy food festival".
@@ -185,58 +158,27 @@ const article = {
         P.S. If after this you still want Black Sea - I pity you. Or are you a masochist? 😈
       </p>
     </div>
-  ),
 };
-
 const title_ru = "🌊 ВОДА ИЛИ ЖИДКАЯ ГАДОСТЬ?";
 const title_en = "🌊 WATER OR SWAMP JUICE?";
-const desc_ru =
-  "Жёсткий гид по выживанию в морях, которые пахнут как борщ и канализация, мемный обзор от Черного моря до Бали.";
-const desc_en =
-  "A brutal guide to seas, from Black Sea to Bali. Meme-based test: is it a resort or a swamp?";
-
+const desc_ru = "Жёсткий гид по выживанию в морях, которые пахнут как борщ и канализация, мемный обзор от Черного моря до Бали.";
+const desc_en = "A brutal guide to seas, from Black Sea to Bali. Meme-based test: is it a resort or a swamp?";
 const WaterOrSwampJuicePost: React.FC = () => {
-  const { language } = useLanguage();
-
-  return (
-    <Layout
-      title={language === "ru" ? title_ru : title_en}
-      description={language === "ru" ? desc_ru : desc_en}
-    >
-      <SEOHead
-        title={language === "ru" ? title_ru : title_en}
-        description={language === "ru" ? desc_ru : desc_en}
-        canonical={
-          typeof window !== "undefined"
-            ? window.location.origin + "/blog/water-or-swamp-juice"
-            : "https://calabria-explorer.lovable.app/blog/water-or-swamp-juice"
-        }
-        type="article"
-        image={
-          typeof window !== "undefined"
-            ? window.location.origin + articleImages[0].src
-            : "https://calabria-explorer.lovable.app" + articleImages[0].src
-        }
-        schema={SCHEMA_ORG(language)}
-      />
+  const {
+    language
+  } = useLanguage();
+  return <Layout title={language === "ru" ? title_ru : title_en} description={language === "ru" ? desc_ru : desc_en}>
+      <SEOHead title={language === "ru" ? title_ru : title_en} description={language === "ru" ? desc_ru : desc_en} canonical={typeof window !== "undefined" ? window.location.origin + "/blog/water-or-swamp-juice" : "https://calabria-explorer.lovable.app/blog/water-or-swamp-juice"} type="article" image={typeof window !== "undefined" ? window.location.origin + articleImages[0].src : "https://calabria-explorer.lovable.app" + articleImages[0].src} schema={SCHEMA_ORG(language)} />
       <section className="w-full min-h-[calc(100vh-250px)] bg-white pb-8">
         <div className="max-w-2xl mx-auto pt-3">
-          <button
-            type="button"
-            onClick={() => window.history.back()}
-            className="mb-6 text-sm text-calabria-blue hover:underline"
-          >
-            {language === "ru"
-              ? "← Назад к блогу"
-              : "← Back to blog"}
+          <button type="button" onClick={() => window.history.back()} className="mb-6 text-sm text-calabria-blue hover:underline">
+            {language === "ru" ? "← Назад к блогу" : "← Back to blog"}
           </button>
           {article[language]}
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default WaterOrSwampJuicePost;
 
 // Файл превышает рекомендуемый размер. После проверки изменений могу предложить разделить статью и галерею на отдельные компоненты для лучшей поддержки и простоты работы.
