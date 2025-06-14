@@ -47,74 +47,73 @@ const EnCalabriaArticle = () => (
       <li>Mountain villages preserve ancient languages (Greek/Albanian dialects) 🏞️</li>
       <li>Locals welcome guests like old friends 🤗</li>
     </ul>
-    {/* Refined “Unlock Calabria’s secrets” block - Wave & Sand style */}
+    {/* Refined “Unlock Calabria’s secrets” block - Seabreeze Mist style */}
     <div
       className={`
         mt-8 mb-7 w-full
         rounded-2xl
-        shadow-xl
+        shadow-lg
         flex flex-col items-center
         px-6 py-10
         transition
         animate-fade-in
         glass-gradient
-        wave-sand-block
+        seabreeze-mist-block
         group
         relative
         overflow-hidden
+        backdrop-blur-md
       `}
       style={{
-        background: "linear-gradient(90deg, #d6eaff 0%, #e0f7fa 45%, #faf3e3 100%)",
-        border: "1.5px solid #e0e4ea33",
-        boxShadow: "0 10px 40px 0 #b2c4d933, 0 2px 10px 0 #e4e9f3aa",
+        background:
+          "linear-gradient(90deg, rgba(214,234,255,0.72) 0%, rgba(224,247,250,0.56) 42%, rgba(250,243,227,0.48) 100%)",
+        border: "1.5px solid #e3f2fd",
+        boxShadow: "0 10px 40px 0 #b2c4d926, 0 2px 10px 0 #9de0fc33",
       }}
     >
-      {/* морская волна (внизу) */}
+      {/* Эффект волн и пузырьков внизу блока */}
       <svg
-        viewBox="0 0 600 50"
+        viewBox="0 0 600 42"
         className="absolute left-0 bottom-0 w-full h-12 pointer-events-none"
         style={{
           zIndex: 2,
         }}
       >
         <path
-          d="M0 20 Q 100 50 200 25 T 400 30 T 600 20 V50 H0Z"
-          fill="#e0f7fa"
-        >
-          <animate
-            attributeName="d"
-            dur="6s"
-            repeatCount="indefinite"
-            values="
-              M0 20 Q 100 50 200 25 T 400 30 T 600 20 V50 H0Z;
-              M0 22 Q 110 42 210 28 T 390 37 T 600 24 V50 H0Z;
-              M0 20 Q 100 50 200 25 T 400 30 T 600 20 V50 H0Z
-            "
-          />
-        </path>
+          d="M0 30 Q 75 37 150 28 T 300 34 T 450 28 T 600 30 V42 H0Z"
+          fill="#d6eaffCC"
+        />
+        {/* Пузырьки */}
+        <circle cx="80" cy="33" r="4" fill="#b3e2fc88" />
+        <circle cx="370" cy="38" r="2.5" fill="#ade6f4AA" />
+        <circle cx="310" cy="34" r="2" fill="#c9f2ffBB" />
+        <circle cx="530" cy="32" r="3.5" fill="#c9e9fd7a" />
+        {/* Волны-эмодзи */}
+        <text x="35" y="40" fontSize="18">🌊</text>
+        <text x="540" y="41" fontSize="18">🌊</text>
       </svg>
-      {/* иконки-звёзды и ракушки */}
-      <div className="absolute top-7 left-8 z-10 text-2xl select-none pointer-events-none">
-        <span role="img" aria-label="starfish">🌟</span>
+      {/* Акцентные эмодзи снежинки или лёгкие волны наверху */}
+      <div className="absolute top-8 left-9 z-10 text-xl select-none pointer-events-none opacity-80">
+        <span role="img" aria-label="sparkle">❄️</span>
       </div>
-      <div className="absolute top-12 right-14 z-10 text-2xl select-none pointer-events-none">
-        <span role="img" aria-label="shell">🐚</span>
+      <div className="absolute top-10 right-12 z-10 text-xl select-none pointer-events-none opacity-80">
+        <span role="img" aria-label="bubbles">💧</span>
       </div>
-      <div className="absolute bottom-12 right-8 z-10 text-xl select-none pointer-events-none">
-        <span role="img" aria-label="shell">🐚</span>
+      <div className="absolute bottom-16 right-7 z-10 text-lg select-none pointer-events-none opacity-75">
+        <span role="img" aria-label="bubbles">🫧</span>
       </div>
-      {/* анимация "плавает" при hover */}
+      {/* Анимация плавного "покачивания" блока при hover */}
       <style>
         {`
-          .wave-sand-block {
+          .seabreeze-mist-block {
             will-change: transform;
-            transition: transform 0.25s cubic-bezier(.36,.68,.53,.97);
+            transition: transform 0.32s cubic-bezier(.22,.78,.27,.96);
           }
-          .wave-sand-block:hover,
-          .wave-sand-block:focus-within,
-          .wave-sand-block:active {
-            transform: translateY(-6px) scale(1.02) rotate(-1deg);
-            box-shadow: 0 16px 42px 0 #b2c4d944, 0 5px 18px 0 #e4e9f3bb;
+          .seabreeze-mist-block:hover,
+          .seabreeze-mist-block:focus-within,
+          .seabreeze-mist-block:active {
+            transform: translateY(-7px) scale(1.015) rotate(-0.7deg);
+            box-shadow: 0 16px 42px 0 #9de0fc52, 0 6px 24px 0 #acd7faaa;
           }
         `}
       </style>
