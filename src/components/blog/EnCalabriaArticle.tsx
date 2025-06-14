@@ -66,7 +66,7 @@ const EnCalabriaArticle = () => (
       `}
       style={{
         background:
-          "linear-gradient(90deg, rgba(214,234,255,0.72) 0%, rgba(224,247,250,0.56) 42%, rgba(250,243,227,0.48) 100%)",
+          "linear-gradient(90deg, #7f7fd5 0%, #86a8e7 50%, #91eae4 100%)",
         border: "1.5px solid #e3f2fd",
         boxShadow: "0 10px 40px 0 #b2c4d926, 0 2px 10px 0 #9de0fc33",
       }}
