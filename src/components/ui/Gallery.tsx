@@ -19,6 +19,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
             key={img.src}
             src={img.src}
             alt={img.alt}
+            figCaption={img.alt} // Для SEO-улучшения
             className={
               i === 0
                 ? "sm:col-span-2 aspect-[3/2] max-h-[420px]"
@@ -49,6 +50,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
             key={images[i].src}
             src={images[i].src}
             alt={images[i].alt}
+            figCaption={images[i].alt}
             className="aspect-[5/4] max-h-[220px] md:max-h-none"
             loading="lazy"
           />
@@ -58,6 +60,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
       <PhotoCard
         src={images[0].src}
         alt={images[0].alt}
+        figCaption={images[0].alt}
         className="
           aspect-[3/2] md:row-span-3 md:aspect-[3/2] max-h-[420px] md:max-h-none
           order-first md:order-none
@@ -69,4 +72,3 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
 };
 
 export default Gallery;
-
