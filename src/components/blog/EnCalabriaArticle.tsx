@@ -47,7 +47,7 @@ const EnCalabriaArticle = () => (
       <li>Mountain villages preserve ancient languages (Greek/Albanian dialects) 🏞️</li>
       <li>Locals welcome guests like old friends 🤗</li>
     </ul>
-    {/* Seabreeze Mist block - updated style */}
+    {/* Seabreeze Mist block with updated emojis and texts */}
     <div
       className={`
         mt-8 mb-7 w-full
@@ -65,9 +65,9 @@ const EnCalabriaArticle = () => (
         backdrop-blur-md
       `}
       style={{
-        background: "linear-gradient(120deg, #b8f5fc 0%, #40d8ef 100%)",
+        background: "linear-gradient(120deg, #1969af 0%, #97cff2 50%, #eaf6fc 100%)",
         border: "1.5px solid #c3ecfa",
-        boxShadow: "0 8px 36px 0 #87e3f446, 0 2px 10px 0 #40d8ef33",
+        boxShadow: "0 8px 36px 0 #88c8f466, 0 2px 10px 0 #7ebff587",
       }}
     >
       <style>
@@ -84,41 +84,46 @@ const EnCalabriaArticle = () => (
           }
         `}
       </style>
-      <h3 className="text-center w-full text-2xl sm:text-3xl font-extrabold font-serif mb-5"
+      <h3 className="text-center w-full text-2xl sm:text-3xl font-extrabold font-serif mb-5 flex items-center justify-center gap-2"
           style={{
             color: "#054263",
-            textShadow: "0 1px 6px #e2fafc, 0 0px 2px #fff"
+            textShadow: "0 1px 8px #e2fafc, 0 0px 2px #fff"
           }}>
-        UNLOCK CALABRIA'S SECRETS
+        <span role="img" aria-hidden="true">✨</span>
+        UNLOCK CALABRIA'S SECRETS!
+        <span role="img" aria-hidden="true">✨</span>
       </h3>
       <ul className="w-full max-w-md text-lg md:text-xl mb-5 mt-1 space-y-3 text-center sm:text-left flex flex-col gap-2 font-sans"
-        style={{ color: "#12637c", textShadow: "0 1px 4px #d8f8fc80" }}>
+        style={{ color: "#12637c", textShadow: "0 1px 6px #cfe7f9" }}>
         <li className="flex items-center gap-3 justify-center sm:justify-start">
+          <span role="img" aria-hidden="true">🌊</span>
           <span>Craving Calabria's freshest seafood?</span>
         </li>
         <li className="flex items-center gap-3 justify-center sm:justify-start">
+          <span role="img" aria-hidden="true">🏝️</span>
           <span>Dreaming of secluded beaches?</span>
         </li>
         <li className="flex items-center gap-3 justify-center sm:justify-start">
+          <span role="img" aria-hidden="true">🍤</span>
           <span>Want to discover hidden gems?</span>
         </li>
       </ul>
       <div className="mt-1 mb-1 w-full flex justify-center">
         <span className="
-          inline-block rounded-lg bg-[#40d8ef] px-7 py-2
+          inline-block rounded-lg bg-[#3fa5cd] px-7 py-2
           text-lg font-bold text-white shadow hover:scale-105 transition-transform
-          hover:shadow-lg
-        "
+          hover:shadow-lg flex items-center gap-2"
         style={{
-          textShadow: "0 2px 6px #18c5dd66, 0 0 1px #fff"
+          textShadow: "0 2px 7px #18aadb66, 0 0 1px #fff"
         }}>
-          ASK A QUESTION &mdash; GET A FREE PERSONALIZED TIP!
+          <span role="img" aria-hidden="true">👉</span>
+          ASK A QUESTION → GET A FREE PERSONALIZED TIP!
         </span>
       </div>
       <p className="mt-4 text-base sm:text-lg font-medium text-center"
          style={{
            color: "#197aac",
-           textShadow: "0 1px 5px #f0fdff90"
+           textShadow: "0 1px 6px #d8eefa90"
          }}>
         Local secrets • Hidden spots • Recommendations tailored for you
       </p>
