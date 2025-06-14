@@ -2,7 +2,6 @@ import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
 import { useNavigate } from "react-router-dom";
-import OptimizedImage from "@/components/ui/optimized-image";
 import Gallery from "@/components/ui/Gallery";
 
 const articleImages = [
@@ -31,15 +30,12 @@ const articleImages = [
 const article = {
   ru: (
     <div className="prose max-w-full sm:mx-auto px-2 py-2">
-      <OptimizedImage src={articleImages[0].src} alt={articleImages[0].alt} className="mx-auto mb-6 rounded-lg max-w-md w-full" width={640} height={480} />
       <h2 className="text-2xl font-bold text-[#8B0000]">🍇 Неизвестные вина Италии!</h2>
-      <OptimizedImage src={articleImages[1].src} alt={articleImages[1].alt} className="mx-auto mb-6 rounded-lg max-w-md w-full" width={640} height={480} />
       <h3 className="text-lg font-bold text-[#4B0082]">Калабрия — земля, где вино и история сплетаются в праздник вкуса 🎉</h3>
       <p>
         Откройте для себя Калабрию — регион, где каждый день превращается в маленькое <strong>гастрономическое приключение</strong>! 🌊⛰️<br />
         Здесь, между бирюзовым морем и зелёными холмами, рождается вино с характером: ✨ <strong>более 170 автохтонных сортов винограда</strong>, включая легендарный <em>галиоппо</em> — сорт, который, по преданию, подавали олимпийским богам и героям античных мифов!
       </p>
-      <OptimizedImage src={articleImages[2].src} alt={articleImages[2].alt} className="mx-auto mb-6 rounded-lg max-w-md w-full" width={640} height={480} />
       <h4 className="font-bold mt-4">🍷 Почему винный тур в Калабрию — это must-have для ценителей?</h4>
       <p>🏛️ <strong>История и мифы в каждом бокале</strong>: попробуйте <em>Чиро</em> — вино, овеянное легендами, с насыщенным вкусом и глубокими танинами.</p>
       <h4 className="font-bold mt-4">🏆 Лучшие винодельни региона:</h4>
@@ -49,11 +45,9 @@ const article = {
         <li><a href="https://www.tenutaiuzzolini.kr.it" className="text-[#8B0000] underline">Luzzolini</a> 🏺</li>
         <li><a href="https://zito.it" className="text-[#8B0000] underline">Zito</a> 🌞</li>
       </ul>
-      <OptimizedImage src={articleImages[3].src} alt={articleImages[3].alt} className="mx-auto mb-6 rounded-lg max-w-md w-full" width={640} height={480} />
       <p>🎉 Все они предлагают не просто дегустации, а настоящий праздник вкуса и знакомства с культурой региона!</p>
       <h4 className="font-bold mt-4">📍 Где и когда отдыхать?</h4>
       <p><strong>Локации</strong>: Чиро, Чиро Марина, Локри, Стронголи (провинция Кротоне) — <strong>сердце винного туризма Калабрии</strong>! 💖</p>
-      <OptimizedImage src={articleImages[4].src} alt={articleImages[4].alt} className="mx-auto mb-6 rounded-lg max-w-md w-full" width={640} height={480} />
       <h4 className="font-bold mt-4">⏰ Лучшее время для поездки:</h4>
       <ul className="list-disc list-inside space-y-1">
         <li><strong>Май – октябрь</strong>: пляжный сезон 🏖️, винные фестивали, экскурсии</li>
@@ -62,7 +56,7 @@ const article = {
       </ul>
       <h4 className="font-bold mt-4">✈️ Как добраться:</h4>
       <ul className="list-disc list-inside space-y-1">
-        <li><strong>Crotone-Sant'Anna Airport (CRV)</strong> — прямые рейсы из Рима, Милана, Дюссельдорфа</li>
+        <li><strong>Crotone-Sant&apos;Anna Airport (CRV)</strong> — прямые рейсы из Рима, Милана, Дюссельдорфа</li>
         <li><strong>Lamezia Terme (SUF)</strong> — удобный вариант для аренды авто 🚗 или индивидуального трансфера</li>
       </ul>
       <h4 className="font-bold mt-4">🛏️ Проживание:</h4>
