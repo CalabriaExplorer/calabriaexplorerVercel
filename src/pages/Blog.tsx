@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
@@ -5,6 +6,10 @@ import Layout from "@/components/layout/Layout";
 const articleTitles = {
   ru: "🍇 Неизвестные вина Италии!",
   en: "🍇 Hidden Gems of Italian Wine!",
+};
+const leCastellaTitles = {
+  ru: "🏰 Le Castella: Тайны крепости на Ионическом море",
+  en: "🏰 Le Castella: Secrets of the Ionian Sea Fortress"
 };
 
 const Blog: React.FC = () => {
@@ -22,6 +27,14 @@ const Blog: React.FC = () => {
                 className="block text-xl font-bold text-[#8B0000] underline hover:text-[#4B0082] transition-colors duration-200 py-4 text-center"
               >
                 {articleTitles[language]}
+              </a>
+            </li>
+            <li>
+              <a
+                href="/blog/le-castella"
+                className="block text-xl font-bold text-[#205f98] underline hover:text-[#125a98] transition-colors duration-200 py-4 text-center"
+              >
+                {leCastellaTitles[language]}
               </a>
             </li>
           </ul>

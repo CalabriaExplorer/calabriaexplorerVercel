@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import SingleBlogPost from "./pages/SingleBlogPost";
+import LeCastellaPost from "./pages/LeCastellaPost";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/guides/ten-steps" element={<TenSteps />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/hidden-gems-of-italian-wine" element={<SingleBlogPost />} />
+            <Route path="/blog/le-castella" element={<LeCastellaPost />} />
             <Route path="/stat" element={<Analytics />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
