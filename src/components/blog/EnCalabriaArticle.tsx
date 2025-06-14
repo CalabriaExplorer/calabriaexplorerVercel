@@ -48,19 +48,53 @@ const EnCalabriaArticle = () => (
       <li>Mountain villages preserve ancient languages (Greek/Albanian dialects) 🏞️</li>
       <li>Locals welcome guests like old friends 🤗</li>
     </ul>
-    <div className="bg-[#FFF8E1] p-4 rounded-lg my-4">
-      <h3 className="font-bold mb-2 text-center">✨ UNLOCK CALABRIA&apos;S SECRETS! ✨</h3>
-      <p>
-        <span role="img" aria-label="sea">🌊</span> Craving Calabria&apos;s freshest seafood?<br />
-        <span role="img" aria-label="beach">🏝️</span> Dreaming of secluded beaches?<br />
-        <span role="img" aria-label="shrimp">🍤</span> Want to discover hidden gems?
-      </p>
-      <p className="mt-3 font-bold text-calabria-blue text-center">
-        👉 ASK A QUESTION → GET A FREE PERSONALIZED TIP!
-      </p>
-      <p className="mt-2 text-center">
-        <span className="block">Local secrets • Hidden spots • Recommendations tailored for you</span>
-      </p>
+    {/* Improved “Unlock Calabria’s secrets” block */}
+    <div
+      className="
+        mt-7 mb-6
+        rounded-2xl
+        p-[2px]
+        bg-gradient-to-tr from-calabria-terracotta/80 via-yellow-200 to-calabria-blue/70
+        shadow-lg
+        animate-fade-in
+        "
+    >
+      <div
+        className="
+          bg-[#FFFDF7]/90 rounded-2xl
+          px-6 py-6 sm:py-7 flex flex-col items-center text-center gap-2
+        "
+      >
+        <h3 className="text-2xl sm:text-3xl mb-3 font-extrabold font-serif text-calabria-blue flex items-center justify-center gap-2 animate-fade-in">
+          <span aria-label="sparkles" role="img" className="animate-pulse">✨</span>
+          UNLOCK CALABRIA&apos;S SECRETS!
+          <span aria-label="sparkles" role="img" className="animate-pulse">✨</span>
+        </h3>
+        <ul className="text-lg md:text-xl space-y-1 leading-relaxed mb-3">
+          <li className="flex items-center justify-center gap-2">
+            <span className="text-2xl">🌊</span> Craving Calabria&apos;s freshest seafood?
+          </li>
+          <li className="flex items-center justify-center gap-2">
+            <span className="text-2xl">🏝️</span> Dreaming of secluded beaches?
+          </li>
+          <li className="flex items-center justify-center gap-2">
+            <span className="text-2xl">🍤</span> Want to discover hidden gems?
+          </li>
+        </ul>
+        <div className="w-full flex justify-center">
+          <span className="
+            inline-block rounded-xl bg-gradient-to-r from-calabria-blue via-calabria-terracotta to-amber-400
+            px-6 py-2 text-lg font-bold text-white
+            shadow hover:scale-105 transition-transform
+            animate-scale-in
+          ">
+            👉 ASK A QUESTION → GET A FREE PERSONALIZED TIP!
+          </span>
+        </div>
+        <p className="mt-3 text-base sm:text-lg text-calabria-blue/80 font-medium">
+          Local secrets • Hidden spots • Recommendations tailored for you
+        </p>
+      </div>
     </div>
     <p className="text-center text-lg font-bold mt-8">🌞 See you in Calabria—land of sun, wine, and pure emotion!</p>
   </div>

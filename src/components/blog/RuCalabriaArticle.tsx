@@ -46,19 +46,53 @@ const RuCalabriaArticle = () => (
       <li>Горные деревни хранят древние языки (диалекты древнегреческого и албанского) 🏞️</li>
       <li>Местные жители встречают гостей, как старых друзей 🤗</li>
     </ul>
-    <div className="bg-[#FFF8E1] p-4 rounded-lg my-4">
-      <h3 className="font-bold mb-2 text-center">✨ РАСКРОЙТЕ СЕКРЕТЫ КАЛАБРИИ! ✨</h3>
-      <p>
-        <span role="img" aria-label="sea">🌊</span> Хотите попробовать самые свежие морепродукты?<br />
-        <span role="img" aria-label="beach">🏝️</span> Мечтаете об уединённых пляжах?<br />
-        <span role="img" aria-label="shrimp">🍤</span> Ищете нетуристические места?
-      </p>
-      <p className="mt-3 font-bold text-calabria-blue text-center">
-        👉 ЗАДАЙТЕ ВОПРОС → ПОЛУЧИТЕ БЕСПЛАТНЫЙ ПЕРСОНАЛЬНЫЙ СОВЕТ!
-      </p>
-      <p className="mt-2 text-center">
-        <span className="block">Местные секреты • Потаённые уголки • Рекомендации под ваш запрос</span>
-      </p>
+    {/* Improved “Секреты Калабрии” block */}
+    <div
+      className="
+        mt-7 mb-6
+        rounded-2xl
+        p-[2px]
+        bg-gradient-to-tr from-calabria-terracotta/80 via-yellow-200 to-calabria-blue/70
+        shadow-lg
+        animate-fade-in
+      "
+    >
+      <div
+        className="
+          bg-[#FFFDF7]/90 rounded-2xl
+          px-6 py-6 sm:py-7 flex flex-col items-center text-center gap-2
+        "
+      >
+        <h3 className="text-2xl sm:text-3xl mb-3 font-extrabold font-serif text-calabria-blue flex items-center justify-center gap-2 animate-fade-in">
+          <span aria-label="sparkles" role="img" className="animate-pulse">✨</span>
+          РАСКРОЙТЕ СЕКРЕТЫ КАЛАБРИИ!
+          <span aria-label="sparkles" role="img" className="animate-pulse">✨</span>
+        </h3>
+        <ul className="text-lg md:text-xl space-y-1 leading-relaxed mb-3">
+          <li className="flex items-center justify-center gap-2">
+            <span className="text-2xl">🌊</span> Хотите попробовать самые свежие морепродукты?
+          </li>
+          <li className="flex items-center justify-center gap-2">
+            <span className="text-2xl">🏝️</span> Мечтаете об уединённых пляжах?
+          </li>
+          <li className="flex items-center justify-center gap-2">
+            <span className="text-2xl">🍤</span> Ищете нетуристические места?
+          </li>
+        </ul>
+        <div className="w-full flex justify-center">
+          <span className="
+              inline-block rounded-xl bg-gradient-to-r from-calabria-blue via-calabria-terracotta to-amber-400
+              px-6 py-2 text-lg font-bold text-white
+              shadow hover:scale-105 transition-transform
+              animate-scale-in
+            ">
+            👉 ЗАДАЙТЕ ВОПРОС → ПОЛУЧИТЕ БЕСПЛАТНЫЙ ПЕРСОНАЛЬНЫЙ СОВЕТ!
+          </span>
+        </div>
+        <p className="mt-3 text-base sm:text-lg text-calabria-blue/80 font-medium">
+          Местные секреты • Потаённые уголки • Рекомендации под ваш запрос
+        </p>
+      </div>
     </div>
     <p className="text-center text-lg font-bold mt-8">🌞 До встречи в Калабрии — земле солнца, вина и настоящих эмоций!</p>
   </div>
