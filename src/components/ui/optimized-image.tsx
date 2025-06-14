@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 interface OptimizedImageProps {
   src: string;
   alt: string;
@@ -10,7 +9,6 @@ interface OptimizedImageProps {
   loading?: 'lazy' | 'eager';
   sizes?: string;
 }
-
 const OptimizedImage: React.FC<OptimizedImageProps> = ({
   src,
   alt,
@@ -23,29 +21,23 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
 }) => {
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-
   const fixImagePath = (imageSrc: string) => {
     if (imageSrc.startsWith('//')) {
       return 'https:' + imageSrc;
     }
     return imageSrc;
   };
-
   const fixedSrc = fixImagePath(src);
   const fixedWebpSrc = webpSrc ? fixImagePath(webpSrc) : undefined;
-
   const handleImageError = () => {
     console.error('Image failed to load:', fixedSrc);
     setImageError(true);
   };
-
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
-
   if (imageError) {
-    return (
-      <div className={`bg-gray-200 flex items-center justify-center ${className}`}>
+    return <div className={`bg-gray-200 flex items-center justify-center ${className}`}>
         <div className="text-center p-4">
           <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-2">
             <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,37 +46,18 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           </div>
           <p className="text-xs text-gray-500">Image not available</p>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className={`relative ${className}`}>
+  return <div className={`relative ${className}`}>
       {/* Loading placeholder */}
-      {!imageLoaded && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+      {!imageLoaded && <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
           <div className="w-8 h-8 bg-gray-300 rounded-full animate-spin border-2 border-gray-400 border-t-transparent"></div>
-        </div>
-      )}
+        </div>}
       
       <picture className="tour-page-image">
-        {fixedWebpSrc && (
-          <source srcSet={fixedWebpSrc} type="image/webp" sizes={sizes} />
-        )}
-        <img
-          src={fixedSrc}
-          alt={alt}
-          className={`${className} ${!imageLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-          width={width}
-          height={height}
-          loading={loading}
-          sizes={sizes}
-          onError={handleImageError}
-          onLoad={handleImageLoad}
-        />
+        {fixedWebpSrc && <source srcSet={fixedWebpSrc} type="image/webp" sizes={sizes} />}
+        
       </picture>
-    </div>
-  );
+    </div>;
 };
-
 export default OptimizedImage;
