@@ -1,4 +1,3 @@
-
 import React from "react";
 import OptimizedImage from "./optimized-image";
 
@@ -34,7 +33,7 @@ const PhotoCard: React.FC<PhotoCardProps> = ({
   >
     <OptimizedImage
       src={src}
-      alt={alt}
+      alt={figCaption ? figCaption : alt}
       className="w-full h-full object-contain bg-white"
       width={width}
       height={height}

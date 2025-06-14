@@ -6,6 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect } from "react";
 import MobileLanguageToggle from "@/components/ui/mobile-language-toggle";
 import MobileMenu from "@/components/ui/mobile-menu";
+import SEOHead from "@/components/SEOHead";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -81,8 +82,91 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
     }
   };
 
+  // Определяем canonical
+  let canonicalUrl = typeof window !== "undefined" 
+    ? window.location.origin + window.location.pathname 
+    : undefined;
+
+  // Schema.org: по title и pathname определяем тип schema
+  const isBlogPost = title && /blog/i.test(title) && typeof window !== "undefined" && window.location.pathname.startsWith("/blog/");
+  const isTour = typeof window !== "undefined" && window.location.pathname.startsWith("/tours/");
+  const schema = React.useMemo(() => {
+    // Структура Organization и Website — для главной всегда
+    if (typeof window === "undefined") return undefined;
+    if (window.location.pathname === "/") {
+      return {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Calabria Explorer",
+        "url": window.location.origin,
+        "description": description || "Travel in Calabria, Italy: Tours, guides, relocation support.",
+        "inLanguage": language,
+        "image": window.location.origin + "/favicon.ico",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Calabria Explorer"
+        }
+      };
+    }
+    // BlogPosting
+    if (isBlogPost) {
+      return {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": title,
+        "description": description,
+        "mainEntityOfPage": window.location.href,
+        "image": window.location.origin + "/favicon.ico",
+        "author": { "@type": "Person", "name": "Мария (Maria)" },
+        "publisher": { "@type": "Organization", "name": "Calabria Explorer" },
+        "datePublished": new Date().toISOString().slice(0, 10),
+        "inLanguage": language
+      };
+    }
+    // TouristTrip/Product для туров
+    if (isTour) {
+      return {
+        "@context": "https://schema.org",
+        "@type": "TouristTrip",
+        "name": title,
+        "description": description,
+        "image": window.location.origin + "/favicon.ico",
+        "inLanguage": language,
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock"
+        }
+      };
+    }
+    // Breadcrumb для всего остального (сформировать путь)
+    const pathChunks = window.location.pathname
+      .split("/")
+      .filter(Boolean);
+    if (pathChunks.length > 0) {
+      const items = pathChunks.map((part, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": decodeURIComponent(part),
+        "item": window.location.origin + "/" + pathChunks.slice(0, i + 1).join("/")
+      }));
+      return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": items
+      };
+    }
+    return undefined;
+  }, [title, description, language, isBlogPost, isTour ]);
+
   return (
     <div className="flex flex-col min-h-screen">
+      <SEOHead
+        title={title || "Calabria Explorer"}
+        description={description || "Travel in Calabria, Italy: Tours, guides, relocation support."}
+        canonical={canonicalUrl}
+        schema={schema}
+      />
       {/* Header/Navigation */}
       <header className={`bg-white border-b ${headerAccentColor} sticky top-0 z-10`} role="banner">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
