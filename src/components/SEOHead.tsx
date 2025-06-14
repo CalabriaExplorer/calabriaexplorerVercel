@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext"; // добавить импорт
@@ -13,8 +12,6 @@ interface SEOHeadProps {
   noIndex?: boolean;
 }
 
-const DEF_FAVICON = "/favicon.ico";
-
 function absoluteUrl(path: string) {
   if (typeof window === "undefined") return "";
   const origin = window.location.origin;
@@ -22,6 +19,15 @@ function absoluteUrl(path: string) {
   if (path.startsWith("//")) return window.location.protocol + path;
   return `${origin}${path.startsWith("/") ? "" : "/"}${path}`;
 }
+
+const DEF_FAVICON = "/favicon.ico";
+
+// Новые размеры фавиконок/иконок
+const FAVICON_SIZES = [
+  { rel: "icon", sizes: "32x32", href: "/favicon.ico" },
+  { rel: "icon", sizes: "192x192", href: "/favicon-192.png" },
+  { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+];
 
 const SEOHead: React.FC<SEOHeadProps> = ({
   title,
@@ -33,8 +39,11 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   noIndex,
 }) => {
   const location = useLocation();
-  const { language } = useLanguage(); // получить язык из контекста
-  const url = canonical || absoluteUrl(location.pathname);
+  const { language } = useLanguage();
+  // canonical без query-параметров пагинации/сортировки
+  const cleanPath = location.pathname;
+  const origin = typeof window !== "undefined" ? window.location.origin : "";
+  const url = canonical || absoluteUrl(cleanPath);
 
   // Google Analytics (gtag.js)
   React.useEffect(() => {
@@ -56,43 +65,108 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     }
   }, []);
 
-  // Фавикон на каждой странице
+  // Фавиконы
   React.useEffect(() => {
-    let favicon = document.querySelector("link[rel='icon']");
-    if (!favicon) {
-      favicon = document.createElement("link");
-      (favicon as HTMLLinkElement).rel = "icon";
-      (favicon as HTMLLinkElement).href = DEF_FAVICON;
-      document.head.appendChild(favicon);
-    } else {
-      (favicon as HTMLLinkElement).href = DEF_FAVICON;
-    }
+    // Удалять предыдущие кастомные фавиконы
+    Array.from(document.head.querySelectorAll("link[rel='icon'],link[rel='apple-touch-icon']")).forEach(f => f.remove());
+    FAVICON_SIZES.forEach(({ rel, sizes, href }) => {
+      const link = document.createElement("link");
+      link.rel = rel;
+      if (sizes) link.sizes = sizes;
+      link.href = href;
+      document.head.appendChild(link);
+    });
   }, []);
 
-  // Canonical
+  // Canonical — убираем параметры page/sort/utm
   React.useEffect(() => {
     let canonicalTag = document.querySelector("link[rel='canonical']");
+    let canonicalHref = url.replace(/\?(page|sort|utm_.*?)=[^&]+(&|$)/g, "");
     if (!canonicalTag) {
       canonicalTag = document.createElement("link");
       (canonicalTag as HTMLLinkElement).rel = "canonical";
       document.head.appendChild(canonicalTag);
     }
-    (canonicalTag as HTMLLinkElement).href = url;
+    (canonicalTag as HTMLLinkElement).href = canonicalHref.endsWith("?") ? canonicalHref.slice(0, -1) : canonicalHref;
   }, [url]);
 
-  // Schema.org в <head>
+  // Schema.org в <head> – поддержка Article, Tour, Product, Offer, BreadcrumbList
   React.useEffect(() => {
     // Удаляем предыдущую схему при SPA переходах
     const toRemove = Array.from(document.head.querySelectorAll('script[type="application/ld+json"].lov-schema-org'));
     toRemove.forEach((el) => el.remove());
-    if (schema) {
+    let pageSchema = schema;
+    // If schema wasn't provided, формируем основу для разных страниц
+    if (!schema && typeof window !== "undefined") {
+      if (location.pathname.startsWith("/blog/")) {
+        pageSchema = JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": title,
+          "description": description,
+          "mainEntityOfPage": window.location.href,
+          "image": absoluteUrl(image || "/favicon.ico"),
+          "author": { "@type": "Person", "name": "Мария (Maria)" },
+          "publisher": { "@type": "Organization", "name": "Calabria Explorer" },
+          "datePublished": new Date().toISOString().slice(0, 10),
+          "inLanguage": language,
+        });
+      } else if (location.pathname.startsWith("/tours/")) {
+        pageSchema = JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "TouristTrip",
+          "name": title,
+          "description": description,
+          "image": absoluteUrl(image || "/favicon.ico"),
+          "inLanguage": language,
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock"
+          }
+        });
+      } else {
+        // BreadcrumbList
+        const pathChunks = location.pathname.split("/").filter(Boolean);
+        if (pathChunks.length > 0) {
+          const items = pathChunks.map((part, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "name": decodeURIComponent(part),
+            "item": `${origin}/` + pathChunks.slice(0, i + 1).join("/")
+          }));
+          pageSchema = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": items,
+          });
+        } else {
+          pageSchema = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Calabria Explorer",
+            "url": origin,
+            "description": description,
+            "inLanguage": language,
+            "image": absoluteUrl("/favicon.ico"),
+            "publisher": {
+              "@type": "Organization",
+              "name": "Calabria Explorer",
+            }
+          });
+        }
+      }
+    }
+    // Удаляем предыдущую схему при SPA переходах
+    Array.from(document.head.querySelectorAll('script[type="application/ld+json"].lov-schema-org')).forEach((el) => el.remove());
+    if (pageSchema) {
       const script = document.createElement("script");
       script.type = "application/ld+json";
       script.className = "lov-schema-org";
-      script.innerHTML = schema;
+      script.innerHTML = pageSchema;
       document.head.appendChild(script);
     }
-  }, [schema]);
+  }, [schema, location.pathname, title, description, image, language]);
 
   // Meta теги (SPA-навигация)
   React.useEffect(() => {
@@ -106,23 +180,20 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       }
       (descTag as HTMLMetaElement).content = description;
     }
-    if (noIndex) {
-      let robotsTag = document.querySelector("meta[name='robots']");
-      if (!robotsTag) {
-        robotsTag = document.createElement("meta");
-        (robotsTag as HTMLMetaElement).name = "robots";
-        document.head.appendChild(robotsTag);
-      }
-      (robotsTag as HTMLMetaElement).content = "noindex, nofollow";
-    } else {
-      const robotsTag = document.querySelector("meta[name='robots']");
-      if (robotsTag) (robotsTag as HTMLMetaElement).content = "index,follow";
+    // Robots: не индексируем, если есть noIndex или есть параметры пагинации
+    let robotsTag = document.querySelector("meta[name='robots']");
+    const isPaginated = /\b(page|sort|utm_)\b/i.test(location.search);
+    const robotsCnt = noIndex || isPaginated ? "noindex, nofollow" : "index, follow";
+    if (!robotsTag) {
+      robotsTag = document.createElement("meta");
+      (robotsTag as HTMLMetaElement).name = "robots";
+      document.head.appendChild(robotsTag);
     }
-  }, [title, description, noIndex]);
+    (robotsTag as HTMLMetaElement).content = robotsCnt;
+  }, [title, description, noIndex, location.search]);
 
-  // Динамические OG / Twitter / hreflang и theme-color
+  // OG / Twitter / hreflang и theme-color
   React.useEffect(() => {
-    // --- OG и Twitter ---
     const head = document.head;
 
     const setMetaTag = (name: string, content: string, propType: "name" | "property" = "property") => {
@@ -136,14 +207,15 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       (tag as HTMLMetaElement).setAttribute("content", content);
     };
 
-    // --- Ограничения на длину для meta данных ---
     const cut = (s?: string, max = 200) => s ? String(s).slice(0, max) : "";
 
-    const imageUrl = image 
-      ? absoluteUrl(image) 
+    const imageUrl = image
+      ? absoluteUrl(image)
       : absoluteUrl("/favicon.ico");
+    // Размеры для og:image
+    setMetaTag("og:image:width", "1200");
+    setMetaTag("og:image:height", "630");
 
-    // OG
     setMetaTag("og:title", cut(title || "Calabria Explorer", 60));
     setMetaTag("og:description", cut(description || "Travel in Calabria, Italy: Tours, guides, relocation support.", 160));
     setMetaTag("og:type", type || "website");
@@ -151,7 +223,6 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     setMetaTag("og:image", imageUrl);
     setMetaTag("og:site_name", "Calabria Explorer");
     setMetaTag("og:locale", language === "ru" ? "ru_RU" : "en_US");
-    // alternate locale
     setMetaTag("og:locale:alternate", language === "ru" ? "en_US" : "ru_RU");
 
     // Twitter
@@ -159,10 +230,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     setMetaTag("twitter:title", cut(title || "Calabria Explorer", 60), "name");
     setMetaTag("twitter:description", cut(description || "Travel in Calabria, Italy: Tours, guides, relocation support.", 160), "name");
     setMetaTag("twitter:image", imageUrl, "name");
-    setMetaTag("twitter:site", "@calabriaexplorer", "name"); // Замените, если есть реальный твиттер
+    setMetaTag("twitter:site", "@calabriaexplorer", "name");
 
-    // --- theme-color ---
-    const theme = document.querySelector("meta[name='theme-color']") as HTMLMetaElement;
+    // theme-color
+    let theme = document.querySelector("meta[name='theme-color']") as HTMLMetaElement;
     if (!theme) {
       const meta = document.createElement("meta");
       meta.name = "theme-color";
@@ -172,32 +243,28 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       theme.content = "#0077B6";
     }
 
-    // --- hreflang/alternate ---
-    // Очистим предыдущие rel="alternate" 
+    // hreflang/alternate
     Array.from(document.querySelectorAll("link[rel='alternate']")).forEach(l => l.remove());
-    const origin = typeof window !== "undefined" ? window.location.origin : "https://calabriaexplorer.app";
 
-    // Поддержка двух языков: ru и en
     const locales = [
       { code: "ru", hreflang: "ru", url: `${origin}${location.pathname.replace(/^\/en/, "")}` },
       { code: "en", hreflang: "en", url: `${origin}/en${location.pathname.replace(/^\/en/, "")}` }
     ];
     locales.forEach(loc => {
-      if (loc.code === language) return; // не дублировать текущий язык
+      if (loc.code === language) return;
       const link = document.createElement("link");
       link.rel = "alternate";
       link.hreflang = loc.hreflang;
       link.href = loc.url;
       head.appendChild(link);
     });
-    // x-default
     const linkX = document.createElement("link");
     linkX.rel = "alternate";
     linkX.hreflang = "x-default";
     linkX.href = url;
     head.appendChild(linkX);
 
-    // --- robots доп. защита ---
+    // robots (ещё раз для безопасности)
     let robotsTag = document.querySelector("meta[name='robots']");
     if (!robotsTag) {
       robotsTag = document.createElement("meta");
@@ -206,11 +273,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     }
     (robotsTag as HTMLMetaElement).content = noIndex ? "noindex, nofollow" : "index, follow";
 
-    // Чистка "висящих" старых тегов (оставим только свежие)
-    // Очищать дополнительные OG/twitter/hreflang если потребуется
-
     return () => {
-      // Очистка alternate при SPA-переходах
       Array.from(document.querySelectorAll("link[rel='alternate']")).forEach(l => l.remove());
     };
   }, [title, description, url, image, type, language, noIndex, location.pathname]);
@@ -218,4 +281,3 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   return null;
 };
 export default SEOHead;
-
