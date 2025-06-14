@@ -11,6 +11,10 @@ const leCastellaTitles = {
   ru: "🏰 Le Castella: Тайны крепости на Ионическом море",
   en: "🏰 Le Castella: Secrets of the Ionian Sea Fortress"
 };
+const dogLifeTitles = {
+  ru: "🐶 Жизнь собачника в Италии: балконы, гавкоты и сиеста",
+  en: "🐶 Dog Owner Life in Italy: Balconies, Barkfests & Siestas"
+};
 
 const Blog: React.FC = () => {
   const { language, t } = useLanguage();
@@ -35,6 +39,14 @@ const Blog: React.FC = () => {
                 className="block text-xl font-bold text-[#205f98] underline hover:text-[#125a98] transition-colors duration-200 py-4 text-center"
               >
                 {leCastellaTitles[language]}
+              </a>
+            </li>
+            <li>
+              <a
+                href="/blog/dog-life-in-italy"
+                className="block text-xl font-bold text-[#2196F3] underline hover:text-[#176b9b] transition-colors duration-200 py-4 text-center"
+              >
+                {dogLifeTitles[language]}
               </a>
             </li>
           </ul>
