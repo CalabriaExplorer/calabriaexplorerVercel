@@ -40,40 +40,18 @@ const Tours = () => {
       title={`${content.title} - Calabria Explorer`}
       description={content.intro}
     >
-      {/* Hero Section UPDATED */}
-      <section
-        className="relative py-16 overflow-hidden"
-        style={{
-          background: "linear-gradient(135deg, #2196F3 0%, #21a1df 35%, #19adde 100%)"
-        }}
-      >
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-[#0077B6] via-[#00A9E6] to-[#0077B6] text-white py-16 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/6d3b6b08-c072-43d0-9bb7-4a32452ce1e1.png')] bg-cover bg-center opacity-10" />
         <div className="relative container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1
-              className="font-serif text-4xl md:text-6xl font-bold mb-6"
-              style={{
-                color: "#fff",
-                textShadow: "0 2px 14px rgba(0,0,0,0.18), 0 1px 2px rgba(0,0,0,0.12)"
-              }}
-            >
+            <h1 className="font-serif text-4xl md:text-6xl font-bold mb-6 animate-fade-in" style={{ textShadow: "0 2px 14px rgba(0,0,0,0.18), 0 1px 2px rgba(0,0,0,0.12)" }}>
               {content.title}
             </h1>
-            <p
-              className="text-xl md:text-2xl mb-8"
-              style={{
-                color: "#fff",
-                textShadow: "0 1px 7px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.08)"
-              }}
-            >
+            <p className="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in" style={{ animationDelay: "0.2s" }}>
               {content.subtitle}
             </p>
-            <p
-              className="text-lg mb-8 max-w-3xl mx-auto"
-              style={{
-                color: "#fff",
-                textShadow: "0 1px 4px rgba(0,0,0,0.15)"
-              }}
-            >
+            <p className="text-lg mb-8 opacity-80 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: "0.4s" }}>
               {content.intro}
             </p>
           </div>
