@@ -53,7 +53,7 @@ const EnCalabriaArticle = () => (
       className="
         mt-8 mb-7 w-full
         rounded-2xl
-        shadow-md
+        shadow-lg
         flex flex-col items-center
         px-6 py-10
         transition
@@ -61,10 +61,11 @@ const EnCalabriaArticle = () => (
         glass-gradient
       "
       style={{
-        background: "linear-gradient(135deg, #B6D0E2 0%, #F5F0E6 100%)",
-        backdropFilter: "blur(9px)",
-        WebkitBackdropFilter: "blur(9px)",
-        border: "1.5px solid #e0e4ea22",
+        background: "linear-gradient(135deg, #E2725Bc9 0%, #F5F0E6e6 100%)",
+        backdropFilter: "blur(14px)",
+        WebkitBackdropFilter: "blur(14px)",
+        border: "1.5px solid #e0e4ea33",
+        boxShadow: "0 2px 40px 0 #e2725b33, 0 1.5px 10px #edd6d1cc",
       }}
     >
       <h3 className="text-center w-full text-2xl sm:text-3xl font-extrabold font-serif mb-5 text-calabria-blue flex items-center justify-center gap-2 tracking-wide drop-shadow-lg">
