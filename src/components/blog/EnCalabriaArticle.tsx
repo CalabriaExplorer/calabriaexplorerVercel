@@ -47,43 +47,43 @@ const EnCalabriaArticle = () => (
       <li>Mountain villages preserve ancient languages (Greek/Albanian dialects) 🏞️</li>
       <li>Locals welcome guests like old friends 🤗</li>
     </ul>
-    {/* Improved “Unlock Calabria’s secrets” block */}
+    {/* Refined “Unlock Calabria’s secrets” block */}
     <div
       className="
-        mt-7 mb-6
-        w-full
-        rounded-2xl
-        bg-gradient-to-tr from-calabria-terracotta/90 via-yellow-100 to-calabria-blue/80
-        shadow-xl
-        flex flex-col items-center px-2 py-6 sm:py-8 animate-fade-in
+        mt-7 mb-6 w-full
+        rounded-xl
+        bg-white/90
+        shadow-md
+        flex flex-col items-center
+        px-4 py-7
+        sm:py-10
+        transition
+        animate-fade-in
       "
     >
-      <h3 className="text-2xl sm:text-3xl font-extrabold font-serif mb-3 flex items-center justify-center gap-2 text-calabria-blue drop-shadow animate-fade-in">
+      <h3 className="text-center w-full text-2xl sm:text-3xl font-extrabold font-serif mb-4 text-calabria-blue flex items-center justify-center gap-2 tracking-wide">
         <span className="text-2xl sm:text-3xl animate-pulse">✨</span>
-        <span className="tracking-wide whitespace-nowrap">
-          UNLOCK CALABRIA&apos;S SECRETS!
-        </span>
+        UNLOCK CALABRIA&apos;S SECRETS!
         <span className="text-2xl sm:text-3xl animate-pulse">✨</span>
       </h3>
-      <ul className="max-w-md w-full mx-auto text-lg md:text-xl mt-2 mb-4 space-y-3">
-        <li className="flex items-center gap-3">
+      <ul className="w-full max-w-md text-lg md:text-xl mb-4 mt-2 space-y-3 text-center sm:text-left flex flex-col gap-2">
+        <li className="flex items-center gap-3 justify-center sm:justify-start">
           <span className="text-2xl">🌊</span>
           <span>Craving Calabria&apos;s freshest seafood?</span>
         </li>
-        <li className="flex items-center gap-3">
+        <li className="flex items-center gap-3 justify-center sm:justify-start">
           <span className="text-2xl">🏝️</span>
           <span>Dreaming of secluded beaches?</span>
         </li>
-        <li className="flex items-center gap-3">
+        <li className="flex items-center gap-3 justify-center sm:justify-start">
           <span className="text-2xl">🍤</span>
           <span>Want to discover hidden gems?</span>
         </li>
       </ul>
-      <div className="w-full flex justify-center">
+      <div className="mt-1 mb-1 w-full flex justify-center">
         <span className="
-          inline-block rounded-lg bg-gradient-to-r from-calabria-blue via-calabria-terracotta to-amber-400
-          px-6 py-2 text-lg font-bold text-white shadow-lg
-          hover:scale-105 transition-transform
+          inline-block rounded-lg bg-calabria-blue px-6 py-2
+          text-lg font-bold text-white shadow hover:scale-105 transition-transform
           animate-scale-in
         ">
           👉 ASK A QUESTION → GET A FREE PERSONALIZED TIP!
