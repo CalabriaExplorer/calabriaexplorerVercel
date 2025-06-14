@@ -45,9 +45,9 @@ const RuCalabriaArticle = () => (
       <li>Горные деревни хранят древние языки (диалекты древнегреческого и албанского) 🏞️</li>
       <li>Местные жители встречают гостей, как старых друзей 🤗</li>
     </ul>
-    {/* Refined “Секреты Калабрии” block */}
+    {/* Refined “Секреты Калабрии” block - Wave & Sand style */}
     <div
-      className="
+      className={`
         mt-8 mb-7 w-full
         rounded-2xl
         shadow-xl
@@ -56,16 +56,66 @@ const RuCalabriaArticle = () => (
         transition
         animate-fade-in
         glass-gradient
-      "
+        wave-sand-block
+        group
+        relative
+        overflow-hidden
+      `}
       style={{
-        background: "linear-gradient(135deg, #F0F4F9 0%, #fff 100%)",
-        backdropFilter: "blur(19px)",
-        WebkitBackdropFilter: "blur(19px)",
-        border: "1px solid #f3f6fa8c",
-        boxShadow:
-          "0 10px 40px 0 #b2c4d933, 0 2px 10px 0 #e4e9f3aa",
+        background: "linear-gradient(90deg, #d6eaff 0%, #e0f7fa 45%, #faf3e3 100%)",
+        border: "1.5px solid #e0e4ea33",
+        boxShadow: "0 10px 40px 0 #b2c4d933, 0 2px 10px 0 #e4e9f3aa",
       }}
     >
+      {/* морская волна (внизу) */}
+      <svg
+        viewBox="0 0 600 50"
+        className="absolute left-0 bottom-0 w-full h-12 pointer-events-none"
+        style={{
+          zIndex: 2,
+        }}
+      >
+        <path
+          d="M0 20 Q 100 50 200 25 T 400 30 T 600 20 V50 H0Z"
+          fill="#e0f7fa"
+        >
+          <animate
+            attributeName="d"
+            dur="6s"
+            repeatCount="indefinite"
+            values="
+              M0 20 Q 100 50 200 25 T 400 30 T 600 20 V50 H0Z;
+              M0 22 Q 110 42 210 28 T 390 37 T 600 24 V50 H0Z;
+              M0 20 Q 100 50 200 25 T 400 30 T 600 20 V50 H0Z
+            "
+          />
+        </path>
+      </svg>
+      {/* иконки: звезда и ракушки */}
+      <div className="absolute top-7 left-8 z-10 text-2xl select-none pointer-events-none">
+        <span role="img" aria-label="starfish">🌟</span>
+      </div>
+      <div className="absolute top-12 right-14 z-10 text-2xl select-none pointer-events-none">
+        <span role="img" aria-label="shell">🐚</span>
+      </div>
+      <div className="absolute bottom-12 right-8 z-10 text-xl select-none pointer-events-none">
+        <span role="img" aria-label="shell">🐚</span>
+      </div>
+      {/* анимация "плавает" при hover */}
+      <style>
+        {`
+          .wave-sand-block {
+            will-change: transform;
+            transition: transform 0.25s cubic-bezier(.36,.68,.53,.97);
+          }
+          .wave-sand-block:hover,
+          .wave-sand-block:focus-within,
+          .wave-sand-block:active {
+            transform: translateY(-6px) scale(1.02) rotate(-1deg);
+            box-shadow: 0 16px 42px 0 #b2c4d944, 0 5px 18px 0 #e4e9f3bb;
+          }
+        `}
+      </style>
       <h3 className="text-center w-full text-2xl sm:text-3xl font-extrabold font-serif mb-5 text-calabria-blue flex items-center justify-center gap-2 tracking-wide drop-shadow-lg">
         <span className="text-2xl sm:text-3xl animate-pulse">✨</span>
         РАСКРОЙТЕ СЕКРЕТЫ КАЛАБРИИ!
