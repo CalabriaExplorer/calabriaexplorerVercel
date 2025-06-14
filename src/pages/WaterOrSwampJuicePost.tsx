@@ -2,6 +2,7 @@ import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
 import SEOHead from "@/components/SEOHead";
+import Gallery from "@/components/ui/Gallery";
 
 const articleImages = [
   {
@@ -48,9 +49,17 @@ const SCHEMA_ORG = (lang: "ru" | "en") =>
     "inLanguage": lang,
   });
 
+const getGalleryImages = (lang: "ru" | "en") =>
+  articleImages.map(img => ({
+    src: img.src,
+    alt: lang === "ru" ? img.alt_ru : img.alt_en
+  }));
+
 const article = {
   ru: (
     <div className="prose max-w-full px-2 py-2">
+      {/* Галерея фото */}
+      <Gallery images={getGalleryImages("ru")} />
       <h2 className="text-2xl font-bold text-[#0077B6] mb-2">🌊 ВОДА ИЛИ ЖИДКАЯ ГАДОСТЬ?</h2>
       <p className="mb-2 font-semibold">Жёсткий гид по выживанию в морях, которые пахнут как лук из борща</p>
       <p className="mb-2">От Черного моря до Бали: как отличить курорт от болота</p>
@@ -118,6 +127,8 @@ const article = {
   ),
   en: (
     <div className="prose max-w-full px-2 py-2">
+      {/* Галерея фото */}
+      <Gallery images={getGalleryImages("en")} />
       <h2 className="text-2xl font-bold text-[#0077B6] mb-2">🌊 WATER OR SWAMP JUICE?</h2>
       <p className="mb-2 font-semibold">A Brutal Guide to Seas That Smell Like Borscht Leftovers</p>
       <p className="mb-2">From Black Sea to Bali: How to Spot a Toxic Puddle</p>
@@ -236,3 +247,5 @@ const WaterOrSwampJuicePost: React.FC = () => {
 };
 
 export default WaterOrSwampJuicePost;
+
+// Файл превышает рекомендуемый размер. После проверки изменений могу предложить разделить статью и галерею на отдельные компоненты для лучшей поддержки и простоты работы.
