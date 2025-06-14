@@ -11,17 +11,13 @@ interface ImageZoomContentProps {
   onClose: () => void;
 }
 
-// Вспомогательная компонента, чтобы поддерживать pinch-to-zoom через react-medium-image-zoom
+// Вспомогательная компонента, поддерживающая pinch-to-zoom через react-medium-image-zoom
 const ZoomableImage: React.FC<{ src: string; alt: string; imgClassName?: string }> = ({
   src,
   alt,
   imgClassName,
 }) => (
-  <Zoom
-    zoomMargin={20}
-    overlayBgColorEnd="rgba(0,0,0,0.92)"
-    transitionDuration={180}
-  >
+  <Zoom zoomMargin={20}>
     <img
       src={src}
       alt={alt}
@@ -51,7 +47,7 @@ const ImageZoomContent: React.FC<ImageZoomContentProps> = ({
     <span className="mt-3 mb-6 text-white text-base font-medium text-center backdrop-blur-sm bg-black/30 px-3 py-1 rounded max-w-[95vw] mx-auto">
       {alt}
     </span>
-    {/* Кнопка закрытия — по прежнему можно закрыть по иконке/крестику/фон */}
+    {/* Кнопка закрытия — по-прежнему можно закрыть по иконке/крестику/фон */}
     <button
       className="absolute top-4 right-4 z-50 text-white bg-black/60 hover:bg-black/80 rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-white"
       aria-label="Закрыть"
