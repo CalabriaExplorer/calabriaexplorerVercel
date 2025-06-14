@@ -13,6 +13,7 @@ import Analytics from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import SingleBlogPost from "./pages/SingleBlogPost";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/tours/pallagorio" element={<Pallagorio />} />
             <Route path="/guides/ten-steps" element={<TenSteps />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/hidden-gems-of-italian-wine" element={<SingleBlogPost />} />
             <Route path="/stat" element={<Analytics />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
