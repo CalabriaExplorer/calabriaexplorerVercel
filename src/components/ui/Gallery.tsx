@@ -17,16 +17,20 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
       {images.map((img, i) => (
         <div
           key={img.src}
-          className={`relative transition-transform duration-300 group rounded-lg shadow-lg overflow-hidden bg-white ${
-            i === 0 ? "sm:col-span-2 h-64" : "h-56"
+          className={`relative transition-transform duration-300 group rounded-lg shadow-lg overflow-hidden bg-white flex items-center justify-center ${
+            i === 0 ? "sm:col-span-2 h-64 sm:h-96" : "h-56 sm:h-80"
           }`}
+          style={{
+            minHeight: i === 0 ? '16rem' : '14rem',
+            background: '#f8fafc'
+          }}
         >
           <OptimizedImage
             src={img.src}
             alt={img.alt}
-            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-            width={700}
-            height={500}
+            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300 mx-auto"
+            width={800}
+            height={600}
             loading={i === 0 ? "eager" : "lazy"}
           />
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-3 pointer-events-none">
