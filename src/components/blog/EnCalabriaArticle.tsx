@@ -49,22 +49,17 @@ const EnCalabriaArticle = () => (
       <li>Locals welcome guests like old friends 🤗</li>
     </ul>
     <div className="bg-[#FFF8E1] p-4 rounded-lg my-4">
-      <h3 className="font-bold mb-2">✨ Crave Authentic Calabria?</h3>
+      <h3 className="font-bold mb-2 text-center">✨ UNLOCK CALABRIA&apos;S SECRETS! ✨</h3>
       <p>
-        <strong>Let a local expert craft your dream trip!</strong> 🗺️<br />
-        I&apos;ll create your <strong>personalized itinerary</strong>:<br />
-        • Family winery tastings 🍷<br />
-        • Seaside dinners 🌅<br />
-        • Ancient city tours 🏛️<br />
-        • Secret beaches 🏝️<br />
-        — all for an unforgettable journey!
+        <span role="img" aria-label="sea">🌊</span> Craving Calabria&apos;s freshest seafood?<br />
+        <span role="img" aria-label="beach">🏝️</span> Dreaming of secluded beaches?<br />
+        <span role="img" aria-label="shrimp">🍤</span> Want to discover hidden gems?
       </p>
-      <p className="mt-2">
-        <strong>📩 Contact Me:{" "}</strong>
-        <a href="mailto:mariamarinaciro@gmail.com" className="text-blue-600 underline">
-          mariamarinaciro@gmail.com
-        </a>
-        {" — get a FREE consultation!"}
+      <p className="mt-3 font-bold text-calabria-blue text-center">
+        👉 ASK A QUESTION → GET A FREE PERSONALIZED TIP!
+      </p>
+      <p className="mt-2 text-center">
+        <span className="block">Local secrets • Hidden spots • Recommendations tailored for you</span>
       </p>
     </div>
     <p className="text-center text-lg font-bold mt-8">🌞 See you in Calabria—land of sun, wine, and pure emotion!</p>

@@ -47,22 +47,17 @@ const RuCalabriaArticle = () => (
       <li>Местные жители встречают гостей, как старых друзей 🤗</li>
     </ul>
     <div className="bg-[#FFF8E1] p-4 rounded-lg my-4">
-      <h3 className="font-bold mb-2">✨ Хотите почувствовать настоящую Калабрию?</h3>
+      <h3 className="font-bold mb-2 text-center">✨ РАСКРОЙТЕ СЕКРЕТЫ КАЛАБРИИ! ✨</h3>
       <p>
-        <strong>Доверьте организацию отпуска тому, кто знает все секреты региона!</strong> 🗺️<br />
-        Я помогу создать для вас <strong>персональный маршрут</strong>:<br />
-        • Дегустации в семейных винодельнях 🍷<br />
-        • Ужины на берегу моря 🌅<br />
-        • Экскурсии по древним городам 🏛️<br />
-        • Секретные пляжи 🏝️<br />
-        — всё, чтобы ваше путешествие стало по-настоящему незабываемым!
+        <span role="img" aria-label="sea">🌊</span> Хотите попробовать самые свежие морепродукты?<br />
+        <span role="img" aria-label="beach">🏝️</span> Мечтаете об уединённых пляжах?<br />
+        <span role="img" aria-label="shrimp">🍤</span> Ищете нетуристические места?
       </p>
-      <p className="mt-2">
-        <strong>📩 Свяжитесь со мной:{" "}</strong>
-        <a href="mailto:mariamarinaciro@gmail.com" className="text-blue-600 underline">
-          mariamarinaciro@gmail.com
-        </a>
-        {" — получите бесплатную консультацию!"}
+      <p className="mt-3 font-bold text-calabria-blue text-center">
+        👉 ЗАДАЙТЕ ВОПРОС → ПОЛУЧИТЕ БЕСПЛАТНЫЙ ПЕРСОНАЛЬНЫЙ СОВЕТ!
+      </p>
+      <p className="mt-2 text-center">
+        <span className="block">Местные секреты • Потаённые уголки • Рекомендации под ваш запрос</span>
       </p>
     </div>
     <p className="text-center text-lg font-bold mt-8">🌞 До встречи в Калабрии — земле солнца, вина и настоящих эмоций!</p>
