@@ -60,7 +60,8 @@ const article = {
           • Секретные пляжи 🏝️<br />
           — всё, чтобы ваше путешествие стало по-настоящему незабываемым!
         </p>
-        <p className="mt-2"><strong>📩 Свяжитесь со мной:</strong><br />
+        <p className="mt-2">
+          <strong>📩 Свяжитесь со мной:</strong><br />
           <a href="mailto:mariamarinaciro@gmail.com" className="text-blue-600 underline">mariamarinaciro@gmail.com</a>
           — получите <strong>бесплатную консультацию</strong>!
         </p>
