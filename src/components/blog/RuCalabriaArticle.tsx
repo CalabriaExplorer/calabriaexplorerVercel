@@ -64,43 +64,11 @@ const RuCalabriaArticle = () => (
       `}
       style={{
         background:
-          "linear-gradient(90deg, #7f7fd5 0%, #86a8e7 50%, #91eae4 100%)",
+          "linear-gradient(90deg, #21a1df 0%, #a8daef 54%, #e3f6fd 100%)",
         border: "1.5px solid #e3f2fd",
         boxShadow: "0 10px 40px 0 #b2c4d926, 0 2px 10px 0 #9de0fc33",
       }}
     >
-      {/* Эффект волн и пузырьков внизу блока */}
-      <svg
-        viewBox="0 0 600 42"
-        className="absolute left-0 bottom-0 w-full h-12 pointer-events-none"
-        style={{
-          zIndex: 2,
-        }}
-      >
-        <path
-          d="M0 30 Q 75 37 150 28 T 300 34 T 450 28 T 600 30 V42 H0Z"
-          fill="#d6eaffCC"
-        />
-        {/* Пузырьки */}
-        <circle cx="80" cy="33" r="4" fill="#b3e2fc88" />
-        <circle cx="370" cy="38" r="2.5" fill="#ade6f4AA" />
-        <circle cx="310" cy="34" r="2" fill="#c9f2ffBB" />
-        <circle cx="530" cy="32" r="3.5" fill="#c9e9fd7a" />
-        {/* Волны-эмодзи */}
-        <text x="35" y="40" fontSize="18">🌊</text>
-        <text x="540" y="41" fontSize="18">🌊</text>
-      </svg>
-      {/* Акцентные эмодзи снежинки или волны наверху */}
-      <div className="absolute top-8 left-9 z-10 text-xl select-none pointer-events-none opacity-80">
-        <span role="img" aria-label="sparkle">❄️</span>
-      </div>
-      <div className="absolute top-10 right-12 z-10 text-xl select-none pointer-events-none opacity-80">
-        <span role="img" aria-label="bubbles">💧</span>
-      </div>
-      <div className="absolute bottom-16 right-7 z-10 text-lg select-none pointer-events-none opacity-75">
-        <span role="img" aria-label="bubbles">🫧</span>
-      </div>
-      {/* Анимация плавного "покачивания" блока при hover */}
       <style>
         {`
           .seabreeze-mist-block {
@@ -116,21 +84,16 @@ const RuCalabriaArticle = () => (
         `}
       </style>
       <h3 className="text-center w-full text-2xl sm:text-3xl font-extrabold font-serif mb-5 text-calabria-blue flex items-center justify-center gap-2 tracking-wide drop-shadow-lg">
-        <span className="text-2xl sm:text-3xl animate-pulse">✨</span>
         РАСКРОЙТЕ СЕКРЕТЫ КАЛАБРИИ!
-        <span className="text-2xl sm:text-3xl animate-pulse">✨</span>
       </h3>
       <ul className="w-full max-w-md text-lg md:text-xl mb-5 mt-1 space-y-3 text-center sm:text-left flex flex-col gap-2 font-sans">
         <li className="flex items-center gap-3 justify-center sm:justify-start">
-          <span className="text-2xl">🌊</span>
           <span>Хотите попробовать самые свежие морепродукты?</span>
         </li>
         <li className="flex items-center gap-3 justify-center sm:justify-start">
-          <span className="text-2xl">🏝️</span>
           <span>Мечтаете об уединённых пляжах?</span>
         </li>
         <li className="flex items-center gap-3 justify-center sm:justify-start">
-          <span className="text-2xl">🍤</span>
           <span>Ищете нетуристические места?</span>
         </li>
       </ul>
