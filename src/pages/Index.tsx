@@ -14,20 +14,20 @@ const Index = () => {
   // Calabria images for the social gallery - обновлено с реальными фото пользователя
   const calabriaImages = [
     {
-      src: "/lovable-uploads/54777e1b-4e94-4a13-af26-bc1b824fcbfd.png",
-      alt: "Осенний лес в Калабрии с деревянной лестницей"
-    },
-    {
       src: "/lovable-uploads/0595e3d6-6cd6-4ff3-8294-fe51e78a0df0.png",
       alt: "Замок на побережье Калабрии"
     },
     {
-      src: "/lovable-uploads/90ce3269-4405-493c-88f6-b1ed72d37baf.png",
-      alt: "Кайтсерфинг на лазурном море в Калабрии"
+      src: "/lovable-uploads/54777e1b-4e94-4a13-af26-bc1b824fcbfd.png",
+      alt: "Осенний лес в Калабрии с деревянной лестницей"
     },
     {
       src: "/lovable-uploads/c421d559-b33b-4801-9947-569010769ea5.png",
       alt: "Традиционная калабрийская нарезка с прошутто и деликатесами"
+    },
+    {
+      src: "/lovable-uploads/90ce3269-4405-493c-88f6-b1ed72d37baf.png",
+      alt: "Кайтсерфинг на лазурном море в Калабрии"
     }
   ];
 
