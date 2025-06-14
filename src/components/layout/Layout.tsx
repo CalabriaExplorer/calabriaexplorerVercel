@@ -196,6 +196,11 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
                     <Link to="#contact" className="text-gray-300 hover:text-white">{t("contact")}</Link>
                   </li>
                   <li>
+                    <Link to="/blog" className="text-gray-300 hover:text-white">
+                      {language === "en" ? "Blog" : "Блог"}
+                    </Link>
+                  </li>
+                  <li>
                     <a
                       href="https://ciro-flight.lovable.app/flights"
                       target="_blank"

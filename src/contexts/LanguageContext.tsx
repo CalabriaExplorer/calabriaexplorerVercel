@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, ReactNode } from "react";
 
 type Language = "en" | "ru";
@@ -64,6 +63,10 @@ const translations = {
     "social.title": "#MyCalabria",
     "social.description": "See Calabria through the eyes of visitors and locals",
     
+    // Blog
+    "blog.title": "Blog",
+    "blog.description": "Articles and tips for travelers and lovers of Calabria.",
+    
     // Footer
     "footer.description": "Discover Italy's hidden gem - pristine beaches, rich culture, and authentic living",
     "footer.quicklinks": "Quick Links",
@@ -125,6 +128,10 @@ const translations = {
     // Social
     "social.title": "#МояКалабрия",
     "social.description": "Увидите Калабрию глазами посетителей и местных жителей",
+    
+    // Blog
+    "blog.title": "Блог",
+    "blog.description": "Статьи и советы для путешественников и любителей Калабрии.",
     
     // Footer
     "footer.description": "Откройте для себя скрытую жемчужину Италии - нетронутые пляжи, богатую культуру и аутентичную жизнь",
