@@ -10,6 +10,7 @@ interface SEOHeadProps {
   schema?: string; // изменили на строку!
   canonical?: string;
   noIndex?: boolean;
+  preloadImages?: string[];
 }
 
 function absoluteUrl(path: string) {
@@ -37,6 +38,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   schema,
   canonical,
   noIndex,
+  preloadImages,
 }) => {
   const location = useLocation();
   const { language } = useLanguage();
@@ -77,6 +79,20 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       document.head.appendChild(link);
     });
   }, []);
+
+  // Preload images if provided
+  React.useEffect(() => {
+    if (!preloadImages || typeof document === "undefined") return;
+    preloadImages.forEach(src => {
+      if (!document.head.querySelector(`link[rel='preload'][href='${src}']`)) {
+        const link = document.createElement("link");
+        link.rel = "preload";
+        link.setAttribute("as", "image");
+        link.href = src;
+        document.head.appendChild(link);
+      }
+    });
+  }, [preloadImages]);
 
   // Canonical — убираем параметры page/sort/utm
   React.useEffect(() => {

@@ -14,9 +14,10 @@ interface LayoutProps {
   colorScheme?: "tourist" | "relocator" | "default";
   title?: string;
   description?: string;
+  preloadImages?: string[];
 }
 
-const Layout = ({ children, colorScheme = "default", title, description }: LayoutProps) => {
+const Layout = ({ children, colorScheme = "default", title, description, preloadImages }: LayoutProps) => {
   const { language, setLanguage, t } = useLanguage();
   
   // Update page title and description for SEO
@@ -164,6 +165,7 @@ const Layout = ({ children, colorScheme = "default", title, description }: Layou
         description={description || "Travel in Calabria, Italy: Tours, guides, relocation support."}
         canonical={canonicalUrl}
         schema={schema}
+        preloadImages={preloadImages}
       />
       {/* Header/Navigation */}
       <header className={`bg-white border-b ${headerAccentColor} sticky top-0 z-10`} role="banner">
