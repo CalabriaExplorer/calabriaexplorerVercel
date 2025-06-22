@@ -77,10 +77,11 @@ const Umbriatico = () => {
   };
 
   return (
-    <Layout 
+    <Layout
       colorScheme="tourist"
       title={`${content.title} - Calabria Explorer`}
       description={content.description}
+      preloadImages={["/lovable-uploads/bbf53f58-00ce-4565-9b79-54cce8d12868.png"]}
     >
       {/* Hero Section */}
       <section className="relative">

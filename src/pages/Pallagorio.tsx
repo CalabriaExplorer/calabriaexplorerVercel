@@ -95,10 +95,11 @@ const Pallagorio = () => {
   const content = tourContent[language];
 
   return (
-    <Layout 
+    <Layout
       colorScheme="tourist"
       title={`${content.title} - Calabria Explorer`}
       description={content.intro}
+      preloadImages={["/lovable-uploads/a7a13b83-eb08-4c06-94da-a9b7574bfd65.png"]}
     >
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#E2725B] to-[#D4511E] text-white py-16">
