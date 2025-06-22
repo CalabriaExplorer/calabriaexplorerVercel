@@ -29,6 +29,11 @@ const articleImages = [
   },
 ];
 
+const articleDescriptions = {
+  ru: "Погрузитесь в атмосферу Калабрии — региона, где вино, история и солнце сливаются в идеальное путешествие!",
+  en: "Immerse yourself in Calabria – where wine, history and sunshine blend into the perfect journey!",
+};
+
 const article = {
   ru: (
     <div className="prose max-w-full sm:mx-auto px-2 py-2">
@@ -173,7 +178,10 @@ const SingleBlogPost: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <Layout title={language === "ru" ? "🍇 Неизвестные вина Италии!" : "🍇 Hidden Gems of Italian Wine!"}>
+    <Layout
+      title={language === "ru" ? "🍇 Неизвестные вина Италии!" : "🍇 Hidden Gems of Italian Wine!"}
+      description={articleDescriptions[language]}
+    >
       <section className="w-full min-h-[calc(100vh-250px)] bg-calabria-sand pb-8">
         <div className="max-w-2xl mx-auto pt-3">
           <button
