@@ -16,7 +16,7 @@ const Melissa = () => {
     en: {
       title: "Melissa Discovery Tour: Ovid's Murals & Bees Adventure! 🎨🐝",
       subtitle: "Open-Air Art Party",
-      intro: "Dive into Calabria's coolest street gallery! See jaw-dropping murals, hear wild artist stories, uncover city myths. Why Melissa? Because art bees love it here!",
+      intro: "Join one of the most vibrant excursions in Calabria and explore a street gallery bursting with color. This isn't your typical wine tour—book your tour now to uncover Melissa's creative spirit.",
       highlights: [
         {
           title: "Open-Air Art Party",
@@ -51,7 +51,7 @@ const Melissa = () => {
     ru: {
       title: "Обзорная экскурсия по городу МЕЛИССА – город Овидия, муралов и пчел",
       subtitle: "Интерактивный вернисаж муралов",
-      intro: "Откройте уникальную галерею под открытым небом: лучшие работы калабрийских художников, истории создания, городские мифы и легенды. Узнайте, почему Мелисса — центр уличного искусства региона.",
+      intro: "Присоединяйтесь к одной из самых ярких экскурсий в Калабрии и прогуляйтесь по галерее под открытым небом. Это не винный тур, а арт-приключение — закажите экскурсию и почувствуйте творческий дух Мелиссы.",
       highlights: [
         {
           title: "Интерактивный вернисаж муралов",

@@ -15,7 +15,7 @@ const Tours = () => {
     en: {
       title: "Discover Calabria Tours",
       subtitle: "Authentic experiences in Italy's hidden gem",
-      intro: "Explore the authentic beauty of Calabria through our carefully curated tours. From medieval hilltop towns to artistic villages, each excursion reveals the soul of this magnificent region.",
+      intro: "Explore the authentic beauty of Calabria through our carefully curated excursions in Calabria. From medieval hilltop towns and artistic villages to classic wine tours, book your tour today to experience the soul of this magnificent region.",
       featuredTitle: "Featured Tours",
       allToursTitle: "All Available Tours",
       bookNow: "Book Your Adventure",
@@ -24,7 +24,7 @@ const Tours = () => {
     ru: {
       title: "Экскурсии по Калабрии",
       subtitle: "Аутентичные впечатления в скрытой жемчужине Италии",
-      intro: "Откройте для себя подлинную красоту Калабрии через наши тщательно подобранные экскурсии. От средневековых городов на холмах до художественных деревень - каждая экскурсия раскрывает душу этого великолепного региона.",
+      intro: "Откройте для себя подлинную красоту Калабрии через тщательно подобранные экскурсии в Калабрии. От средневековых городков и художественных деревень до классических винных туров — закажите экскурсию и почувствуйте душу этого великолепного региона.",
       featuredTitle: "Рекомендуемые экскурсии",
       allToursTitle: "Все доступные экскурсии",
       bookNow: "Забронировать приключение",
