@@ -35,10 +35,11 @@ const Tours = () => {
   const content = tourContent[language];
 
   return (
-    <Layout 
+    <Layout
       colorScheme="tourist"
       title={`${content.title} - Calabria Explorer`}
       description={content.intro}
+      preloadImages={["/lovable-uploads/6d3b6b08-c072-43d0-9bb7-4a32452ce1e1.png"]}
     >
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[#0077B6] via-[#00A9E6] to-[#0077B6] text-white py-16 overflow-hidden">
