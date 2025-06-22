@@ -45,7 +45,10 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
     return language === "ru" ? `€${price}/чел` : `€${price}/person`;
   };
 
-  const bookingText = language === "ru" ? "Забронировать" : "Book Now";
+  const bookingText =
+    language === "ru"
+      ? "Заказать экскурсию через Telegram"
+      : "Book via WhatsApp";
 
   return (
     <Link to={`/tours/${id}`} className="block group">
@@ -105,9 +108,14 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
               {formatPrice(price)}
             </span>
             
-            <Button 
+            <Button
               onClick={handleBooking}
               className="book-btn bg-gradient-to-r from-[#0077B6] to-[#00A9E6] hover:from-[#005A8A] hover:to-[#0077B6] text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+              aria-label={
+                language === "ru"
+                  ? "Заказать экскурсию через Telegram"
+                  : "Book via WhatsApp"
+              }
             >
               {language === "ru" ? (
                 <>
