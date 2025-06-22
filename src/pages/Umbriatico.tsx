@@ -15,7 +15,7 @@ const Umbriatico = () => {
     en: {
       title: "Umbriatico: Town on the Edge of Time",
       subtitle: "Medieval village with stunning Ionian Sea views",
-      description: "Discover the enchanting medieval village of Umbriatico, perched high on a hilltop overlooking the crystal-clear waters of the Ionian Sea. This authentic Calabrian gem offers visitors a journey through centuries of history, Byzantine art, and breathtaking panoramic views.",
+      description: "Take an unforgettable excursion in Calabria to the medieval village of Umbriatico, perched high above the Ionian Sea. This isn't a wine tour, but panoramic views and Byzantine art await—book your tour to step back in time.",
       highlights: [
         "Explore narrow medieval streets and ancient stone houses",
         "Visit hidden chapels with original Byzantine frescoes",
@@ -41,7 +41,7 @@ const Umbriatico = () => {
     ru: {
       title: "Средневековый Умбриатико",
       subtitle: "Деревня на краю времени с видами на Ионическое море",
-      description: "Откройте для себя очаровательную средневековую деревню Умбриатико, расположенную высоко на холме с видом на кристально чистые воды Ионического моря. Этот подлинный калабрийский самоцвет предлагает посетителям путешествие через века истории, византийского искусства и захватывающих панорамных видов.",
+      description: "Отправьтесь на незабываемую экскурсию в Калабрии в средневековый Умбриатико, который возвышается над Ионическим морем. Это не винный тур, но панорамы и византийское искусство впечатлят вас — закажите экскурсию и окунитесь в прошлое.",
       highlights: [
         "Исследуйте узкие средневековые улочки и древние каменные дома",
         "Посетите скрытые часовни с оригинальными византийскими фресками",

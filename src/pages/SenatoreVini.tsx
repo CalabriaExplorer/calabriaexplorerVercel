@@ -14,7 +14,7 @@ const SenatoreVini = () => {
     en: {
       title: "Senatore Vini Wine Tasting",
       subtitle: "Historic Wine Cellar Tour & Tasting",
-      intro: "Step into the enchanting world of Calabrian winemaking at the historic Senatore Vini cellar. Dating back to the 18th century, this family-owned winery has been crafting exceptional wines using traditional methods passed down through generations.",
+      intro: "Experience one of the finest wine tours in Calabria inside the historic Senatore Vini cellar. This excursion in Calabria reveals time-honored methods passed down for generations—book your tour and savor the region's heritage.",
       highlights: [
         {
           title: "Historic Wine Cellar",
@@ -47,7 +47,7 @@ const SenatoreVini = () => {
     ru: {
       title: "Дегустация Senatore Vini",
       subtitle: "Исторический тур с дегустацией",
-      intro: "Погрузитесь в очаровательный мир калабрийского виноделия в историческом погребе Senatore Vini. Эта семейная винодельня, датируемая XVIII веком, создает исключительные вина, используя традиционные методы, передаваемые из поколения в поколение.",
+      intro: "Познакомьтесь с одним из лучших винных туров Калабрии в историческом погребе Senatore Vini. Эта экскурсия в Калабрии раскрывает вековые традиции виноделия—закажите экскурсию и откройте наследие региона.",
       highlights: [
         {
           title: "Исторический винный погреб",

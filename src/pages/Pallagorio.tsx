@@ -17,7 +17,7 @@ const Pallagorio = () => {
     en: {
       title: "Vercino and Pallagorio: The Mysteries & Albanian Heritage",
       subtitle: "Cultural Heritage Tour",
-      intro: "Immerse yourself in the heart of Calabria! This tour unveils two unique worlds: Vercino: Explore the medieval town, descend into mysterious Byzantine caves adorned with ancient frescoes (Vercino Caves), and visit a local apiary for a tasting of aromatic honey (thyme, orange, chestnut). Pallagorio: Discover the \"Albanian-Calabrian gem\". Dive into the unique culture over lunch featuring authentic 15th-century dishes. At Giuseppe Lapietra's Workshop, uncover the fascinating secrets of Calabrian & Albanian \"magic\" (traditions, folklore), preserved for centuries. Emphasize the uniqueness of this living heritage.",
+      intro: "Embark on an unforgettable excursion in Calabria that leads from Vercino's frescoed caves to Pallagorio's Albanian heritage. It's not a wine tour, but local flavors and honey tastings await—book your tour to discover these living traditions.",
       highlights: [
         {
           title: "Vercino Caves",
@@ -55,7 +55,7 @@ const Pallagorio = () => {
     ru: {
       title: "Верцино и Паллагорио: Тайны и Албанское наследие",
       subtitle: "Тур культурного наследия",
-      intro: "Погрузитесь в сердце Калабрии! Этот тур откроет вам два уникальных мира: Верцино: Исследуйте средневековый город, спуститесь в таинственные византийские пещеры с древними фресками (Гроты Верцино) и посетите местную пасеку, где вас ждет дегустация ароматного меда (тимьян, апельсин, каштан). Паллагорио: Откройте для себя \"Албано-калабрийскую жемчужину\". Погрузитесь в уникальную культуру за обедом с блюдами по рецептам XV века. В мастерской Джузеппе Лапьетры вы раскроете удивительные секреты калабрийской и албанской \"магии\" (традиции, фольклор), пронесенные через века. Подчеркните уникальность этого живого наследия.",
+      intro: "Отправьтесь на незабываемую экскурсию в Калабрии: от гротов Верцино с фресками до албанских корней Паллагорио. Это не винный тур, но местные вкусы и дегустация меда удивят вас. Закажите экскурсию и откройте вековые традиции.",
       highlights: [
         {
           title: "Гроты Верцино",
