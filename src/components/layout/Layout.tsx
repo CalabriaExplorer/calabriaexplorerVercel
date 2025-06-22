@@ -305,7 +305,7 @@ const Layout = ({ children, colorScheme = "default", title, description, preload
                   </li>
                   <li>
                     <a
-                      href="https://ciro-flight.lovable.app/flights"
+                      href="https://calabriaexplorer.vercel.app/flights"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-300 hover:text-white"
