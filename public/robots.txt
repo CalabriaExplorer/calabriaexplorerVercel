@@ -28,3 +28,4 @@ User-agent: LinkedInBot
 Allow: /
 
 Sitemap: https://calabria-explorer.lovable.app/sitemap.xml
+Host: calabria-explorer.lovable.app

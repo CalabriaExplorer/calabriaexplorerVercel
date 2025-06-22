@@ -129,25 +129,28 @@ const SenatoreVini = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
             <div className="md:col-span-2">
               <AspectRatio ratio={16/9} className="overflow-hidden rounded-lg">
-                <img 
+                <img
                   src="/lovable-uploads/d310f5fa-3d93-4307-b982-9e2ff5b15586.png"
                   alt={content.title}
+                  loading="lazy"
                   className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
                 />
               </AspectRatio>
             </div>
             <div className="space-y-4">
               <AspectRatio ratio={4/3} className="overflow-hidden rounded-lg">
-                <img 
+                <img
                   src="/lovable-uploads/25dc2f21-31f0-4475-a614-6b9b16b01057.png"
                   alt={language === "en" ? "Wine cellar interior" : "Интерьер винного погреба"}
+                  loading="lazy"
                   className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
                 />
               </AspectRatio>
               <AspectRatio ratio={4/3} className="overflow-hidden rounded-lg">
-                <img 
+                <img
                   src="/lovable-uploads/bbf53f58-00ce-4565-9b79-54cce8d12868.png"
                   alt={language === "en" ? "Wine tasting setup" : "Сервировка дегустации"}
+                  loading="lazy"
                   className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
                 />
               </AspectRatio>
