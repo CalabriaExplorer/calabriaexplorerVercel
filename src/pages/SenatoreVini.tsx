@@ -41,8 +41,8 @@ const SenatoreVini = () => {
         ]
       },
       bookNow: "Book Wine Experience",
-      whatsappBook: "Book in WhatsApp",
-      telegramBook: "Забронировать в Telegram"
+      whatsappBook: "Заказать экскурсию через WhatsApp",
+      telegramBook: "Заказать экскурсию через Telegram"
     },
     ru: {
       title: "Дегустация Senatore Vini",
@@ -74,8 +74,8 @@ const SenatoreVini = () => {
         ]
       },
       bookNow: "Забронировать дегустацию",
-      whatsappBook: "Book in WhatsApp", 
-      telegramBook: "Забронировать в Telegram"
+      whatsappBook: "Заказать экскурсию через WhatsApp",
+      telegramBook: "Заказать экскурсию через Telegram"
     }
   };
 
@@ -278,10 +278,15 @@ const SenatoreVini = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
+              <Button
                 onClick={handleBooking}
-                size="lg" 
+                size="lg"
                 className="bg-white text-[#0077B6] hover:bg-gray-100 flex items-center gap-2"
+                aria-label={
+                  language === "ru"
+                    ? "Заказать экскурсию через Telegram"
+                    : "Book via WhatsApp"
+                }
               >
                 {language === "ru" ? (
                   <>

@@ -61,7 +61,7 @@ const Umbriatico = () => {
         "Дегустация традиционных калабрийских закусок",
         "Помощь с фотографированием в живописных местах"
       ],
-      bookNow: "Забронировать в Telegram",
+      bookNow: "Заказать экскурсию через Telegram",
       contact: "Связаться с гидом"
     }
   };
@@ -183,9 +183,14 @@ const Umbriatico = () => {
                     </div>
                   </div>
 
-                  <Button 
+                  <Button
                     onClick={handleBooking}
                     className="w-full bg-gradient-to-r from-[#0077B6] to-[#00A9E6] hover:from-[#005A8A] hover:to-[#0077B6] text-white py-3 text-lg font-semibold"
+                    aria-label={
+                      language === "ru"
+                        ? "Заказать экскурсию через Telegram"
+                        : "Book via WhatsApp"
+                    }
                   >
                     {language === "ru" ? (
                       <>
