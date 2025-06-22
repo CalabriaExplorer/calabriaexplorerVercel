@@ -8,6 +8,7 @@ import Tours from "./pages/Tours";
 import Melissa from "./pages/Melissa";
 import Pallagorio from "./pages/Pallagorio";
 import Umbriatico from "./pages/Umbriatico";
+import SenatoreVini from "./pages/SenatoreVini";
 import TenSteps from "./pages/TenSteps";
 import Analytics from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/tours/umbriatico" element={<Umbriatico />} />
             <Route path="/tours/melissa" element={<Melissa />} />
             <Route path="/tours/pallagorio" element={<Pallagorio />} />
+            <Route path="/tours/senatore-vini" element={<SenatoreVini />} />
             <Route path="/guides/ten-steps" element={<TenSteps />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/water-or-swamp-juice" element={<WaterOrSwampJuicePost />} />
