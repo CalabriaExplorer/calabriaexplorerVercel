@@ -90,10 +90,13 @@ const SenatoreVini = () => {
   };
 
   return (
-    <Layout 
+    <Layout
       colorScheme="tourist"
       title={`${content.title} - Calabria Explorer`}
       description={content.intro}
+      price={55}
+      offerUrl="https://wa.me/393446935576"
+      startLocation={content.details.meetingPoint}
     >
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#0077B6] to-[#00A9E6] text-white py-16">

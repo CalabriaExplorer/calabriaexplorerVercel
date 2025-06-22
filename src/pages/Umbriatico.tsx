@@ -77,10 +77,13 @@ const Umbriatico = () => {
   };
 
   return (
-    <Layout 
+    <Layout
       colorScheme="tourist"
       title={`${content.title} - Calabria Explorer`}
       description={content.description}
+      price={50}
+      offerUrl="https://wa.me/393446935576"
+      startLocation={content.meetingPoint}
     >
       {/* Hero Section */}
       <section className="relative">

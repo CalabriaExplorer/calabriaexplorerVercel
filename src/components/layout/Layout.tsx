@@ -15,9 +15,23 @@ interface LayoutProps {
   title?: string;
   description?: string;
   preloadImages?: string[];
+  price?: number;
+  offerUrl?: string;
+  startLocation?: string;
+  startDate?: string;
 }
 
-const Layout = ({ children, colorScheme = "default", title, description, preloadImages }: LayoutProps) => {
+const Layout = ({
+  children,
+  colorScheme = "default",
+  title,
+  description,
+  preloadImages,
+  price,
+  offerUrl,
+  startLocation,
+  startDate,
+}: LayoutProps) => {
   const { language, setLanguage, t } = useLanguage();
   
   // Update page title and description for SEO
@@ -124,9 +138,9 @@ const Layout = ({ children, colorScheme = "default", title, description, preload
       });
     }
     if (isTour) {
-      return JSON.stringify({
+      const trip: any = {
         "@context": "https://schema.org",
-        "@type": "TouristTrip",
+        "@type": startDate ? "Event" : "TouristTrip",
         "name": title,
         "description": description,
         "image": window.location.origin + "/favicon.ico",
@@ -134,9 +148,17 @@ const Layout = ({ children, colorScheme = "default", title, description, preload
         "offers": {
           "@type": "Offer",
           "priceCurrency": "EUR",
-          "availability": "https://schema.org/InStock"
+          "availability": "https://schema.org/InStock",
+          ...(price ? { price } : {}),
+          ...(offerUrl ? { url: offerUrl } : {})
         }
-      });
+      };
+      if (startDate) trip.startDate = startDate;
+      if (startLocation) {
+        const place = { "@type": "Place", name: startLocation };
+        if (startDate) trip.location = place; else trip.startLocation = place;
+      }
+      return JSON.stringify(trip);
     }
     // BreadcrumbList для остального
     const pathChunks = window.location.pathname
@@ -156,7 +178,7 @@ const Layout = ({ children, colorScheme = "default", title, description, preload
       });
     }
     return undefined;
-  }, [title, description, language, isBlogPost, isTour ]);
+  }, [title, description, language, isBlogPost, isTour, price, offerUrl, startLocation, startDate]);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -166,6 +188,10 @@ const Layout = ({ children, colorScheme = "default", title, description, preload
         canonical={canonicalUrl}
         schema={schema}
         preloadImages={preloadImages}
+        price={price}
+        offerUrl={offerUrl}
+        startLocation={startLocation}
+        startDate={startDate}
       />
       {/* Header/Navigation */}
       <header className={`bg-white border-b ${headerAccentColor} sticky top-0 z-10`} role="banner">

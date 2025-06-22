@@ -11,6 +11,10 @@ interface SEOHeadProps {
   canonical?: string;
   noIndex?: boolean;
   preloadImages?: string[];
+  price?: number;
+  offerUrl?: string;
+  startLocation?: string;
+  startDate?: string;
 }
 
 function absoluteUrl(path: string) {
@@ -39,6 +43,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   canonical,
   noIndex,
   preloadImages,
+  price,
+  offerUrl,
+  startLocation,
+  startDate,
 }) => {
   const location = useLocation();
   const { language } = useLanguage();
@@ -128,9 +136,9 @@ const SEOHead: React.FC<SEOHeadProps> = ({
           "inLanguage": language,
         });
       } else if (location.pathname.startsWith("/tours/")) {
-        pageSchema = JSON.stringify({
+        const trip: any = {
           "@context": "https://schema.org",
-          "@type": "TouristTrip",
+          "@type": startDate ? "Event" : "TouristTrip",
           "name": title,
           "description": description,
           "image": absoluteUrl(image || "/favicon.ico"),
@@ -138,9 +146,17 @@ const SEOHead: React.FC<SEOHeadProps> = ({
           "offers": {
             "@type": "Offer",
             "priceCurrency": "EUR",
-            "availability": "https://schema.org/InStock"
-          }
-        });
+            "availability": "https://schema.org/InStock",
+            ...(price ? { price } : {}),
+            ...(offerUrl ? { url: offerUrl } : {})
+          },
+        };
+        if (startDate) trip.startDate = startDate;
+        if (startLocation) {
+          const place = { "@type": "Place", name: startLocation };
+          if (startDate) trip.location = place; else trip.startLocation = place;
+        }
+        pageSchema = JSON.stringify(trip);
       } else {
         // BreadcrumbList
         const pathChunks = location.pathname.split("/").filter(Boolean);
@@ -182,7 +198,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       script.innerHTML = pageSchema;
       document.head.appendChild(script);
     }
-  }, [schema, location.pathname, title, description, image, language]);
+  }, [schema, location.pathname, title, description, image, language, price, offerUrl, startLocation, startDate]);
 
   // Meta теги (SPA-навигация)
   React.useEffect(() => {
