@@ -39,6 +39,7 @@ const Tours = () => {
       colorScheme="tourist"
       title={`${content.title} - Calabria Explorer`}
       description={content.intro}
+      image="/lovable-uploads/6d3b6b08-c072-43d0-9bb7-4a32452ce1e1.png"
       preloadImages={["/lovable-uploads/6d3b6b08-c072-43d0-9bb7-4a32452ce1e1.png"]}
     >
       {/* Hero Section */}

@@ -88,10 +88,11 @@ const Melissa = () => {
   const content = tourContent[language];
 
   return (
-    <Layout 
+    <Layout
       colorScheme="tourist"
       title={`${content.title} - Calabria Explorer`}
       description={content.intro}
+      image="/lovable-uploads/2ca0f4d4-ee1c-4971-94d5-c9a8219e9c36.png"
     >
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#E2725B] to-[#D4511E] text-white py-16">

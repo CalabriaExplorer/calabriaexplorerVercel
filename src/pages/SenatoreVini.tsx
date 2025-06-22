@@ -90,10 +90,11 @@ const SenatoreVini = () => {
   };
 
   return (
-    <Layout 
+    <Layout
       colorScheme="tourist"
       title={`${content.title} - Calabria Explorer`}
       description={content.intro}
+      image="/lovable-uploads/d310f5fa-3d93-4307-b982-9e2ff5b15586.png"
     >
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#0077B6] to-[#00A9E6] text-white py-16">
