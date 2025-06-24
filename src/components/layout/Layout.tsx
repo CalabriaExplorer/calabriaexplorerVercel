@@ -14,10 +14,11 @@ interface LayoutProps {
   colorScheme?: "tourist" | "relocator" | "default";
   title?: string;
   description?: string;
+  image?: string;
   preloadImages?: string[];
 }
 
-const Layout = ({ children, colorScheme = "default", title, description, preloadImages }: LayoutProps) => {
+const Layout = ({ children, colorScheme = "default", title, description, image, preloadImages }: LayoutProps) => {
   const { language, setLanguage, t } = useLanguage();
   
   // Update page title and description for SEO
@@ -116,7 +117,7 @@ const Layout = ({ children, colorScheme = "default", title, description, preload
         "url": window.location.origin,
         "description": description || "Travel in Calabria, Italy: Tours, guides, relocation support.",
         "inLanguage": language,
-        "image": window.location.origin + "/favicon.ico",
+        "image": window.location.origin + (image || "/favicon.ico"),
         "publisher": {
           "@type": "Organization",
           "name": "Calabria Explorer"
@@ -130,7 +131,7 @@ const Layout = ({ children, colorScheme = "default", title, description, preload
         "headline": title,
         "description": description,
         "mainEntityOfPage": window.location.href,
-        "image": window.location.origin + "/favicon.ico",
+        "image": window.location.origin + (image || "/favicon.ico"),
         "author": { "@type": "Person", "name": "Мария (Maria)" },
         "publisher": { "@type": "Organization", "name": "Calabria Explorer" },
         "datePublished": new Date().toISOString().slice(0, 10),
@@ -143,7 +144,7 @@ const Layout = ({ children, colorScheme = "default", title, description, preload
         "@type": "TouristTrip",
         "name": title,
         "description": description,
-        "image": window.location.origin + "/favicon.ico",
+        "image": window.location.origin + (image || "/favicon.ico"),
         "inLanguage": language,
         "offers": {
           "@type": "Offer",
@@ -170,7 +171,7 @@ const Layout = ({ children, colorScheme = "default", title, description, preload
       });
     }
     return undefined;
-  }, [title, description, language, isBlogPost, isTour ]);
+  }, [title, description, image, language, isBlogPost, isTour]);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -178,6 +179,7 @@ const Layout = ({ children, colorScheme = "default", title, description, preload
         title={title || "Calabria Explorer"}
         description={description || "Travel in Calabria, Italy: Tours, guides, relocation support."}
         canonical={canonicalUrl}
+        image={image}
         schema={schema}
         preloadImages={preloadImages}
       />
