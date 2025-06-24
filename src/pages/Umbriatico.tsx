@@ -128,4 +128,47 @@ const Umbriatico = () => {
                     <h3 className="font-serif text-xl font-bold text-gray-800 mb-4">
                       {language === "en" ? "Tour Highlights" : "Основные моменты"}
                     </h3>
-                    <ul className="space-velopers:nowrap.............
+                    <ul className="space-y-2">
+                      {content.highlights.map((highlight, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-[#0077B6] rounded-full mt-2 flex-shrink-0" />
+                          <span className="text-gray-600">{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="font-serif text-xl font-bold text-gray-800 mb-4">
+                      {content.includes}
+                    </h3>
+                    <ul className="space-y-2">
+                      {content.includesList.map((item, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
+                          <span className="text-gray-600">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-6">
+              <Card className="p-6">
+                <CardContent className="space-y-4">
+                  <h3 className="font-serif text-lg font-bold text-gray-800 mb-4">
+                    {content.details}
+                  </h3>
+                  <div className="space-y-3 text-sm">
+                    <div className="flex items-center gap-3">
+                      <Clock className="w-5 h-5 text-[#0077B6]" />
+                      <span className="text-gray-600">{content.duration}</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Euro className="w-5 h-5 text-[#0077B6]" />
+                      <span className="text-gray-600">{content.price}</span>
+                    </div>
+                    <div className="flex items
