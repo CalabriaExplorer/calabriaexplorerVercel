@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { MapPin, Clock, Users, Camera, Mail, Phone, Wine } from "lucide-react";
+import { Clock, Users, MapPin, Wine } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
+import OptimizedImage from "@/components/ui/optimized-image";
 
 const SenatoreVini = () => {
   const { language } = useLanguage();
@@ -40,9 +41,11 @@ const SenatoreVini = () => {
           "Stories and history of Calabrian winemaking"
         ]
       },
-      bookNow: "Book Wine Experience",
-      whatsappBook: "Заказать экскурсию через WhatsApp",
-      telegramBook: "Заказать экскурсию через Telegram"
+      bookNowLabel: "Book Wine Experience",
+      contactVia: {
+        whatsapp: "Book via WhatsApp",
+        telegram: "Book via Telegram"
+      }
     },
     ru: {
       title: "Дегустация Senatore Vini",
@@ -74,17 +77,21 @@ const SenatoreVini = () => {
           "Истории и традиции калабрийского виноделия"
         ]
       },
-      bookNow: "Забронировать дегустацию",
-      whatsappBook: "Заказать экскурсию через WhatsApp",
-      telegramBook: "Заказать экскурсию через Telegram"
+      bookNowLabel: "Забронировать дегустацию",
+      contactVia: {
+        whatsapp: "Заказать через WhatsApp",
+        telegram: "Заказать через Telegram"
+      }
     }
   };
 
   const content = tourContent[language];
 
   const handleBooking = () => {
-    if (language === "ru") window.open("https://t.me/393446935576", "_blank");
-    else window.open("https://wa.me/393446935576", "_blank");
+    const url = language === "ru"
+      ? `https://t.me/${content.contactVia.telegram}`
+      : `https://wa.me/${content.contactVia.whatsapp}`;
+    window.open(url, '_blank');
   };
 
   return (
@@ -98,67 +105,44 @@ const SenatoreVini = () => {
       {/* Hero Section */}
       <section
         className="relative text-white py-16"
-        style={{
-          backgroundImage: `url(${content.heroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
+        style={{ background: `url(${content.heroImage}) center/cover no-repeat` }}
       >
-        <div className="container mx-auto px-4 bg-black bg-opacity-50 py-16 rounded-lg">
-          <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-center">
-            {content.title}
-          </h1>
-          <p className="text-center text-xl opacity-90 mb-8">{content.subtitle}</p>
+        <div className="container mx-auto px-4 bg-black bg-opacity-50 py-16 rounded-lg text-center">
+          <h1 className="font-serif text-4xl md:text-5xl font-bold mb-2">{content.title}</h1>
+          <p className="text-xl opacity-90 mb-4">{content.subtitle}</p>
         </div>
       </section>
 
-      {/* Photo Gallery */}
-      <section className="py-12 bg-white">
-        <div className="container mx-auto px-4 grid md:grid-cols-3 gap-4 max-w-6xl mx-auto">
-          <div className="md:col-span-2">
-            <AspectRatio ratio={16/9} className="overflow-hidden rounded-lg">
-              <img
-                src={content.heroImage}
-                alt={content.title}
-                loading="lazy"
-                className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
-              />
-            </AspectRatio>
-          </div>
-          <div className="space-y-4">
-            {content.details.includes.map((item, idx) => (
-              <AspectRatio key={idx} ratio={4/3} className="overflow-hidden rounded-lg">
-                <img
-                  src={content.heroImage}
-                  alt={item}
-                  loading="lazy"
-                  className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
-                />
-              </AspectRatio>
-            ))}
-          </div>
+      {/* Highlights */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 grid md:grid-cols-3 gap-8">
+          {content.highlights.map((h, idx) => (
+            <Card key={idx} className="hover:shadow-lg">
+              <CardContent>
+                <h3 className="font-serif text-xl font-bold mb-2">{h.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{h.description}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
 
-      {/* Details Section */}
+      {/* Details */}
       <section className="py-16 bg-[#F8FBFE]">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <ul className="space-y-4">
-            <li><Clock className="inline w-5 h-5 text-[#0077B6] mr-2" /> {content.details.duration}</li>
-            <li><MapPin className="inline w-5 h-5 text-[#0077B6] mr-2" /> {content.details.meetingPoint}</li>
-            <li><Wine className="inline w-5 h-5 text-[#0077B6] mr-2" /> {content.details.price}</li>
-            <li><Users className="inline w-5 h-5 text-[#0077B6] mr-2" /> {language === "en" ? "Max 8 people" : "Макс. 8 человек"}</li>
+        <div className="container mx-auto px-4 max-w-md">
+          <ul className="space-y-4 text-gray-700">
+            <li><Clock className="inline w-5 h-5 text-[#0077B6] mr-2" />{content.details.duration}</li>
+            <li><MapPin className="inline w-5 h-5 text-[#0077B6] mr-2" />{content.details.meetingPoint}</li>
+            <li><Wine className="inline w-5 h-5 text-[#0077B6] mr-2" />{content.details.price}</li>
           </ul>
         </div>
       </section>
 
-      {/* Booking Section */}
-      <section className="py-16 bg-[#0077B6] text-white">
-        <div className="container mx-auto px-4 text-center">
-          <Button onClick={handleBooking} size="lg" className="bg-white text-[#0077B6] hover:bg-gray-100">
-            {language === "ru" ? content.telegramBook : content.whatsappBook}
-          </Button>
-        </div>
+      {/* Booking */}
+      <section className="py-16 bg-[#0077B6] text-white text-center">
+        <Button onClick={handleBooking} size="lg" className="bg-white text-[#0077B6] hover:bg-gray-100">
+          {content.bookNowLabel}
+        </Button>
       </section>
     </Layout>
   );
