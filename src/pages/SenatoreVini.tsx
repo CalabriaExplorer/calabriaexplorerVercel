@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { MapPin, Clock, Users, Camera, Mail, Phone, Wine } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -83,11 +83,8 @@ const SenatoreVini = () => {
   const content = tourContent[language];
 
   const handleBooking = () => {
-    if (language === "ru") {
-      window.open("https://t.me/393446935576", "_blank");
-    } else {
-      window.open("https://wa.me/393446935576", "_blank");
-    }
+    if (language === "ru") window.open("https://t.me/393446935576", "_blank");
+    else window.open("https://wa.me/393446935576", "_blank");
   };
 
   return (
@@ -108,61 +105,63 @@ const SenatoreVini = () => {
         }}
       >
         <div className="container mx-auto px-4 bg-black bg-opacity-50 py-16 rounded-lg">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
-              {content.title}
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-90">
-              {content.subtitle}
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <div className="flex items-center gap-2"><Clock className="w-4 h-4" /><span>{content.details.duration}</span></div>
-              <div className="flex items-center gap-2"><Users className="w-4 h-4" /><span>{language === "en" ? "Max 8 people" : "Макс. 8 человек"}</span></div>
-              <div className="flex items-center gap-2"><Wine className="w-4 h-4" /><span>{language === "en" ? "Wine tasting" : "Дегустация вин"}</span></div>
-            </div>
-          </div>
+          <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-center">
+            {content.title}
+          </h1>
+          <p className="text-center text-xl opacity-90 mb-8">{content.subtitle}</p>
         </div>
       </section>
 
       {/* Photo Gallery */}
       <section className="py-12 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
-            <div className="md:col-span-2">
-              <AspectRatio ratio={16/9} className="overflow-hidden rounded-lg">
+        <div className="container mx-auto px-4 grid md:grid-cols-3 gap-4 max-w-6xl mx-auto">
+          <div className="md:col-span-2">
+            <AspectRatio ratio={16/9} className="overflow-hidden rounded-lg">
+              <img
+                src={content.heroImage}
+                alt={content.title}
+                loading="lazy"
+                className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
+              />
+            </AspectRatio>
+          </div>
+          <div className="space-y-4">
+            {content.details.includes.map((item, idx) => (
+              <AspectRatio key={idx} ratio={4/3} className="overflow-hidden rounded-lg">
                 <img
                   src={content.heroImage}
-                  alt={content.title}
+                  alt={item}
                   loading="lazy"
                   className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
                 />
               </AspectRatio>
-            </div>
-            <div className="space-y-4">
-              <AspectRatio ratio={4/3} className="overflow-hidden rounded-lg">
-                <img
-                  src="/lovable-uploads/25dc2f21-31f0-4475-a614-6b9b16b01057.png"
-                  alt={language === "en" ? "Wine cellar interior" : "Интерьер винного погреба"}
-                  loading="lazy"
-                  className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
-                />
-              </AspectRatio>
-              <AspectRatio ratio={4/3} className="overflow-hidden rounded-lg">
-                <img
-                  src="/lovable-uploads/bbf53f58-00ce-4565-9b79-54cce8d12868.png"
-                  alt={language === "en" ? "Wine tasting setup" : "Сервировка дегустации"}
-                  loading="lazy"
-                  className="object-cover w-full h-full hover:scale-105 transition-transform cursor-zoom-in"
-                />
-              </AspectRatio>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Introduction */}
-      <section className="py-12 bg-[#F8FBFE]">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <p className="text-lg leading-relaxed text-gray-700 mb-8">{content.intro}</p>
-          </
+      {/* Details Section */}
+      <section className="py-16 bg-[#F8FBFE]">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <ul className="space-y-4">
+            <li><Clock className="inline w-5 h-5 text-[#0077B6] mr-2" /> {content.details.duration}</li>
+            <li><MapPin className="inline w-5 h-5 text-[#0077B6] mr-2" /> {content.details.meetingPoint}</li>
+            <li><Wine className="inline w-5 h-5 text-[#0077B6] mr-2" /> {content.details.price}</li>
+            <li><Users className="inline w-5 h-5 text-[#0077B6] mr-2" /> {language === "en" ? "Max 8 people" : "Макс. 8 человек"}</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Booking Section */}
+      <section className="py-16 bg-[#0077B6] text-white">
+        <div className="container mx-auto px-4 text-center">
+          <Button onClick={handleBooking} size="lg" className="bg-white text-[#0077B6] hover:bg-gray-100">
+            {language === "ru" ? content.telegramBook : content.whatsappBook}
+          </Button>
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+export default SenatoreVini;
