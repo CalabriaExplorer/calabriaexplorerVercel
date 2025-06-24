@@ -2,6 +2,7 @@
 import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
+import { Link } from "react-router-dom";
 
 const articleTitles = {
   ru: "🍇 Неизвестные вина Италии!",
@@ -30,36 +31,36 @@ const Blog: React.FC = () => {
           <p className="mb-4 text-gray-600 text-center">{t("blog.description")}</p>
           <ul>
             <li>
-              <a
-                href="/blog/water-or-swamp-juice"
+              <Link
+                to="/blog/water-or-swamp-juice"
                 className="block text-xl font-bold text-[#2981F2] underline hover:text-[#3d2eff] transition-colors duration-200 py-4 text-center"
               >
                 {waterOrSwampJuiceTitles[language]}
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/blog/hidden-gems-of-italian-wine"
+              <Link
+                to="/blog/hidden-gems-of-italian-wine"
                 className="block text-xl font-bold text-[#8B0000] underline hover:text-[#4B0082] transition-colors duration-200 py-4 text-center"
               >
                 {articleTitles[language]}
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/blog/le-castella"
+              <Link
+                to="/blog/le-castella"
                 className="block text-xl font-bold text-[#205f98] underline hover:text-[#125a98] transition-colors duration-200 py-4 text-center"
               >
                 {leCastellaTitles[language]}
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/blog/dog-life-in-italy"
+              <Link
+                to="/blog/dog-life-in-italy"
                 className="block text-xl font-bold text-[#2196F3] underline hover:text-[#176b9b] transition-colors duration-200 py-4 text-center"
               >
                 {dogLifeTitles[language]}
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
