@@ -147,5 +147,4 @@ const SenatoreVini = () => {
     </Layout>
   );
 };
-
 export default SenatoreVini;
