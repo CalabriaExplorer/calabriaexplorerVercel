@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,7 +15,7 @@ const Melissa = () => {
     en: {
       title: "Melissa Discovery Tour: Ovid's Murals & Bees Adventure! 🎨🐝",
       subtitle: "Open-Air Art Party",
-      intro: "Dive into Calabria's coolest street gallery! See jaw-dropping murals, hear wild artist stories, uncover city myths. Why Melissa? Because art bees love it here!",
+      intro: "Join one of the most vibrant excursions in Calabria and explore a street gallery bursting with color. This isn't your typical wine tour—book your tour now to uncover Melissa's creative spirit.",
       highlights: [
         {
           title: "Open-Air Art Party",
@@ -51,7 +50,7 @@ const Melissa = () => {
     ru: {
       title: "Обзорная экскурсия по городу МЕЛИССА – город Овидия, муралов и пчел",
       subtitle: "Интерактивный вернисаж муралов",
-      intro: "Откройте уникальную галерею под открытым небом: лучшие работы калабрийских художников, истории создания, городские мифы и легенды. Узнайте, почему Мелисса — центр уличного искусства региона.",
+      intro: "Присоединяйтесь к одной из самых ярких экскурсий в Калабрии и прогуляйтесь по галерее под открытым небом. Это не винный тур, а арт-приключение — закажите экскурсию и почувствуйте творческий дух Мелиссы.",
       highlights: [
         {
           title: "Интерактивный вернисаж муралов",
@@ -86,17 +85,19 @@ const Melissa = () => {
   };
 
   const content = tourContent[language];
+  const heroImage = "/lovable-uploads/2ca0f4d4-ee1c-4971-94d5-c9a8219e9c36.png";
 
   return (
     <Layout
       colorScheme="tourist"
       title={`${content.title} - Calabria Explorer`}
       description={content.intro}
-      image="/lovable-uploads/2ca0f4d4-ee1c-4971-94d5-c9a8219e9c36.png"
+      heroImage={heroImage}
+      preloadImages={[heroImage]}
     >
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-[#E2725B] to-[#D4511E] text-white py-16">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-gradient-to-r from-[#E2725B] to-[#D4511E] text-white py-16" style={{ backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="container mx-auto px-4 bg-black bg-opacity-50 py-16 rounded-lg">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
               {content.title}
