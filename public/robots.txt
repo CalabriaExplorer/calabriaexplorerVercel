@@ -27,5 +27,5 @@ Allow: /
 User-agent: LinkedInBot
 Allow: /
 
-Sitemap: https://calabria-explorer.lovable.app/sitemap.xml
-Host: calabria-explorer.lovable.app
+Sitemap: https://calabriaexplorer.vercel.app/sitemap.xml
+Host: calabriaexplorer.vercel.app

@@ -21,8 +21,8 @@ const SCHEMA_ORG = (lang: "ru" | "en") => JSON.stringify({
   "@type": "BlogPosting",
   "headline": lang === "ru" ? "🌊 ВОДА ИЛИ ЖИДКАЯ ГАДОСТЬ?" : "🌊 WATER OR SWAMP JUICE?",
   "description": lang === "ru" ? "Жёсткий гид по выживанию в морях, которые пахнут как лук из борща" : "A brutal guide to seas: how to spot a beach vs. an algae swamp. Meme-based survival tips.",
-  "mainEntityOfPage": typeof window !== "undefined" ? window.location.href : "https://calabria-explorer.lovable.app/blog/water-or-swamp-juice",
-  "image": articleImages.map(img => typeof window !== "undefined" ? window.location.origin + img.src : "https://calabria-explorer.lovable.app" + img.src),
+  "mainEntityOfPage": typeof window !== "undefined" ? window.location.href : "https://calabriaexplorer.vercel.app/blog/water-or-swamp-juice",
+  "image": articleImages.map(img => typeof window !== "undefined" ? window.location.origin + img.src : "https://calabriaexplorer.vercel.app" + img.src),
   "author": {
     "@type": "Person",
     "name": "Мария (Maria)"
@@ -167,7 +167,7 @@ const WaterOrSwampJuicePost: React.FC = () => {
     language
   } = useLanguage();
   return <Layout title={language === "ru" ? title_ru : title_en} description={language === "ru" ? desc_ru : desc_en}>
-      <SEOHead title={language === "ru" ? title_ru : title_en} description={language === "ru" ? desc_ru : desc_en} canonical={typeof window !== "undefined" ? window.location.origin + "/blog/water-or-swamp-juice" : "https://calabria-explorer.lovable.app/blog/water-or-swamp-juice"} type="article" image={typeof window !== "undefined" ? window.location.origin + articleImages[0].src : "https://calabria-explorer.lovable.app" + articleImages[0].src} schema={SCHEMA_ORG(language)} />
+      <SEOHead title={language === "ru" ? title_ru : title_en} description={language === "ru" ? desc_ru : desc_en} canonical={typeof window !== "undefined" ? window.location.origin + "/blog/water-or-swamp-juice" : "https://calabriaexplorer.vercel.app/blog/water-or-swamp-juice"} type="article" image={typeof window !== "undefined" ? window.location.origin + articleImages[0].src : "https://calabriaexplorer.vercel.app" + articleImages[0].src} schema={SCHEMA_ORG(language)} />
       <section className="w-full min-h-[calc(100vh-250px)] bg-white pb-8">
         <div className="max-w-2xl mx-auto pt-3">
           <button type="button" onClick={() => window.history.back()} className="mb-6 text-sm text-calabria-blue hover:underline">
