@@ -1,8 +1,9 @@
 const { series } = require('gulp');
 
 function build(cb) {
-  // здесь ваша логика сборки: копирование, транспиляция и т.п.
+  console.log('✅ Gulp "build" task executed');
   cb();
 }
 
-exports.build = series(build);
+// Экспорт основной задачи по умолчанию
+exports.default = series(build);
