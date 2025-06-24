@@ -22,7 +22,19 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install dependencies
+        run: npm ci
+
       - name: Build
         run: |
-          npm ci
           npx gulp build
+
+  deploy:
+    name: Trigger Vercel Production Deploy
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call Vercel Deploy Hook
+        run: |
+          curl -X POST ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
