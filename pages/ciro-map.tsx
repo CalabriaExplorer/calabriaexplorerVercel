@@ -1,0 +1,199 @@
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import Head from 'next/head';
+import '../styles/ciro-map.css';
+import { Feature } from 'geojson';
+
+const MapContainer = dynamic(() => import('react-leaflet').then(m => m.MapContainer), { ssr: false });
+const TileLayer = dynamic(() => import('react-leaflet').then(m => m.TileLayer), { ssr: false });
+const Marker = dynamic(() => import('react-leaflet').then(m => m.Marker), { ssr: false });
+const Popup = dynamic(() => import('react-leaflet').then(m => m.Popup), { ssr: false });
+const GeoJSON = dynamic(() => import('react-leaflet').then(m => m.GeoJSON), { ssr: false });
+
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+const iconRetinaUrl = (markerIcon2x as unknown as string) || '';
+const iconUrl = (markerIcon as unknown as string) || '';
+const shadowUrl = (markerShadow as unknown as string) || '';
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+});
+
+interface Place {
+  id: number;
+  lat: number;
+  lng: number;
+  category: string;
+  name_ru: string;
+  name_en: string;
+  description_ru: string;
+  description_en: string;
+  image: string;
+}
+
+const places: Place[] = [
+  {
+    id: 1,
+    lat: 39.37630,
+    lng: 17.12388,
+    category: 'supermarket',
+    name_ru: 'Супермаркет Conad',
+    name_en: 'Conad Supermarket',
+    description_ru: 'Популярный магазин рядом с пляжем.',
+    description_en: 'Popular grocery store near the beach.',
+    image: '/images/conad_real.jpg',
+  },
+  {
+    id: 2,
+    lat: 39.37398,
+    lng: 17.12306,
+    category: 'theatre',
+    name_ru: 'Театр Alikia',
+    name_en: 'Teatro Alikia',
+    description_ru: 'Современный театр и культурная площадка в Чиро-Марине.',
+    description_en: 'Modern theatre and cultural venue in Cirò Marina.',
+    image: '/images/teatro_alikia.jpg',
+  },
+  {
+    id: 3,
+    lat: 39.37017,
+    lng: 17.11668,
+    category: 'winery',
+    name_ru: 'Винодельня Ippolito 1845',
+    name_en: 'Ippolito 1845 Winery',
+    description_ru: 'Старинная калабрийская винодельня с дегустацией.',
+    description_en: 'Historic Calabrian winery with wine tasting.',
+    image: '/images/ippolito.jpg',
+  },
+];
+
+const ciroMarinaBoundary: Feature = {
+  type: 'Feature',
+  properties: {},
+  geometry: {
+    type: 'Polygon',
+    coordinates: [
+      [
+        [17.113, 39.378],
+        [17.135, 39.378],
+        [17.135, 39.362],
+        [17.113, 39.362],
+        [17.113, 39.378],
+      ],
+    ],
+  },
+};
+
+const categories: Record<string, { ru: string; en: string }> = {
+  supermarket: { ru: 'Супермаркеты', en: 'Supermarkets' },
+  theatre: { ru: 'Театр', en: 'Theatre' },
+  winery: { ru: 'Винодельни', en: 'Wineries' },
+};
+
+const CiroMapPage = () => {
+  const [language, setLanguage] = useState<'ru' | 'en'>('ru');
+  const [activeCategories, setActiveCategories] = useState<string[]>(['supermarket', 'theatre', 'winery']);
+
+  const toggleCategory = (cat: string) => {
+    setActiveCategories((prev) =>
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+    );
+  };
+
+  const filteredPlaces = places.filter((p) => activeCategories.includes(p.category));
+
+  const center: [number, number] = [39.37, 17.12];
+
+  return (
+    <>
+      <Head>
+        <title>Cirò Marina Map</title>
+      </Head>
+      <div className="flex flex-col md:flex-row gap-4 p-4">
+        <div className="w-full md:w-2/3 h-72 md:h-[500px] order-1 md:order-none">
+          <MapContainer center={center} zoom={14} scrollWheelZoom={false} className="h-full w-full">
+            <TileLayer
+              attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors"
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <GeoJSON data={ciroMarinaBoundary} pathOptions={{ color: 'blue' }} />
+            {filteredPlaces.map((place) => (
+              <Marker key={place.id} position={[place.lat, place.lng]}>
+                <Popup>
+                  <div className="text-center w-[300px]">
+                    <img
+                      src={place.image}
+                      alt={language === 'ru' ? place.name_ru : place.name_en}
+                      className="place-photo mb-2"
+                    />
+                    <h3 className="font-semibold">
+                      {language === 'ru' ? place.name_ru : place.name_en}
+                    </h3>
+                    <p className="text-sm my-1">
+                      {language === 'ru' ? place.description_ru : place.description_en}
+                    </p>
+                    <a className="text-blue-600 underline" href="#">
+                      {language === 'ru' ? 'Подробнее' : 'More details'}
+                    </a>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+        </div>
+        <div className="w-full md:w-1/3 space-y-4 order-0 md:order-none">
+          <div className="flex justify-center gap-2 mb-4">
+            <button
+              className={`px-3 py-1 border rounded ${language === 'ru' ? 'bg-blue-600 text-white' : ''}`}
+              onClick={() => setLanguage('ru')}
+            >
+              RU
+            </button>
+            <button
+              className={`px-3 py-1 border rounded ${language === 'en' ? 'bg-blue-600 text-white' : ''}`}
+              onClick={() => setLanguage('en')}
+            >
+              EN
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-4 mb-4 justify-center">
+            {Object.entries(categories).map(([key, label]) => (
+              <label key={key} className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={activeCategories.includes(key)}
+                  onChange={() => toggleCategory(key)}
+                />
+                {language === 'ru' ? label.ru : label.en}
+              </label>
+            ))}
+          </div>
+          {filteredPlaces.map((place) => (
+            <div key={place.id} className="border rounded p-2 flex flex-col items-center">
+              <img
+                src={place.image}
+                alt={language === 'ru' ? place.name_ru : place.name_en}
+                className="place-photo mb-2"
+              />
+              <h3 className="font-semibold">
+                {language === 'ru' ? place.name_ru : place.name_en}
+              </h3>
+              <p className="text-sm text-center">
+                {language === 'ru' ? place.description_ru : place.description_en}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default CiroMapPage;
