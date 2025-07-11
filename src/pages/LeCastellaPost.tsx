@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Gallery from "@/components/ui/Gallery";
 import LeCastellaArticleRu from "@/components/blog/LeCastellaArticleRu";
 import LeCastellaArticleEn from "@/components/blog/LeCastellaArticleEn";
+import AboutAuthor from "@/components/blog/AboutAuthor";
 
 const images = [
   { src: "/lovable-uploads/5017e784-dec8-4499-8f82-348763675b74.png", alt: "Le Castella viewed from the sea on a sunny day" },
@@ -201,6 +202,7 @@ const LeCastellaPost: React.FC = () => {
               mariamarinaciro@gmail.com
             </a>
           </div>
+          <AboutAuthor />
         </div>
       </section>
     </Layout>

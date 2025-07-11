@@ -100,7 +100,7 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
   };
 
   // Определяем canonical
-  let canonicalUrl = typeof window !== "undefined" 
+  const canonicalUrl = typeof window !== "undefined" 
     ? window.location.origin + window.location.pathname 
     : undefined;
 

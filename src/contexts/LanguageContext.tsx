@@ -17,7 +17,7 @@ const translations = {
     "tours": "Tours",
     
     // Hero
-    "hero.title": "Calabria: Where La Dolce Vita Meets Affordability",
+    "hero.title": "Calabria Explorer – real stories and local tours",
     "hero.subtitle": "Discover Italy's hidden gem - pristine beaches, rich culture, and authentic living",
     
     // Audience Selection
@@ -74,6 +74,8 @@ const translations = {
     "footer.relocation": "Relocation",
     "footer.connect": "Connect With Us",
     "footer.copyright": "All rights reserved.",
+    "aboutAuthor.title": "About the Author",
+    "aboutAuthor.text": "Maria has lived in Calabria for over 10 years. She is a licensed guide offering personal tours."
   },
   ru: {
     // Home
@@ -83,7 +85,7 @@ const translations = {
     "tours": "Экскурсии",
     
     // Hero
-    "hero.title": "Калабрия: Где La Dolce Vita Встречается с Доступностью",
+    "hero.title": "Calabria Explorer – реальные истории и авторские туры",
     "hero.subtitle": "Откройте для себя скрытую жемчужину Италии - нетронутые пляжи, богатую культуру и аутентичную жизнь",
     
     // Audience Selection
@@ -140,6 +142,8 @@ const translations = {
     "footer.relocation": "Переезд",
     "footer.connect": "Свяжитесь с Нами",
     "footer.copyright": "Все права защищены.",
+    "aboutAuthor.title": "Об авторе",
+    "aboutAuthor.text": "Мария живёт в Калабрии более 10 лет. Она лицензированный гид и проводит авторские туры."
   }
 };
 

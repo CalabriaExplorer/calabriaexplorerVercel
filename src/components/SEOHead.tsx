@@ -97,7 +97,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   // Canonical — убираем параметры page/sort/utm
   React.useEffect(() => {
     let canonicalTag = document.querySelector("link[rel='canonical']");
-    let canonicalHref = url.replace(/\?(page|sort|utm_.*?)=[^&]+(&|$)/g, "");
+    const canonicalHref = url.replace(/\?(page|sort|utm_.*?)=[^&]+(&|$)/g, "");
     if (!canonicalTag) {
       canonicalTag = document.createElement("link");
       (canonicalTag as HTMLLinkElement).rel = "canonical";
@@ -213,7 +213,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     const head = document.head;
 
     const setMetaTag = (name: string, content: string, propType: "name" | "property" = "property") => {
-      let selector = propType === "property" ? `meta[property='${name}']` : `meta[name='${name}']`;
+      const selector = propType === "property" ? `meta[property='${name}']` : `meta[name='${name}']`;
       let tag = head.querySelector(selector);
       if (!tag) {
         tag = document.createElement("meta");
@@ -249,7 +249,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     setMetaTag("twitter:site", "@calabriaexplorer", "name");
 
     // theme-color
-    let theme = document.querySelector("meta[name='theme-color']") as HTMLMetaElement;
+    const theme = document.querySelector("meta[name='theme-color']") as HTMLMetaElement;
     if (!theme) {
       const meta = document.createElement("meta");
       meta.name = "theme-color";
