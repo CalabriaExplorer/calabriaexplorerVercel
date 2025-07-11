@@ -18,6 +18,7 @@ import SingleBlogPost from "./pages/SingleBlogPost";
 import LeCastellaPost from "./pages/LeCastellaPost";
 import DogLifePost from "./pages/DogLifePost";
 import WaterOrSwampJuicePost from "./pages/WaterOrSwampJuicePost";
+import CiroMap from "./pages/CiroMap";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
             <Route path="/blog/hidden-gems-of-italian-wine" element={<SingleBlogPost />} />
             <Route path="/blog/le-castella" element={<LeCastellaPost />} />
             <Route path="/blog/dog-life-in-italy" element={<DogLifePost />} />
+            <Route path="/ciro-map" element={<CiroMap />} />
             <Route path="/stat" element={<Analytics />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
