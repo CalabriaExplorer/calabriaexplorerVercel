@@ -267,7 +267,7 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
                     </svg>
                   </a>
                   <a 
-                    href="https://t.me/393446935576" 
+                      href="https://t.me/+393446935576"
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="text-blue-400 hover:text-blue-300"
