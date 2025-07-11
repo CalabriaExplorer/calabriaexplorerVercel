@@ -171,8 +171,6 @@ const Umbriatico = () => {
                       <Euro className="w-5 h-5 text-[#0077B6]" />
                       <span className="text-gray-600">{content.price}</span>
                     </div>
-                      <span className="text-gray-600">{content.price}</span>
-                    </div>
                     
                     <div className="flex items-center gap-3">
                       <Users className="w-5 h-5 text-[#0077B6]" />
