@@ -49,7 +49,7 @@ export const safeAddEventListener = (
   }
 };
 
-export const initializeSwiper = (selector: string, options: any) => {
+export const initializeSwiper = (selector: string, options: Record<string, unknown>) => {
   return new Promise((resolve, reject) => {
     // Wait for DOM to be ready
     if (document.readyState === 'loading') {
@@ -65,8 +65,14 @@ export const initializeSwiper = (selector: string, options: any) => {
         const swiperElement = document.querySelector(selector);
         if (swiperElement) {
           // Check if Swiper is available
-          if (typeof window !== 'undefined' && (window as any).Swiper) {
-            const swiper = new (window as any).Swiper(selector, options);
+          if (
+            typeof window !== 'undefined' &&
+            (window as { Swiper?: new (selector: string, opts: Record<string, unknown>) => unknown }).Swiper
+          ) {
+            const SwiperClass = (window as {
+              Swiper: new (selector: string, opts: Record<string, unknown>) => unknown;
+            }).Swiper;
+            const swiper = new SwiperClass(selector, options);
             resolve(swiper);
           } else {
             console.warn('Swiper library not loaded');

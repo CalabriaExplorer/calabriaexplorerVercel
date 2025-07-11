@@ -74,7 +74,7 @@ function useTopPages(counterId: string, token: string) {
       })
       .then(json => {
         const pages =
-          json.data?.map((row: any) => ({
+          json.data?.map((row: { dimensions: { name?: string }[]; metrics: number[] }) => ({
             url: row.dimensions[0]?.name || "—",
             visits: row.metrics[0] || 0,
           })) || [];
@@ -108,7 +108,7 @@ function useSearchEngines(counterId: string, token: string) {
       })
       .then(json => {
         const engines =
-          json.data?.map((row: any) => ({
+          json.data?.map((row: { dimensions: { name?: string }[]; metrics: number[] }) => ({
             engine: row.dimensions[0]?.name || "—",
             visits: row.metrics[0] || 0,
             users: row.metrics[1] || 0,
@@ -142,7 +142,7 @@ function useGeoStats(counterId: string, token: string) {
       })
       .then(json => {
         const regions =
-          json.data?.map((row: any) => ({
+          json.data?.map((row: { dimensions: { name?: string }[]; metrics: number[] }) => ({
             geo: row.dimensions[0]?.name || "—",
             visits: row.metrics[0] || 0,
           })) || [];
@@ -174,7 +174,7 @@ function useTrafficSources(counterId: string, token: string) {
       })
       .then(json => {
         const sources =
-          json.data?.map((row: any) => ({
+          json.data?.map((row: { dimensions: { name?: string }[]; metrics: number[] }) => ({
             source: row.dimensions[0]?.name || "—",
             visits: row.metrics[0] || 0,
           })) || [];
@@ -194,13 +194,15 @@ const Analytics = () => {
   // Достаем токен и id из localStorage
   useEffect(() => {
     const saved = localStorage.getItem(METRIKA_STORAGE_KEY);
-    if (saved) {
-      try {
-        const obj = JSON.parse(saved) as { token: string; counterId: string };
-        setToken(obj.token);
-        setCounterId(obj.counterId);
-      } catch {}
-    }
+      if (saved) {
+        try {
+          const obj = JSON.parse(saved) as { token: string; counterId: string };
+          setToken(obj.token);
+          setCounterId(obj.counterId);
+        } catch (err) {
+          console.error('Failed to parse saved metrika data', err);
+        }
+      }
   }, []);
 
   // Форма

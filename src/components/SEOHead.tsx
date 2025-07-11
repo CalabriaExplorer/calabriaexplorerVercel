@@ -182,7 +182,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       script.innerHTML = pageSchema;
       document.head.appendChild(script);
     }
-  }, [schema, location.pathname, title, description, image, language]);
+  }, [schema, location.pathname, title, description, image, language, origin]);
 
   // Meta теги (SPA-навигация)
   React.useEffect(() => {
@@ -217,7 +217,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       let tag = head.querySelector(selector);
       if (!tag) {
         tag = document.createElement("meta");
-        (tag as any)[propType] = name;
+        (tag as HTMLMetaElement).setAttribute(propType, name);
         head.appendChild(tag);
       }
       (tag as HTMLMetaElement).setAttribute("content", content);
@@ -292,7 +292,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     return () => {
       Array.from(document.querySelectorAll("link[rel='alternate']")).forEach(l => l.remove());
     };
-  }, [title, description, url, image, type, language, noIndex, location.pathname]);
+  }, [title, description, url, image, type, language, noIndex, location.pathname, origin]);
 
   return null;
 };
