@@ -41,35 +41,46 @@ interface Place {
 const places: Place[] = [
   {
     id: 1,
-    lat: 39.37630,
+    lat: 39.3763,
     lng: 17.12388,
     category: 'supermarket',
     name_ru: 'Супермаркет Conad',
     name_en: 'Conad Supermarket',
-    description_ru: 'Популярный магазин рядом с пляжем.',
-    description_en: 'Popular grocery store near the beach.',
+    description_ru: 'Магазин с широким ассортиментом продуктов.',
+    description_en: 'Well-stocked grocery store near the center.',
     image: '/images/conad_real.jpg',
   },
   {
     id: 2,
+    lat: 39.37402,
+    lng: 17.12214,
+    category: 'supermarket',
+    name_ru: 'Coop',
+    name_en: 'Coop',
+    description_ru: 'Супермаркет рядом с набережной.',
+    description_en: 'Supermarket close to the seafront.',
+    image: '/images/coop.jpg',
+  },
+  {
+    id: 3,
     lat: 39.37398,
     lng: 17.12306,
     category: 'theatre',
     name_ru: 'Театр Alikia',
     name_en: 'Teatro Alikia',
-    description_ru: 'Современный театр и культурная площадка в Чиро-Марине.',
-    description_en: 'Modern theatre and cultural venue in Cirò Marina.',
+    description_ru: 'Современный театр и культурная площадка.',
+    description_en: 'Modern theatre and cultural venue.',
     image: '/images/teatro_alikia.jpg',
   },
   {
-    id: 3,
+    id: 4,
     lat: 39.37017,
     lng: 17.11668,
     category: 'winery',
     name_ru: 'Винодельня Ippolito 1845',
     name_en: 'Ippolito 1845 Winery',
-    description_ru: 'Старинная калабрийская винодельня с дегустацией.',
-    description_en: 'Historic Calabrian winery with wine tasting.',
+    description_ru: 'Историческая винодельня с дегустацией.',
+    description_en: 'Historic winery offering tastings.',
     image: '/images/ippolito.jpg',
   },
 ];
@@ -116,14 +127,17 @@ const CiroMapPage = () => {
       <Head>
         <title>Cirò Marina Map</title>
       </Head>
-      <div className="flex flex-col md:flex-row gap-4 p-4">
-        <div className="w-full md:w-2/3 h-72 md:h-[500px] order-1 md:order-none">
+      <div className="flex flex-col gap-4 p-4">
+        <div className="w-full h-72 md:h-[500px]">
           <MapContainer center={center} zoom={14} scrollWheelZoom={false} className="h-full w-full">
             <TileLayer
               attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors"
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <GeoJSON data={ciroMarinaBoundary} pathOptions={{ color: 'blue' }} />
+            <GeoJSON
+              data={ciroMarinaBoundary}
+              pathOptions={{ color: 'red', fillColor: 'red', fillOpacity: 0.1 }}
+            />
             {filteredPlaces.map((place) => (
               <Marker key={place.id} position={[place.lat, place.lng]}>
                 <Popup>
@@ -148,16 +162,16 @@ const CiroMapPage = () => {
             ))}
           </MapContainer>
         </div>
-        <div className="w-full md:w-1/3 space-y-4 order-0 md:order-none">
+        <div className="w-full space-y-4">
           <div className="flex justify-center gap-2 mb-4">
             <button
-              className={`px-3 py-1 border rounded ${language === 'ru' ? 'bg-blue-600 text-white' : ''}`}
+              className={`px-4 py-2 border rounded ${language === 'ru' ? 'bg-blue-600 text-white' : ''}`}
               onClick={() => setLanguage('ru')}
             >
               RU
             </button>
             <button
-              className={`px-3 py-1 border rounded ${language === 'en' ? 'bg-blue-600 text-white' : ''}`}
+              className={`px-4 py-2 border rounded ${language === 'en' ? 'bg-blue-600 text-white' : ''}`}
               onClick={() => setLanguage('en')}
             >
               EN
