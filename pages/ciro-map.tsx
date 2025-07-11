@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import '../styles/ciro-map.css';
@@ -85,22 +85,6 @@ const places: Place[] = [
   },
 ];
 
-const ciroMarinaBoundary: Feature = {
-  type: 'Feature',
-  properties: {},
-  geometry: {
-    type: 'Polygon',
-    coordinates: [
-      [
-        [17.113, 39.378],
-        [17.135, 39.378],
-        [17.135, 39.362],
-        [17.113, 39.362],
-        [17.113, 39.378],
-      ],
-    ],
-  },
-};
 
 const categories: Record<string, { ru: string; en: string }> = {
   supermarket: { ru: 'Супермаркеты', en: 'Supermarkets' },
@@ -110,15 +94,54 @@ const categories: Record<string, { ru: string; en: string }> = {
 
 const CiroMapPage = () => {
   const [language, setLanguage] = useState<'ru' | 'en'>('ru');
-  const [activeCategories, setActiveCategories] = useState<string[]>(['supermarket', 'theatre', 'winery']);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([
+    'supermarket',
+    'theatre',
+    'winery',
+  ]);
+  const [activePlace, setActivePlace] = useState<number | null>(null);
+  const [boundary, setBoundary] = useState<Feature | null>(null);
+  const mapRef = useRef<L.Map | null>(null);
 
   const toggleCategory = (cat: string) => {
-    setActiveCategories((prev) =>
+    setSelectedCategories((prev) =>
       prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
     );
   };
 
-  const filteredPlaces = places.filter((p) => activeCategories.includes(p.category));
+  const filteredPlaces = places.filter((p) =>
+    selectedCategories.includes(p.category)
+  );
+
+  useEffect(() => {
+    fetch('/geo/ciro_marina.geojson')
+      .then((res) => res.json())
+      .then((data) => {
+        const feature = (data.features?.[0] ?? null) as Feature | null;
+        setBoundary(feature);
+      })
+      .catch(() => {
+        /* empty */
+      });
+  }, []);
+
+  useEffect(() => {
+    if (mapRef.current && boundary) {
+      const boundaryLayer = L.geoJSON(boundary);
+      const bounds = boundaryLayer.getBounds();
+      const markerBounds = L.latLngBounds(
+        places.map((p) => L.latLng(p.lat, p.lng))
+      );
+      const allBounds = bounds.extend(markerBounds);
+      mapRef.current.fitBounds(allBounds);
+      mapRef.current.setMaxBounds(bounds.pad(0.1));
+    }
+  }, [boundary]);
+
+const handleCardClick = (place: Place) => {
+  setActivePlace(place.id);
+  mapRef.current?.flyTo([place.lat, place.lng], 17);
+};
 
   const center: [number, number] = [39.37, 17.12];
 
@@ -127,19 +150,34 @@ const CiroMapPage = () => {
       <Head>
         <title>Cirò Marina Map</title>
       </Head>
-      <div className="flex flex-col gap-4 p-4">
-        <div className="w-full h-72 md:h-[500px]">
-          <MapContainer center={center} zoom={14} scrollWheelZoom={false} className="h-full w-full">
+      <div className="flex flex-col md:flex-row gap-4 p-4">
+        <div className="md:w-7/12 w-full h-72 md:h-[600px]">
+          <MapContainer
+            center={center}
+            zoom={14}
+            minZoom={13}
+            maxZoom={17}
+            scrollWheelZoom={false}
+            whenCreated={(m) => (mapRef.current = m)}
+            className="h-full w-full"
+            maxBounds={boundary ? L.geoJSON(boundary).getBounds().pad(0.1) : undefined}
+          >
             <TileLayer
               attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors"
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <GeoJSON
-              data={ciroMarinaBoundary}
-              pathOptions={{ color: 'red', fillColor: 'red', fillOpacity: 0.1 }}
-            />
+            {boundary && (
+              <GeoJSON
+                data={boundary}
+                pathOptions={{ color: 'red', fillColor: 'red', fillOpacity: 0.1 }}
+              />
+            )}
             {filteredPlaces.map((place) => (
-              <Marker key={place.id} position={[place.lat, place.lng]}>
+              <Marker
+                key={place.id}
+                position={[place.lat, place.lng]}
+                eventHandlers={{ click: () => setActivePlace(place.id) }}
+              >
                 <Popup>
                   <div className="text-center w-[300px]">
                     <img
@@ -154,7 +192,7 @@ const CiroMapPage = () => {
                       {language === 'ru' ? place.description_ru : place.description_en}
                     </p>
                     <a className="text-blue-600 underline" href="#">
-                      {language === 'ru' ? 'Подробнее' : 'More details'}
+                      {language === 'ru' ? 'Подробнее...' : 'More details...'}
                     </a>
                   </div>
                 </Popup>
@@ -162,8 +200,8 @@ const CiroMapPage = () => {
             ))}
           </MapContainer>
         </div>
-        <div className="w-full space-y-4">
-          <div className="flex justify-center gap-2 mb-4">
+        <div className="md:w-5/12 w-full space-y-4 overflow-y-auto">
+          <div className="flex justify-center gap-2 mb-2">
             <button
               className={`px-4 py-2 border rounded ${language === 'ru' ? 'bg-blue-600 text-white' : ''}`}
               onClick={() => setLanguage('ru')}
@@ -179,10 +217,10 @@ const CiroMapPage = () => {
           </div>
           <div className="flex flex-wrap gap-4 mb-4 justify-center">
             {Object.entries(categories).map(([key, label]) => (
-              <label key={key} className="flex items-center gap-2">
+              <label key={key} className="flex items-center gap-2 text-sm">
                 <input
                   type="checkbox"
-                  checked={activeCategories.includes(key)}
+                  checked={selectedCategories.includes(key)}
                   onChange={() => toggleCategory(key)}
                 />
                 {language === 'ru' ? label.ru : label.en}
@@ -190,7 +228,11 @@ const CiroMapPage = () => {
             ))}
           </div>
           {filteredPlaces.map((place) => (
-            <div key={place.id} className="border rounded p-2 flex flex-col items-center">
+            <div
+              key={place.id}
+              className={`border rounded p-2 flex flex-col items-center cursor-pointer ${activePlace === place.id ? 'border-blue-600' : ''}`}
+              onClick={() => handleCardClick(place)}
+            >
               <img
                 src={place.image}
                 alt={language === 'ru' ? place.name_ru : place.name_en}
