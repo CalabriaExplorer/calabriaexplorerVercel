@@ -3,6 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
 import SEOHead from "@/components/SEOHead";
 import Gallery from "@/components/ui/Gallery";
+import AboutAuthor from "@/components/blog/AboutAuthor";
 const articleImages = [{
   src: "/lovable-uploads/e23f8b3b-f1dc-4a17-a7fe-cd2896aaea08.png",
   alt_ru: "Кристально чистая вода и галька на пляже Калабрии",
@@ -174,6 +175,7 @@ const WaterOrSwampJuicePost: React.FC = () => {
             {language === "ru" ? "← Назад к блогу" : "← Back to blog"}
           </button>
           {article[language]}
+          <AboutAuthor />
         </div>
       </section>
     </Layout>;
