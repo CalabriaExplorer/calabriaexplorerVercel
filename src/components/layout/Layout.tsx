@@ -298,22 +298,9 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
                     <Link to="#relocation" className="text-gray-300 hover:text-white">{t("footer.relocation")}</Link>
                   </li>
                   <li>
-                    <Link to="#contact" className="text-gray-300 hover:text-white">{t("contact")}</Link>
-                  </li>
-                  <li>
                     <Link to="/blog" className="text-gray-300 hover:text-white">
                       {language === "en" ? "Blog" : "Блог"}
                     </Link>
-                  </li>
-                  <li>
-                    <a
-                      href="https://calabriaexplorer.vercel.app/flights"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-300 hover:text-white"
-                    >
-                      {language === "en" ? "How to get there" : "Как добраться"}
-                    </a>
                   </li>
                 </ul>
               </nav>
