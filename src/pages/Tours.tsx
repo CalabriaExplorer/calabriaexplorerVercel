@@ -110,7 +110,7 @@ const Tours = () => {
                   </svg>
                 </a>
                 <a
-                  href="https://t.me/393446935576"
+                  href="https://t.me/+393446935576"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-300 hover:text-blue-200 transition-colors"

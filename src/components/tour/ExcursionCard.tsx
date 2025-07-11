@@ -35,7 +35,7 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
     e.stopPropagation();
     
     if (language === "ru") {
-      window.open("https://t.me/393446935576", "_blank");
+      window.open("https://t.me/+393446935576", "_blank");
     } else {
       window.open("https://wa.me/393446935576", "_blank");
     }
