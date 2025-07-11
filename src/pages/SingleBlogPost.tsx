@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Gallery from "@/components/ui/Gallery";
 import RuCalabriaArticle from "@/components/blog/RuCalabriaArticle";
 import EnCalabriaArticle from "@/components/blog/EnCalabriaArticle";
+import AboutAuthor from "@/components/blog/AboutAuthor";
 
 const articleImages = [
   {
@@ -231,6 +232,7 @@ const SingleBlogPost: React.FC = () => {
               mariamarinaciro@gmail.com
             </a>
           </div>
+          <AboutAuthor />
         </div>
       </section>
     </Layout>
