@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useState, useContext, ReactNode } from "react";
 
 type Language = "en" | "ru";
