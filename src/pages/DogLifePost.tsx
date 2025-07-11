@@ -4,6 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import Layout from "@/components/layout/Layout";
 import DogLifeArticleRu from "@/components/blog/DogLifeArticleRu";
 import DogLifeArticleEn from "@/components/blog/DogLifeArticleEn";
+import AboutAuthor from "@/components/blog/AboutAuthor";
 import Gallery from "@/components/ui/Gallery";
 
 const images = [
@@ -48,6 +49,7 @@ const DogLifePost = () => {
         <p className="mb-4 text-gray-600 text-center">{dogBlogDescriptions[language]}</p>
         <Gallery images={images} />
         {language === "ru" ? <DogLifeArticleRu /> : <DogLifeArticleEn />}
+        <AboutAuthor />
       </article>
     </Layout>
   );

@@ -3,19 +3,19 @@ import React from "react";
 
 const DogLifeArticleEn = () => (
   <div className="prose max-w-full sm:mx-auto px-2 py-2">
-    <h2 className="text-2xl font-bold text-[#2196F3] mb-2">🐶 Dog Owner Life in Italy: Balconies, Barkfests &amp; Siestas</h2>
+    <h2 className="text-2xl font-bold text-[#2196F3] mb-2">Dog Owner Life in Italy: Balconies, Barkfests &amp; Siestas</h2>
     <h3 className="text-lg font-semibold text-[#2579c5] mb-2">Where leashes are sacred and vets vanish after lunch</h3>
     <p>
       <strong>Dogs on balcony in Italy</strong><br />
-      Think dog ownership is just walks and feeding? In Italy, it's a whole comedy show. While owners are at work, their four-legged friends hold "balcony debates" across neighborhoods. Even our usually silent Alabai (who acts like a mafia boss) suddenly barks back at neighbor's dachshunds and Pomeranians. Apparently, boredom is the best motivator for canine gossip. 🐾
+      Think dog ownership is just walks and feeding? In Italy, it's a whole comedy show. While owners are at work, their four-legged friends hold "balcony debates" across neighborhoods. Even our usually silent Alabai suddenly barks back at neighbor's dachshunds and Pomeranians. Apparently boredom is the best motivator for canine gossip.
     </p>
     <h4 className="font-bold mt-4 text-[#2982c6]">🎯 The Sacred Leash Law</h4>
     <p>
-      Fun fact: All dogs here — from tiny Yorkies to giant Great Danes — walk on leashes. Not because Italians are law-abiding, but because it prevents "accidental" showdowns. Considering you might bump into a real 'Ndrangheta boss any minute, everyone avoids creating tricky dog situations. A leash is like an invisible fence saving your nerves, clothes from fur, and possibly your health. 😅
+      Fun fact: All dogs here — from tiny Yorkies to giant Great Danes — walk on leashes. Not because Italians are law-abiding, but because it prevents "accidental" showdowns. A leash is like an invisible fence saving your nerves and clothes from fur. See official rules on the <a href="https://www.salute.gov.it/portale/home.html" target="_blank" rel="noopener">Italian Ministry of Health</a> website.
     </p>
     <h4 className="font-bold mt-4 text-[#2982c6]">🍖 Dog Food: Cheaper Than Pasta?</h4>
     <p>
-      About food: Good professional dog food costs around €2 per kilo. A 20kg bag is about €40. Not cheap, but not astronomical. Just don't confuse it with supermarket brands — unless you want your dog to give you the "I hate you all" look. 🐶💔
+      About food: Good professional dog food costs around €2 per kilo. A 20kg bag is about €40. Just don't confuse it with supermarket brands — unless you want your dog to give you the "I hate you all" look.
     </p>
     <div className="my-3 px-3 py-3 rounded-lg bg-blue-50 border border-blue-100 text-blue-900 shadow-sm">
       <span className="font-bold">⚠️ Pro tip:</span> Look for "<strong>super premium</strong>" labels — Italian vets say it's like parmesan for dogs.
