@@ -10,23 +10,19 @@
 </head>
 <body>
 <audio id="bgMusic" src="sounds/pixelated-dreams-20240608-171413.m4r" loop autoplay></audio>
-<audio id="b1s" src="sounds/b1s.MP3"></audio>
-<audio id="b2s" src="sounds/b2s.MP3"></audio>
-<audio id="b3s" src="sounds/b3s.MP3"></audio>
+<audio id="catchSound" src="sounds/catch.mp3"></audio>
 <audio id="failSound" src="sounds/fail.mp3"></audio>
 <div id="gameContainer">
 <canvas id="game"></canvas>
 <div id="overlay">
   <div id="finalScore"></div>
-  <div class="fullscreen-ad-wrapper">
-    <ins class="adsbygoogle" style="display:inline-block;width:320px;height:250px" data-ad-client="ca-pub-6361433510552253" data-ad-slot="1234567890"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  <div id="fullscreenAdContainer">
+    <iframe src="ads/fullscreen.html"></iframe>
   </div>
   <button id="playAgain"></button>
   </div>
   </div>
-  <ins class="adsbygoogle banner-ad" style="display:block" data-ad-client="ca-pub-6361433510552253" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  <iframe id="adBanner" src="ads/banner.html"></iframe>
   <script src="game.js"></script>
 </body>
 </html>
