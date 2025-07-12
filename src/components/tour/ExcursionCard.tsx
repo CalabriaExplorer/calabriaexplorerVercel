@@ -47,7 +47,7 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
 
   const bookingText =
     language === "ru"
-      ? "Заказать экскурсию через Telegram"
+      ? "Заявка в Telegram"
       : "Book via WhatsApp";
 
   return (
@@ -113,7 +113,7 @@ const ExcursionCard: React.FC<ExcursionCardProps> = ({
               className="book-btn bg-gradient-to-r from-[#0077B6] to-[#00A9E6] hover:from-[#005A8A] hover:to-[#0077B6] text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
               aria-label={
                 language === "ru"
-                  ? "Заказать экскурсию через Telegram"
+                  ? "Заявка в Telegram"
                   : "Book via WhatsApp"
               }
             >
