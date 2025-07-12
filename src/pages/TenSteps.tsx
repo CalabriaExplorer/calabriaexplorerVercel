@@ -221,7 +221,7 @@ const TenSteps = () => {
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-[#E2725B] rounded-full flex items-center justify-center text-white">
-                      <step.icon className="w-6 h-6" />
+                      <step.icon className="w-6 h-6" aria-hidden="true" />
                     </div>
                     <div>
                       <CardTitle className="text-xl font-serif text-[#E2725B] flex items-center gap-2">

@@ -25,12 +25,12 @@ const ReferralSourcesTable = ({ data, onExport }: ReferralSourcesTableProps) => 
   const getSourceIcon = (type: string) => {
     switch (type) {
       case 'search':
-        return <Search className="h-4 w-4 text-blue-600" />;
+        return <Search className="h-4 w-4 text-blue-600" aria-hidden="true" />;
       case 'social':
       case 'referral':
-        return <Globe className="h-4 w-4 text-green-600" />;
+        return <Globe className="h-4 w-4 text-green-600" aria-hidden="true" />;
       default:
-        return <Globe className="h-4 w-4 text-gray-600" />;
+        return <Globe className="h-4 w-4 text-gray-600" aria-hidden="true" />;
     }
   };
 

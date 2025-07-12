@@ -96,7 +96,7 @@ const Index = () => {
             >
               <CardHeader className="text-center">
                 <div className="w-16 h-16 bg-[#0077B6] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <MapPin className="w-8 h-8 text-white" />
+                  <MapPin className="w-8 h-8 text-white" aria-hidden="true" />
                 </div>
                 <CardTitle className="text-2xl font-serif text-[#0077B6]">
                   {t("tourist.title")}
@@ -122,7 +122,7 @@ const Index = () => {
             >
               <CardHeader className="text-center">
                 <div className="w-16 h-16 bg-[#E2725B] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Home className="w-8 h-8 text-white" />
+                  <Home className="w-8 h-8 text-white" aria-hidden="true" />
                 </div>
                 <CardTitle className="text-2xl font-serif text-[#E2725B]">
                   {t("relocator.title")}
@@ -151,7 +151,7 @@ const Index = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader className="text-center">
-                  <MapPin className="w-12 h-12 text-[#0077B6] mx-auto mb-2" />
+                  <MapPin className="w-12 h-12 text-[#0077B6] mx-auto mb-2" aria-hidden="true" />
                   <CardTitle className="text-lg">{t("tourist.explore.title")}</CardTitle>
                   <CardDescription>{t("tourist.explore.description")}</CardDescription>
                 </CardHeader>
@@ -159,7 +159,7 @@ const Index = () => {
               
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader className="text-center">
-                  <Calendar className="w-12 h-12 text-[#0077B6] mx-auto mb-2" />
+                  <Calendar className="w-12 h-12 text-[#0077B6] mx-auto mb-2" aria-hidden="true" />
                   <CardTitle className="text-lg">{t("tourist.calendar.title")}</CardTitle>
                   <CardDescription>{t("tourist.calendar.description")}</CardDescription>
                 </CardHeader>
@@ -167,7 +167,7 @@ const Index = () => {
               
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader className="text-center">
-                  <Route className="w-12 h-12 text-[#0077B6] mx-auto mb-2" />
+                  <Route className="w-12 h-12 text-[#0077B6] mx-auto mb-2" aria-hidden="true" />
                   <CardTitle className="text-lg">{t("tourist.itineraries.title")}</CardTitle>
                   <CardDescription>{t("tourist.itineraries.description")}</CardDescription>
                 </CardHeader>
@@ -175,7 +175,7 @@ const Index = () => {
               
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader className="text-center">
-                  <Users className="w-12 h-12 text-[#0077B6] mx-auto mb-2" />
+                  <Users className="w-12 h-12 text-[#0077B6] mx-auto mb-2" aria-hidden="true" />
                   <CardTitle className="text-lg">{t("tourist.secrets.title")}</CardTitle>
                   <CardDescription>{t("tourist.secrets.description")}</CardDescription>
                 </CardHeader>
@@ -233,7 +233,7 @@ const Index = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader className="text-center">
-                  <Route className="w-12 h-12 text-[#E2725B] mx-auto mb-2" />
+                  <Route className="w-12 h-12 text-[#E2725B] mx-auto mb-2" aria-hidden="true" />
                   <CardTitle className="text-lg">{t("relocator.guide.title")}</CardTitle>
                   <CardDescription>{t("relocator.guide.description")}</CardDescription>
                 </CardHeader>
@@ -241,7 +241,7 @@ const Index = () => {
               
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader className="text-center">
-                  <Home className="w-12 h-12 text-[#E2725B] mx-auto mb-2" />
+                  <Home className="w-12 h-12 text-[#E2725B] mx-auto mb-2" aria-hidden="true" />
                   <CardTitle className="text-lg">{t("relocator.estate.title")}</CardTitle>
                   <CardDescription>{t("relocator.estate.description")}</CardDescription>
                 </CardHeader>
@@ -249,7 +249,7 @@ const Index = () => {
               
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader className="text-center">
-                  <Users className="w-12 h-12 text-[#E2725B] mx-auto mb-2" />
+                  <Users className="w-12 h-12 text-[#E2725B] mx-auto mb-2" aria-hidden="true" />
                   <CardTitle className="text-lg">{t("relocator.forum.title")}</CardTitle>
                   <CardDescription>{t("relocator.forum.description")}</CardDescription>
                 </CardHeader>
@@ -257,7 +257,7 @@ const Index = () => {
               
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader className="text-center">
-                  <Calculator className="w-12 h-12 text-[#E2725B] mx-auto mb-2" />
+                  <Calculator className="w-12 h-12 text-[#E2725B] mx-auto mb-2" aria-hidden="true" />
                   <CardTitle className="text-lg">{t("relocator.calculator.title")}</CardTitle>
                   <CardDescription>{t("relocator.calculator.description")}</CardDescription>
                 </CardHeader>
@@ -353,7 +353,7 @@ const Index = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-[#0077B6] hover:text-[#005A8A] font-medium"
             >
-              <Instagram className="w-5 h-5" />
+              <Instagram className="w-5 h-5" aria-hidden="true" />
               #MyCalabria
             </a>
           </div>

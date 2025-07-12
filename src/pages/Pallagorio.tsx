@@ -109,9 +109,9 @@ const Pallagorio = () => {
             <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">{title}</h1>
             <p className="text-xl md:text-2xl mb-8 opacity-90">{subtitle}</p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <div className="flex items-center gap-2"><Clock className="w-4 h-4" /><span>8 {language === "en" ? "hours" : "часов"}</span></div>
-              <div className="flex items-center gap-2"><Mountain className="w-4 h-4" /><span>{language === "en" ? "Byzantine caves" : "Византийские пещеры"}</span></div>
-              <div className="flex items-center gap-2"><Camera className="w-4 h-4" /><span>{language === "en" ? "Cultural heritage" : "Культурное наследие"}</span></div>
+              <div className="flex items-center gap-2"><Clock className="w-4 h-4" aria-hidden="true" /><span>8 {language === "en" ? "hours" : "часов"}</span></div>
+              <div className="flex items-center gap-2"><Mountain className="w-4 h-4" aria-hidden="true" /><span>{language === "en" ? "Byzantine caves" : "Византийские пещеры"}</span></div>
+              <div className="flex items-center gap-2"><Camera className="w-4 h-4" aria-hidden="true" /><span>{language === "en" ? "Cultural heritage" : "Культурное наследие"}</span></div>
             </div>
           </div>
         </div>
@@ -126,7 +126,7 @@ const Pallagorio = () => {
               <div className="flex items-center justify-center h-full bg-gradient-to-br from-gray-200 to-gray-300">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-[#E2725B] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
                   </div>
                   <p className="text-gray-600">{language === "en" ? "Video coming soon..." : "Видео скоро появится..."}</p>
                 </div>
@@ -187,8 +187,8 @@ const Pallagorio = () => {
             <h2 className="font-serif text-3xl font-bold mb-8">{bookNow}</h2>
             <p className="text-xl mb-8 opacity-90">{language === "en" ? "Ready for a cultural adventure through Vercino and Pallagorio? Contact us to plan your heritage discovery:" : "Готовы к культурному приключению в Верчино и Паллагорио? Свяжитесь с нами, чтобы спланировать ваше открытие наследия:"}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              <div className="flex items-center gap-2"><Mail className="w-5 h-5" /><a href="mailto:mariamarinaciro@gmail.com" className="hover:text-blue-200">mariamarinaciro@gmail.com</a></div>
-              <div className="flex items-center gap-4"><Phone className="w-5 h-5" /><span>+39 344 6935576</span></div>
+              <div className="flex items-center gap-2"><Mail className="w-5 h-5" aria-hidden="true" /><a href="mailto:mariamarinaciro@gmail.com" className="hover:text-blue-200">mariamarinaciro@gmail.com</a></div>
+              <div className="flex items-center gap-4"><Phone className="w-5 h-5" aria-hidden="true" /><span>+39 344 6935576</span></div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-white text-[#E2725B] hover:bg-gray-100">{language === "en" ? "Book Now" : "Забронировать"}</Button>

@@ -44,7 +44,7 @@ const MobileLanguageToggle = () => {
         }}
       >
         <div className="flex flex-col items-center text-xs">
-          <Globe className="w-5 h-5 mb-0.5" />
+          <Globe className="w-5 h-5 mb-0.5" aria-hidden="true" />
           <span className="text-[11px] font-bold leading-none">
             {language === "en" ? "RU" : "EN"}
           </span>

@@ -21,7 +21,7 @@ const MobileMenu = () => {
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
           <Button variant="ghost" size="sm" className="p-2">
-            <Menu className="w-5 h-5" />
+            <Menu className="w-5 h-5" aria-hidden="true" />
           </Button>
         </SheetTrigger>
         <SheetContent side="right" className="w-[300px] bg-white">
@@ -54,7 +54,7 @@ const MobileMenu = () => {
             
             <div className="border-t pt-4 mt-4">
               <div className="flex items-center gap-2 mb-3">
-                <Globe className="w-4 h-4" />
+                <Globe className="w-4 h-4" aria-hidden="true" />
                 <span className="font-medium">Language / Язык</span>
               </div>
               

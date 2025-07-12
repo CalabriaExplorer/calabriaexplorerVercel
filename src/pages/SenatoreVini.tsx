@@ -131,9 +131,9 @@ const SenatoreVini = () => {
       <section className="py-16 bg-[#F8FBFE]">
         <div className="container mx-auto px-4 max-w-md">
           <ul className="space-y-4 text-gray-700">
-            <li><Clock className="inline w-5 h-5 text-[#0077B6] mr-2" />{content.details.duration}</li>
-            <li><MapPin className="inline w-5 h-5 text-[#0077B6] mr-2" />{content.details.meetingPoint}</li>
-            <li><Wine className="inline w-5 h-5 text-[#0077B6] mr-2" />{content.details.price}</li>
+            <li><Clock className="inline w-5 h-5 text-[#0077B6] mr-2" aria-hidden="true" />{content.details.duration}</li>
+            <li><MapPin className="inline w-5 h-5 text-[#0077B6] mr-2" aria-hidden="true" />{content.details.meetingPoint}</li>
+            <li><Wine className="inline w-5 h-5 text-[#0077B6] mr-2" aria-hidden="true" />{content.details.price}</li>
           </ul>
         </div>
       </section>
