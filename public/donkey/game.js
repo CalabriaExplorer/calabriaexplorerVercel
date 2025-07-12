@@ -6,8 +6,12 @@ const donkeyImg = new Image();
 const bottleImg = new Image();
 const bgImg = new Image();
 const bgMusic = document.getElementById('bgMusic');
-const catchSound = document.getElementById('catchSound');
 const failSound = document.getElementById('failSound');
+const catchSounds = [
+  document.getElementById('b1s'),
+  document.getElementById('b2s'),
+  document.getElementById('b3s')
+];
 const lanes = 5;
 const BOTTLE_SCALE = 1;
 let laneWidth;
@@ -102,7 +106,10 @@ function loop(ts){
     const donkeyWidth = laneWidth;
     const donkeyHeight = donkeyWidth*1.2;
     if(b.y>height-donkeyHeight-20 && b.y<height-20 && Math.abs(b.x-donkeyX)<25){
-      score++; b.caught=true; catchSound.currentTime=0; catchSound.play();
+      score++; b.caught=true;
+      const sfx = catchSounds[Math.floor(Math.random() * catchSounds.length)];
+      sfx.currentTime = 0;
+      sfx.play();
     } else if(b.y>height){
       endGame();
       return;
