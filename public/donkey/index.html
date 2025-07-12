@@ -6,6 +6,7 @@
 <base href="/donkey/">
 <title>Donkey & Brasilena</title>
 <link rel="stylesheet" href="styles.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6361433510552253" crossorigin="anonymous"></script>
 </head>
 <body>
 <audio id="bgMusic" src="sounds/pixelated-dreams-20240608-171413.m4r" loop autoplay></audio>
@@ -16,12 +17,16 @@
 <div id="gameContainer">
 <canvas id="game"></canvas>
 <div id="overlay">
-<div id="finalScore"></div>
-<iframe src="ads/fullscreen.html" style="width:80%;height:50%;border:none;margin:20px 0;"></iframe>
-<button id="playAgain"></button>
-</div>
-</div>
-<iframe id="adBanner" src="ads/banner.html"></iframe>
-<script src="game.js"></script>
+  <div id="finalScore"></div>
+  <div class="fullscreen-ad-wrapper">
+    <ins class="adsbygoogle" style="display:inline-block;width:320px;height:250px" data-ad-client="ca-pub-6361433510552253" data-ad-slot="1234567890"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <button id="playAgain"></button>
+  </div>
+  </div>
+  <ins class="adsbygoogle banner-ad" style="display:block" data-ad-client="ca-pub-6361433510552253" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  <script src="game.js"></script>
 </body>
 </html>
