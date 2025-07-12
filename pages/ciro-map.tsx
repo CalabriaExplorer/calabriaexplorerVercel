@@ -126,7 +126,7 @@ const CiroMapPage = () => {
       mapRef.current.fitBounds(allBounds);
       mapRef.current.setMaxBounds(bounds.pad(0.1));
     }
-  }, []);
+  }, [boundary]);
 
 const handleCardClick = (place: Place) => {
   setActivePlace(place.id);
@@ -150,13 +150,15 @@ const handleCardClick = (place: Place) => {
             scrollWheelZoom={false}
             whenCreated={(m) => (mapRef.current = m)}
             className="h-full w-full"
-            maxBounds={boundary ? L.geoJSON(boundary).getBounds().pad(0.1) : undefined}
           >
             <TileLayer
               attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors"
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <GeoJSON data={boundaryData} style={{ color: 'red', fill: false, weight: 3 }} />
+            <GeoJSON
+              data={boundaryData}
+              style={{ color: 'red', weight: 2, fillOpacity: 0.1, fill: false }}
+            />
             {filteredPlaces.map((place) => (
               <Marker
                 key={place.id}
