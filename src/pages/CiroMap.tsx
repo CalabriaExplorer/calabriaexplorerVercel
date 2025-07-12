@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -10,7 +10,8 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "../../styles/ciro-map.css";
 
-import boundaryData from "../../public/geo/ciro_marina.json" assert { type: "json" };
+import type { Feature } from "geojson";
+import boundaryData from "../../public/geo/ciro_marina.geojson" assert { type: "json" };
 
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
@@ -84,6 +85,9 @@ const CiroMap = () => {
     "theatre",
     "winery",
   ]);
+  const [activePlace, setActivePlace] = useState<number | null>(null);
+  const boundary = (boundaryData.features?.[0] ?? null) as Feature | null;
+  const mapRef = useRef<L.Map | null>(null);
 
   const toggleCategory = (cat: string) => {
     setActiveCategories((prev) =>
@@ -92,6 +96,24 @@ const CiroMap = () => {
   };
 
   const filteredPlaces = places.filter((p) => activeCategories.includes(p.category));
+
+  useEffect(() => {
+    if (mapRef.current && boundary) {
+      const boundaryLayer = L.geoJSON(boundary);
+      const bounds = boundaryLayer.getBounds();
+      const markerBounds = L.latLngBounds(
+        places.map((p) => L.latLng(p.lat, p.lng))
+      );
+      const allBounds = bounds.extend(markerBounds);
+      mapRef.current.fitBounds(allBounds);
+      mapRef.current.setMaxBounds(bounds.pad(0.1));
+    }
+  }, [boundary]);
+
+  const handleCardClick = (place: Place) => {
+    setActivePlace(place.id);
+    mapRef.current?.flyTo([place.lat, place.lng], 17);
+  };
 
   const center: [number, number] = [39.37, 17.12];
 
@@ -125,14 +147,29 @@ const CiroMap = () => {
         ))}
       </div>
       <div className="flex-1 mt-4">
-        <MapContainer center={center} zoom={14} className="h-72 sm:h-96 w-full" scrollWheelZoom={false}>
+        <MapContainer
+          center={center}
+          zoom={14}
+          minZoom={13}
+          maxZoom={17}
+          scrollWheelZoom={false}
+          whenCreated={(m) => (mapRef.current = m)}
+          className="h-72 sm:h-96 w-full"
+        >
           <TileLayer
             attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <GeoJSON data={boundaryData} style={{ color: "red", weight: 3, fill: false }} />
+          <GeoJSON
+            data={boundaryData}
+            style={{ color: "red", weight: 2, fillOpacity: 0.1, fill: false }}
+          />
           {filteredPlaces.map((place) => (
-            <Marker key={place.id} position={[place.lat, place.lng]}>
+            <Marker
+              key={place.id}
+              position={[place.lat, place.lng]}
+              eventHandlers={{ click: () => setActivePlace(place.id) }}
+            >
               <Popup>
                 <div className="text-center">
                   <img
@@ -154,7 +191,11 @@ const CiroMap = () => {
       </div>
       <div className="p-4 space-y-4">
         {filteredPlaces.map((place) => (
-          <div key={place.id} className="flex gap-4 border rounded p-2 items-center">
+          <div
+            key={place.id}
+            className={`flex gap-4 border rounded p-2 items-center ${activePlace === place.id ? 'border-blue-600' : ''}`}
+            onClick={() => handleCardClick(place)}
+          >
             <img
               src={place.image}
               alt={language === "ru" ? place.name_ru : place.name_en}

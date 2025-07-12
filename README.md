@@ -18,6 +18,12 @@ npm ci
 
 If you prefer, `npm install` also works.
 
+Before running the map locally, fetch the latest city boundary:
+
+```bash
+node scripts/fetchCiroBoundary.mjs
+```
+
 Start the development server with:
 
 ```bash
