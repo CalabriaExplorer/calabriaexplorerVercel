@@ -114,7 +114,7 @@ const CiroMapPage = () => {
   );
 
   useEffect(() => {
-    fetch('/geo/ciro_marina.geojson')
+    fetch('/geo/ciro_marina.json')
       .then((res) => res.json())
       .then((data) => {
         const feature = (data.features?.[0] ?? null) as Feature | null;
