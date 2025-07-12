@@ -11,7 +11,7 @@ import L from "leaflet";
 import "../../styles/ciro-map.css";
 
 import type { Feature } from "geojson";
-import boundaryData from "../../public/geo/ciro_marina.geojson" assert { type: "json" };
+import boundaryData from "../../public/geo/ciro_marina.json" assert { type: "json" };
 
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";

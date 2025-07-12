@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import '../styles/ciro-map.css';
 import { Feature } from 'geojson';
-import boundaryData from '../public/geo/ciro_marina.geojson' assert { type: 'json' };
+import boundaryData from '../public/geo/ciro_marina.json' assert { type: 'json' };
 
 const MapContainer = dynamic(() => import('react-leaflet').then(m => m.MapContainer), { ssr: false });
 const TileLayer = dynamic(() => import('react-leaflet').then(m => m.TileLayer), { ssr: false });
