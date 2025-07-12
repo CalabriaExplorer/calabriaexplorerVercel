@@ -209,9 +209,6 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem className="px-2">
-                <Link to="#contact" className="font-medium" aria-label="Contact us">{t("contact")}</Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem className="px-2">
                 <Button 
                   variant="outline" 
                   size="sm" 
