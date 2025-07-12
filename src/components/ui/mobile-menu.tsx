@@ -44,20 +44,6 @@ const MobileMenu = () => {
             >
               {t("tours")}
             </Link>
-            <Link 
-              to="#about" 
-              className="text-lg font-medium py-2"
-              onClick={() => setIsOpen(false)}
-            >
-              {t("about")}
-            </Link>
-            <Link 
-              to="#contact" 
-              className="text-lg font-medium py-2"
-              onClick={() => setIsOpen(false)}
-            >
-              {t("contact")}
-            </Link>
             
             <div className="border-t pt-4 mt-4">
               <div className="flex items-center gap-2 mb-3">
