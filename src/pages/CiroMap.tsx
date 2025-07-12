@@ -10,6 +10,8 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "../../styles/ciro-map.css";
 
+import boundaryData from "../../public/geo/ciro_marina.json" assert { type: "json" };
+
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
@@ -68,22 +70,6 @@ const places: Place[] = [
   },
 ];
 
-const ciroMarinaBoundary = {
-  type: "Feature",
-  properties: {},
-  geometry: {
-    type: "Polygon",
-    coordinates: [
-      [
-        [17.113, 39.378],
-        [17.135, 39.378],
-        [17.135, 39.362],
-        [17.113, 39.362],
-        [17.113, 39.378],
-      ],
-    ],
-  },
-} as const;
 
 const categories: Record<string, { ru: string; en: string }> = {
   supermarket: { ru: "Супермаркеты", en: "Supermarkets" },
@@ -144,7 +130,7 @@ const CiroMap = () => {
             attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <GeoJSON data={ciroMarinaBoundary} pathOptions={{ color: "blue" }} />
+          <GeoJSON data={boundaryData} style={{ color: "red", weight: 3, fill: false }} />
           {filteredPlaces.map((place) => (
             <Marker key={place.id} position={[place.lat, place.lng]}>
               <Popup>
