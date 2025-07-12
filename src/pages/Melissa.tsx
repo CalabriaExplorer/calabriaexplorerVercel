@@ -96,7 +96,16 @@ const Melissa = () => {
       preloadImages={[heroImage]}
     >
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-[#E2725B] to-[#D4511E] text-white py-16" style={{ backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <section
+        className="relative bg-gradient-to-r from-[#E2725B] to-[#D4511E] text-white py-16 bg-no-repeat"
+        style={{
+          backgroundImage: `url(${heroImage})`,
+          backgroundSize: 'contain',
+          backgroundPosition: 'center',
+          minHeight: '320px',
+          aspectRatio: '3 / 2'
+        }}
+      >
         <div className="container mx-auto px-4 bg-black bg-opacity-50 py-16 rounded-lg">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
