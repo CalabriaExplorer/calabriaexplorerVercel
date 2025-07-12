@@ -2,6 +2,8 @@ const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 const overlay = document.getElementById('overlay');
 const playBtn = document.getElementById('playAgain');
+const donkeyImg = new Image();
+const bottleImg = new Image();
 let width, height;
 let donkeyPos = 1; //0 left,1 right
 let score = 0;
@@ -12,6 +14,19 @@ let spawnInterval = 1000;
 let speed = 2;
 let lang = 'en';
 let texts = {};
+let assetsLoaded = false;
+let langLoaded = false;
+
+function checkReady(){
+  if(assetsLoaded && langLoaded) startGame();
+}
+
+function loadAssets(){
+  Promise.all([
+    new Promise(res=>{donkeyImg.onload=res; donkeyImg.src='donkey.png';}),
+    new Promise(res=>{bottleImg.onload=res; bottleImg.src='brasilena.png';})
+  ]).then(()=>{assetsLoaded=true; checkReady();});
+}
 
 function resize() {
   width = canvas.width = window.innerWidth;
@@ -21,7 +36,7 @@ function resize() {
 function loadLang() {
   const n = navigator.language.slice(0,2);
   lang = ['en','ru','it','es','fr','de','zh','ja','ko','pt'].includes(n)?n:'en';
-  fetch(`lang/${lang}.json`).then(r=>r.json()).then(d=>{texts=d;startGame();});
+  fetch(`lang/${lang}.json`).then(r=>r.json()).then(d=>{texts=d;langLoaded=true;checkReady();});
 }
 
 function startGame(){
@@ -31,20 +46,20 @@ function startGame(){
 }
 
 function spawnBottle(){
-  bottles.push({x: Math.random()<0.5?0:1, y:-50});
+  const bottleWidth = width/8;
+  bottles.push({x: Math.random()<0.5?0:1, y:-bottleWidth*2});
 }
 
 function drawDonkey(){
-  const w = width/3;
-  const h = 40;
-  ctx.fillStyle = '#654321';
-  ctx.fillRect(donkeyPos*w+w/2-20,height-60,40,h);
+  const donkeyWidth = width/3;
+  const donkeyHeight = donkeyWidth*1.2;
+  ctx.drawImage(donkeyImg, donkeyPos*width/2+width/4-donkeyWidth/2, height-donkeyHeight-20, donkeyWidth, donkeyHeight);
 }
 
 function drawBottle(b){
-  const w = width/3;
-  ctx.fillStyle = '#2e86ab';
-  ctx.fillRect(b.x*w+w/2-10,b.y,20,40);
+  const bottleWidth = width/8;
+  const bottleHeight = bottleWidth*2;
+  ctx.drawImage(bottleImg, b.x*width/2+width/4-bottleWidth/2, b.y, bottleWidth, bottleHeight);
 }
 
 let gameOver=false;
@@ -57,7 +72,9 @@ function loop(ts){
   for(const b of bottles){
     b.y += speed;
     drawBottle(b);
-    if(b.y>height-60 && b.y<height-20 && b.x===donkeyPos){
+    const donkeyWidth = width/3;
+    const donkeyHeight = donkeyWidth*1.2;
+    if(b.y>height-donkeyHeight-20 && b.y<height-20 && b.x===donkeyPos){
       score++; b.caught=true;
     } else if(b.y>height){
       endGame();
@@ -93,4 +110,5 @@ canvas.addEventListener('touchstart',e=>{const x=e.touches[0].clientX; if(x<widt
 playBtn.addEventListener('click',startGame);
 window.addEventListener('resize',resize);
 resize();
+loadAssets();
 loadLang();
