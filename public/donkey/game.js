@@ -5,7 +5,6 @@ const playBtn = document.getElementById('playAgain');
 const finalScore = document.getElementById('finalScore');
 const donkeyImg = new Image();
 const bottleImg = new Image();
-const bgImg = new Image();
 const bgMusic = document.getElementById('bgMusic');
 const catchSound = document.getElementById('catchSound');
 const failSound = document.getElementById('failSound');
@@ -17,7 +16,6 @@ let laneWidth;
 let width, height;
 let donkeyLane = Math.floor(lanes/2);
 let donkeyX = 0;
-let bgY = 0;
 let score = 0;
 let bottles = [];
 let lastTime = 0;
@@ -36,14 +34,14 @@ function checkReady(){
 function loadAssets(){
   Promise.all([
     new Promise(res=>{donkeyImg.onload=res; donkeyImg.src='donkey.png';}),
-    new Promise(res=>{bottleImg.onload=res; bottleImg.src='brasilena.png';}),
-    new Promise(res=>{bgImg.onload=res; bgImg.src='background.png';})
+    new Promise(res=>{bottleImg.onload=res; bottleImg.src='brasilena.png';})
   ]).then(()=>{assetsLoaded=true; checkReady();});
 }
 
 function resize() {
+  const bannerHeight = 50;
   width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
+  height = canvas.height = window.innerHeight - bannerHeight;
   laneWidth = width / lanes;
   donkeyX = laneWidth * donkeyLane + laneWidth / 2;
 
@@ -67,7 +65,6 @@ function startGame(){
   score=0; bottles=[]; lastTime=0; spawnTimer=0; spawnInterval=1000; speed=2; gameOver=false; overlay.style.display='none';
   donkeyLane=Math.floor(lanes/2);
   donkeyX=laneWidth*donkeyLane+laneWidth/2;
-  bgY = 0;
   bgMusic.currentTime=0;
   bgMusic.play();
   requestAnimationFrame(loop);
@@ -79,12 +76,12 @@ function spawnBottle(){
   bottles.push({x: lane*laneWidth+laneWidth/2, y:-bottleWidth*2});
 }
 
-function drawBackground(){
-  const h = bgImg.height;
-  bgY += speed*0.5;
-  if(bgY >= h) bgY -= h;
-  ctx.drawImage(bgImg, 0, bgY - h, width, h);
-  ctx.drawImage(bgImg, 0, bgY, width, h);
+function drawBackground() {
+  const gradient = ctx.createRadialGradient(width/2, height/2, 10, width/2, height/2, height);
+  gradient.addColorStop(0, '#ffffff');
+  gradient.addColorStop(1, '#59c1f5');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, width, height);
 }
 
 function drawDonkey(){
