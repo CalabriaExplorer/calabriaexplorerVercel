@@ -5,6 +5,7 @@ const playBtn = document.getElementById('playAgain');
 const finalScore = document.getElementById('finalScore');
 const donkeyImg = new Image();
 const bottleImg = new Image();
+const brickImg = new Image();
 const heartsImg = new Image();
 const bgMusic = document.getElementById('bgMusic');
 const catchSound = document.getElementById('catchSound');
@@ -37,6 +38,7 @@ function loadAssets(){
   Promise.all([
     new Promise(res=>{donkeyImg.onload=res; donkeyImg.src='donkey.png';}),
     new Promise(res=>{bottleImg.onload=res; bottleImg.src='brasilena.png';}),
+    new Promise(res=>{brickImg.onload=res; brickImg.src='Brick.png';}),
     new Promise(res=>{heartsImg.onload=res; heartsImg.src='hearts.png';})
   ]).then(()=>{assetsLoaded=true; checkReady();});
 }
@@ -74,9 +76,10 @@ function startGame(){
 }
 
 function spawnBottle(){
-  const bottleWidth = laneWidth*0.6*BOTTLE_SCALE;
+  const itemWidth = laneWidth*0.6*BOTTLE_SCALE;
   const lane = Math.floor(Math.random()*lanes);
-  bottles.push({x: lane*laneWidth+laneWidth/2, y:-bottleWidth*2});
+  const type = Math.random() < 0.8 ? 'bottle' : 'brick';
+  bottles.push({x: lane*laneWidth+laneWidth/2, y:-itemWidth*2, type});
 }
 
 function drawBackground() {
@@ -93,10 +96,12 @@ function drawDonkey(){
   ctx.drawImage(donkeyImg, donkeyX - donkeyWidth/2, height - donkeyHeight - 20, donkeyWidth, donkeyHeight);
 }
 
-function drawBottle(b){
-  const bottleWidth = laneWidth*0.6*BOTTLE_SCALE*bottleScale;
-  const bottleHeight = bottleWidth*2;
-  ctx.drawImage(bottleImg, b.x - bottleWidth/2, b.y, bottleWidth, bottleHeight);
+function drawItem(b){
+  const itemWidth = laneWidth*0.6*BOTTLE_SCALE*bottleScale;
+  const isBrick = b.type === 'brick';
+  const itemHeight = isBrick ? itemWidth : itemWidth*2;
+  const img = isBrick ? brickImg : bottleImg;
+  ctx.drawImage(img, b.x - itemWidth/2, b.y, itemWidth, itemHeight);
 }
 
 function drawHearts(){
@@ -128,21 +133,34 @@ function loop(ts){
   drawHearts();
   for(const b of bottles){
     b.y += speed;
-    drawBottle(b);
+    drawItem(b);
     const donkeyWidth = laneWidth;
     const donkeyHeight = donkeyWidth*1.2;
     if(b.y>height-donkeyHeight-20 && b.y<height-20 && Math.abs(b.x-donkeyX)<25){
-      score++;
-      b.caught = true;
-      catchSound.currentTime = 0;
-      catchSound.play();
-    } else if(b.y>height){
-      lives--;
-      b.caught = true;
-      if(lives<=0){
-        endGame();
-        return;
+      if(b.type === 'brick'){
+        b.caught = true;
+        lives--;
+        failSound.currentTime = 0;
+        failSound.play();
+        if(lives<=0){
+          endGame();
+          return;
+        }
+      } else {
+        score++;
+        b.caught = true;
+        catchSound.currentTime = 0;
+        catchSound.play();
       }
+    } else if(b.y>height){
+      if(b.type !== 'brick'){
+        lives--;
+        if(lives<=0){
+          endGame();
+          return;
+        }
+      }
+      b.caught = true;
     }
   }
   bottles = bottles.filter(b=>!b.caught);
