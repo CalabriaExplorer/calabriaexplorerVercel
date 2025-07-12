@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import '../styles/ciro-map.css';
 import { Feature } from 'geojson';
+import boundaryData from '../public/geo/ciro_marina.geojson' assert { type: 'json' };
 
 const MapContainer = dynamic(() => import('react-leaflet').then(m => m.MapContainer), { ssr: false });
 const TileLayer = dynamic(() => import('react-leaflet').then(m => m.TileLayer), { ssr: false });
@@ -100,7 +101,7 @@ const CiroMapPage = () => {
     'winery',
   ]);
   const [activePlace, setActivePlace] = useState<number | null>(null);
-  const [boundary, setBoundary] = useState<Feature | null>(null);
+  const boundary = (boundaryData.features?.[0] ?? null) as Feature | null;
   const mapRef = useRef<L.Map | null>(null);
 
   const toggleCategory = (cat: string) => {
@@ -113,17 +114,6 @@ const CiroMapPage = () => {
     selectedCategories.includes(p.category)
   );
 
-  useEffect(() => {
-    fetch('/geo/ciro_marina.json')
-      .then((res) => res.json())
-      .then((data) => {
-        const feature = (data.features?.[0] ?? null) as Feature | null;
-        setBoundary(feature);
-      })
-      .catch(() => {
-        /* empty */
-      });
-  }, []);
 
   useEffect(() => {
     if (mapRef.current && boundary) {
@@ -136,7 +126,7 @@ const CiroMapPage = () => {
       mapRef.current.fitBounds(allBounds);
       mapRef.current.setMaxBounds(bounds.pad(0.1));
     }
-  }, [boundary]);
+  }, []);
 
 const handleCardClick = (place: Place) => {
   setActivePlace(place.id);
@@ -166,12 +156,7 @@ const handleCardClick = (place: Place) => {
               attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors"
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {boundary && (
-              <GeoJSON
-                data={boundary}
-                pathOptions={{ color: 'red', fillColor: 'red', fillOpacity: 0.1 }}
-              />
-            )}
+            <GeoJSON data={boundaryData} style={{ color: 'red', fill: false, weight: 3 }} />
             {filteredPlaces.map((place) => (
               <Marker
                 key={place.id}
