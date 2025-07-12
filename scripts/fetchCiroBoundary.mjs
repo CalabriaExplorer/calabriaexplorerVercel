@@ -59,9 +59,9 @@ async function main() {
   }
 
   const featureCollection = { type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: geo }] };
-  await fs.mkdir('public/geo', { recursive: true });
-  await fs.writeFile('public/geo/ciro_marina.json', JSON.stringify(featureCollection, null, 2));
-  console.log('Saved to public/geo/ciro_marina.json');
+  await fs.mkdir('src/data', { recursive: true });
+  await fs.writeFile('src/data/ciro_marina.json', JSON.stringify(featureCollection, null, 2));
+  console.log('Saved to src/data/ciro_marina.json');
 }
 
 main().catch((err) => {
