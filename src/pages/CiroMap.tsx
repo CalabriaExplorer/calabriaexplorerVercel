@@ -150,7 +150,7 @@ const CiroMap = () => {
         <MapContainer
           center={center}
           zoom={14}
-          minZoom={13}
+          minZoom={11}
           maxZoom={17}
           scrollWheelZoom={false}
           whenCreated={(m) => (mapRef.current = m)}
