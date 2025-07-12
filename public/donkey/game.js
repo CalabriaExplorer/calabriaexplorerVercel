@@ -4,8 +4,14 @@ const overlay = document.getElementById('overlay');
 const playBtn = document.getElementById('playAgain');
 const donkeyImg = new Image();
 const bottleImg = new Image();
+const bgMusic = document.getElementById('bgMusic');
+const catchSound = document.getElementById('catchSound');
+const failSound = document.getElementById('failSound');
+const lanes = 5;
+let laneWidth;
 let width, height;
-let donkeyPos = 1; //0 left,1 right
+let donkeyLane = Math.floor(lanes/2);
+let donkeyX = 0;
 let score = 0;
 let bottles = [];
 let lastTime = 0;
@@ -31,6 +37,8 @@ function loadAssets(){
 function resize() {
   width = canvas.width = window.innerWidth;
   height = canvas.height = window.innerHeight;
+  laneWidth = width / lanes;
+  donkeyX = laneWidth * donkeyLane + laneWidth / 2;
 }
 
 function loadLang() {
@@ -42,24 +50,29 @@ function loadLang() {
 function startGame(){
   playBtn.textContent = texts.play_again || 'Play Again';
   score=0; bottles=[]; lastTime=0; spawnTimer=0; spawnInterval=1000; speed=2; gameOver=false; overlay.style.display='none';
+  donkeyLane=Math.floor(lanes/2);
+  donkeyX=laneWidth*donkeyLane+laneWidth/2;
+  bgMusic.currentTime=0;
+  bgMusic.play();
   requestAnimationFrame(loop);
 }
 
 function spawnBottle(){
-  const bottleWidth = width/8;
-  bottles.push({x: Math.random()<0.5?0:1, y:-bottleWidth*2});
+  const bottleWidth = laneWidth*0.6;
+  const lane = Math.floor(Math.random()*lanes);
+  bottles.push({x: lane*laneWidth+laneWidth/2, y:-bottleWidth*2});
 }
 
 function drawDonkey(){
-  const donkeyWidth = width/3;
+  const donkeyWidth = laneWidth;
   const donkeyHeight = donkeyWidth*1.2;
-  ctx.drawImage(donkeyImg, donkeyPos*width/2+width/4-donkeyWidth/2, height-donkeyHeight-20, donkeyWidth, donkeyHeight);
+  ctx.drawImage(donkeyImg, donkeyX-donkeyWidth/2, height-donkeyHeight-20, donkeyWidth, donkeyHeight);
 }
 
 function drawBottle(b){
-  const bottleWidth = width/8;
+  const bottleWidth = laneWidth*0.6;
   const bottleHeight = bottleWidth*2;
-  ctx.drawImage(bottleImg, b.x*width/2+width/4-bottleWidth/2, b.y, bottleWidth, bottleHeight);
+  ctx.drawImage(bottleImg, b.x - bottleWidth/2, b.y, bottleWidth, bottleHeight);
 }
 
 let gameOver=false;
@@ -72,10 +85,10 @@ function loop(ts){
   for(const b of bottles){
     b.y += speed;
     drawBottle(b);
-    const donkeyWidth = width/3;
+    const donkeyWidth = laneWidth;
     const donkeyHeight = donkeyWidth*1.2;
-    if(b.y>height-donkeyHeight-20 && b.y<height-20 && b.x===donkeyPos){
-      score++; b.caught=true;
+    if(b.y>height-donkeyHeight-20 && b.y<height-20 && Math.abs(b.x-donkeyX)<25){
+      score++; b.caught=true; catchSound.currentTime=0; catchSound.play();
     } else if(b.y>height){
       endGame();
       return;
@@ -100,10 +113,23 @@ function endGame(){
   document.getElementById('finalScore').innerText=`${texts.game_over} - ${texts.score}: ${score}`;
   playBtn.textContent = texts.play_again || 'Play Again';
   overlay.style.display='flex';
+  failSound.currentTime=0;
+  failSound.play();
+  bgMusic.pause();
 }
 
-function moveLeft(){donkeyPos=0;}
-function moveRight(){donkeyPos=1;}
+function moveLeft(){
+  if(donkeyLane>0){
+    donkeyLane--;
+    donkeyX = laneWidth*donkeyLane + laneWidth/2;
+  }
+}
+function moveRight(){
+  if(donkeyLane<lanes-1){
+    donkeyLane++;
+    donkeyX = laneWidth*donkeyLane + laneWidth/2;
+  }
+}
 
 window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')moveLeft();if(e.key==='ArrowRight')moveRight();});
 canvas.addEventListener('touchstart',e=>{const x=e.touches[0].clientX; if(x<width/2) moveLeft(); else moveRight();});
