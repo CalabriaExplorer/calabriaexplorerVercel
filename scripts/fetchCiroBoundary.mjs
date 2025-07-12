@@ -1,6 +1,21 @@
 import fs from 'fs/promises';
 import osmtogeojson from 'osmtogeojson';
 
+function isRectangle(coords) {
+  if (!Array.isArray(coords) || coords.length !== 5) return false;
+  const xs = [...new Set(coords.map((c) => c[0]))];
+  const ys = [...new Set(coords.map((c) => c[1]))];
+  if (xs.length !== 2 || ys.length !== 2) return false;
+  const expected = [
+    [xs[0], ys[0]],
+    [xs[0], ys[1]],
+    [xs[1], ys[1]],
+    [xs[1], ys[0]],
+    [xs[0], ys[0]],
+  ];
+  return coords.every((c, i) => c[0] === expected[i][0] && c[1] === expected[i][1]);
+}
+
 async function main() {
   const nominatimUrl = 'https://nominatim.openstreetmap.org/search?format=json&polygon_geojson=1&q=Cir%C3%B2%20Marina';
   let geo = null;
@@ -34,6 +49,13 @@ async function main() {
 
   if (!geo) {
     throw new Error('Failed to fetch boundary data');
+  }
+
+  if (geo.type !== 'Polygon') {
+    throw new Error(`Unexpected geometry type: ${geo.type}`);
+  }
+  if (isRectangle(geo.coordinates[0])) {
+    throw new Error('Fetched geometry is a rectangle, expected city outline');
   }
 
   const featureCollection = { type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: geo }] };
