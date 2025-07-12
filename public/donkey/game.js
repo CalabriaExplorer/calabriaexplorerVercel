@@ -14,6 +14,8 @@ const catchSounds = [
 ];
 const lanes = 5;
 const BOTTLE_SCALE = 1;
+let bottleScale = 1;
+let donkeyScale = 1;
 let laneWidth;
 let width, height;
 let donkeyLane = Math.floor(lanes/2);
@@ -47,6 +49,14 @@ function resize() {
   height = canvas.height = window.innerHeight;
   laneWidth = width / lanes;
   donkeyX = laneWidth * donkeyLane + laneWidth / 2;
+
+  if (width >= 768) {
+    bottleScale = 0.5;   // Desktop
+    donkeyScale = 1;
+  } else {
+    bottleScale = 1;
+    donkeyScale = 1.4;   // Mobile
+  }
 }
 
 function loadLang() {
@@ -81,13 +91,13 @@ function drawBackground(){
 }
 
 function drawDonkey(){
-  const donkeyWidth = laneWidth;
-  const donkeyHeight = donkeyWidth*1.2;
-  ctx.drawImage(donkeyImg, donkeyX-donkeyWidth/2, height-donkeyHeight-20, donkeyWidth, donkeyHeight);
+  const donkeyWidth = laneWidth * donkeyScale;
+  const donkeyHeight = donkeyWidth * 1.2;
+  ctx.drawImage(donkeyImg, donkeyX - donkeyWidth/2, height - donkeyHeight - 20, donkeyWidth, donkeyHeight);
 }
 
 function drawBottle(b){
-  const bottleWidth = laneWidth*0.6*BOTTLE_SCALE;
+  const bottleWidth = laneWidth*0.6*BOTTLE_SCALE*bottleScale;
   const bottleHeight = bottleWidth*2;
   ctx.drawImage(bottleImg, b.x - bottleWidth/2, b.y, bottleWidth, bottleHeight);
 }
