@@ -4,14 +4,17 @@ const overlay = document.getElementById('overlay');
 const playBtn = document.getElementById('playAgain');
 const donkeyImg = new Image();
 const bottleImg = new Image();
+const bgImg = new Image();
 const bgMusic = document.getElementById('bgMusic');
 const catchSound = document.getElementById('catchSound');
 const failSound = document.getElementById('failSound');
 const lanes = 5;
+const BOTTLE_SCALE = 1;
 let laneWidth;
 let width, height;
 let donkeyLane = Math.floor(lanes/2);
 let donkeyX = 0;
+let bgY = 0;
 let score = 0;
 let bottles = [];
 let lastTime = 0;
@@ -30,7 +33,8 @@ function checkReady(){
 function loadAssets(){
   Promise.all([
     new Promise(res=>{donkeyImg.onload=res; donkeyImg.src='donkey.png';}),
-    new Promise(res=>{bottleImg.onload=res; bottleImg.src='brasilena.png';})
+    new Promise(res=>{bottleImg.onload=res; bottleImg.src='brasilena.png';}),
+    new Promise(res=>{bgImg.onload=res; bgImg.src='background.png';})
   ]).then(()=>{assetsLoaded=true; checkReady();});
 }
 
@@ -52,15 +56,24 @@ function startGame(){
   score=0; bottles=[]; lastTime=0; spawnTimer=0; spawnInterval=1000; speed=2; gameOver=false; overlay.style.display='none';
   donkeyLane=Math.floor(lanes/2);
   donkeyX=laneWidth*donkeyLane+laneWidth/2;
+  bgY = 0;
   bgMusic.currentTime=0;
   bgMusic.play();
   requestAnimationFrame(loop);
 }
 
 function spawnBottle(){
-  const bottleWidth = laneWidth*0.6;
+  const bottleWidth = laneWidth*0.6*BOTTLE_SCALE;
   const lane = Math.floor(Math.random()*lanes);
   bottles.push({x: lane*laneWidth+laneWidth/2, y:-bottleWidth*2});
+}
+
+function drawBackground(){
+  const h = bgImg.height;
+  bgY += speed*0.5;
+  if(bgY >= h) bgY -= h;
+  ctx.drawImage(bgImg, 0, bgY - h, width, h);
+  ctx.drawImage(bgImg, 0, bgY, width, h);
 }
 
 function drawDonkey(){
@@ -70,7 +83,7 @@ function drawDonkey(){
 }
 
 function drawBottle(b){
-  const bottleWidth = laneWidth*0.6;
+  const bottleWidth = laneWidth*0.6*BOTTLE_SCALE;
   const bottleHeight = bottleWidth*2;
   ctx.drawImage(bottleImg, b.x - bottleWidth/2, b.y, bottleWidth, bottleHeight);
 }
@@ -81,6 +94,7 @@ function loop(ts){
   const delta = ts - lastTime;
   lastTime = ts;
   ctx.clearRect(0,0,width,height);
+  drawBackground();
   drawDonkey();
   for(const b of bottles){
     b.y += speed;
