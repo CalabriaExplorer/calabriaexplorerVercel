@@ -5,6 +5,7 @@ const playBtn = document.getElementById('playAgain');
 const finalScore = document.getElementById('finalScore');
 const donkeyImg = new Image();
 const bottleImg = new Image();
+const heartsImg = new Image();
 const bgMusic = document.getElementById('bgMusic');
 const catchSound = document.getElementById('catchSound');
 const failSound = document.getElementById('failSound');
@@ -17,6 +18,7 @@ let width, height;
 let donkeyLane = Math.floor(lanes/2);
 let donkeyX = 0;
 let score = 0;
+let lives = 3;
 let bottles = [];
 let lastTime = 0;
 let spawnTimer = 0;
@@ -34,7 +36,8 @@ function checkReady(){
 function loadAssets(){
   Promise.all([
     new Promise(res=>{donkeyImg.onload=res; donkeyImg.src='donkey.png';}),
-    new Promise(res=>{bottleImg.onload=res; bottleImg.src='brasilena.png';})
+    new Promise(res=>{bottleImg.onload=res; bottleImg.src='brasilena.png';}),
+    new Promise(res=>{heartsImg.onload=res; heartsImg.src='hearts.png';})
   ]).then(()=>{assetsLoaded=true; checkReady();});
 }
 
@@ -62,7 +65,7 @@ function loadLang() {
 
 function startGame(){
   playBtn.textContent = texts.play_again || 'Play Again';
-  score=0; bottles=[]; lastTime=0; spawnTimer=0; spawnInterval=1000; speed=2; gameOver=false; overlay.style.display='none';
+  score=0; bottles=[]; lastTime=0; spawnTimer=0; spawnInterval=1000; speed=2; gameOver=false; lives=3; overlay.style.display='none';
   donkeyLane=Math.floor(lanes/2);
   donkeyX=laneWidth*donkeyLane+laneWidth/2;
   bgMusic.currentTime=0;
@@ -96,6 +99,24 @@ function drawBottle(b){
   ctx.drawImage(bottleImg, b.x - bottleWidth/2, b.y, bottleWidth, bottleHeight);
 }
 
+function drawHearts(){
+  const heartSrcW = heartsImg.width / 3;
+  const heartSrcH = heartsImg.height;
+  for(let i=0;i<lives;i++){
+    ctx.drawImage(
+      heartsImg,
+      heartSrcW * i,
+      0,
+      heartSrcW,
+      heartSrcH,
+      10 + i * (32 + 10),
+      10,
+      32,
+      32
+    );
+  }
+}
+
 let gameOver=false;
 function loop(ts){
   if(gameOver) return;
@@ -104,6 +125,7 @@ function loop(ts){
   ctx.clearRect(0,0,width,height);
   drawBackground();
   drawDonkey();
+  drawHearts();
   for(const b of bottles){
     b.y += speed;
     drawBottle(b);
@@ -115,8 +137,12 @@ function loop(ts){
       catchSound.currentTime = 0;
       catchSound.play();
     } else if(b.y>height){
-      endGame();
-      return;
+      lives--;
+      b.caught = true;
+      if(lives<=0){
+        endGame();
+        return;
+      }
     }
   }
   bottles = bottles.filter(b=>!b.caught);
