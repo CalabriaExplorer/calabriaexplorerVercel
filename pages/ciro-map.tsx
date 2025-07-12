@@ -155,11 +155,14 @@ const handleCardClick = (place: Place) => {
               attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors"
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <GeoJSON
-              data={boundaryData}
-              style={{ color: 'red', weight: 2, fillOpacity: 0.1, fill: false }}
-            />
-            {filteredPlaces.map((place) => (
+            {boundary && (
+              <GeoJSON
+                data={boundary}
+                pathOptions={{ color: 'red', fill: false, weight: 2 }}
+              />
+            )}
+            {boundary &&
+              filteredPlaces.map((place) => (
               <Marker
                 key={place.id}
                 position={[place.lat, place.lng]}
