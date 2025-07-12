@@ -4,9 +4,11 @@ import {
   TileLayer,
   Marker,
   Popup,
+  GeoJSON,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import "../../styles/ciro-map.css";
 
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
@@ -36,22 +38,22 @@ const places: Place[] = [
     lat: 39.3763,
     lng: 17.12388,
     category: "supermarket",
-    name_ru: "Conad Супермаркет",
+    name_ru: "Супермаркет Conad",
     name_en: "Conad Supermarket",
-    description_ru: "Популярный супермаркет с широким выбором товаров.",
-    description_en: "Popular supermarket with a wide selection of goods.",
-    image: "/images/conad.jpg",
+    description_ru: "Популярный магазин рядом с пляжем.",
+    description_en: "Popular grocery store near the beach.",
+    image: "/images/conad_real.jpg",
   },
   {
     id: 2,
-    lat: 39.3736,
-    lng: 17.12492,
-    category: "supermarket",
-    name_ru: "Conad City",
-    name_en: "Conad City",
-    description_ru: "Маленький магазин рядом с пляжем.",
-    description_en: "Small convenience store near the beach.",
-    image: "/images/conad2.jpg",
+    lat: 39.37398,
+    lng: 17.12306,
+    category: "theatre",
+    name_ru: "Театр Alikia",
+    name_en: "Teatro Alikia",
+    description_ru: "Современный театр и культурная площадка в Чиро-Марине.",
+    description_en: "Modern theatre and cultural venue in Cirò Marina.",
+    image: "/images/teatro_alikia.jpg",
   },
   {
     id: 3,
@@ -66,14 +68,36 @@ const places: Place[] = [
   },
 ];
 
+const ciroMarinaBoundary = {
+  type: "Feature",
+  properties: {},
+  geometry: {
+    type: "Polygon",
+    coordinates: [
+      [
+        [17.113, 39.378],
+        [17.135, 39.378],
+        [17.135, 39.362],
+        [17.113, 39.362],
+        [17.113, 39.378],
+      ],
+    ],
+  },
+} as const;
+
 const categories: Record<string, { ru: string; en: string }> = {
-  supermarket: { ru: "Супермаркет", en: "Supermarket" },
-  winery: { ru: "Винодельня", en: "Winery" },
+  supermarket: { ru: "Супермаркеты", en: "Supermarkets" },
+  theatre: { ru: "Театр", en: "Theatre" },
+  winery: { ru: "Винодельни", en: "Wineries" },
 };
 
 const CiroMap = () => {
   const [language, setLanguage] = useState<"ru" | "en">("ru");
-  const [activeCategories, setActiveCategories] = useState<string[]>(["supermarket", "winery"]);
+  const [activeCategories, setActiveCategories] = useState<string[]>([
+    "supermarket",
+    "theatre",
+    "winery",
+  ]);
 
   const toggleCategory = (cat: string) => {
     setActiveCategories((prev) =>
@@ -83,7 +107,7 @@ const CiroMap = () => {
 
   const filteredPlaces = places.filter((p) => activeCategories.includes(p.category));
 
-  const center: [number, number] = [39.374, 17.1235];
+  const center: [number, number] = [39.37, 17.12];
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -120,6 +144,7 @@ const CiroMap = () => {
             attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+          <GeoJSON data={ciroMarinaBoundary} pathOptions={{ color: "blue" }} />
           {filteredPlaces.map((place) => (
             <Marker key={place.id} position={[place.lat, place.lng]}>
               <Popup>
@@ -127,7 +152,7 @@ const CiroMap = () => {
                   <img
                     src={place.image}
                     alt={language === "ru" ? place.name_ru : place.name_en}
-                    className="w-40 h-24 object-cover mb-2 rounded"
+                    className="place-photo mb-2"
                   />
                   <h3 className="font-semibold">
                     {language === "ru" ? place.name_ru : place.name_en}
@@ -147,7 +172,7 @@ const CiroMap = () => {
             <img
               src={place.image}
               alt={language === "ru" ? place.name_ru : place.name_en}
-              className="w-16 h-16 object-cover rounded"
+              className="place-photo"
             />
             <div>
               <h3 className="font-semibold">
