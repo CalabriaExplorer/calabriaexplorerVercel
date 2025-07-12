@@ -29,3 +29,7 @@ Start the development server with:
 ```bash
 npm run dev
 ```
+
+The interactive map component lives in `src/pages/CiroMap.tsx`. An older
+Next.js variant existed at `pages/ciro-map.tsx` but it is no longer used
+and has been removed.
