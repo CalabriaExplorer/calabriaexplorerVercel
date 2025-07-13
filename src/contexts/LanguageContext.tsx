@@ -1,5 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useState, useContext, ReactNode } from "react";
+import enExtra from "../../public/locales/en.json" assert { type: "json" };
+import ruExtra from "../../public/locales/ru.json" assert { type: "json" };
 
 type Language = "en" | "ru";
 
@@ -9,7 +11,7 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
-const translations = {
+const baseTranslations = {
   en: {
     // Home
     "home": "Home",
@@ -146,6 +148,11 @@ const translations = {
     "aboutAuthor.title": "Об авторе",
     "aboutAuthor.text": "Мария живёт в Калабрии и с энтузиазмом делится её красотой с путешественниками. Она организует авторские туры, наполненные локальным колоритом, гастрономией и историями из жизни южной Италии."
   }
+};
+
+const translations = {
+  en: { ...baseTranslations.en, ...(enExtra as Record<string, string>) },
+  ru: { ...baseTranslations.ru, ...(ruExtra as Record<string, string>) },
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);

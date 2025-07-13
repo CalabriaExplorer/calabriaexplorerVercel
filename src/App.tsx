@@ -19,7 +19,7 @@ import LeCastellaPost from "./pages/LeCastellaPost";
 import DogLifePost from "./pages/DogLifePost";
 import WaterOrSwampJuicePost from "./pages/WaterOrSwampJuicePost";
 import CiroMap from "./pages/CiroMap";
-import PucciPane from "./pages/PucciPane";
+import PucciPanePage from "./pages/places/pucci-pane";
 
 const queryClient = new QueryClient();
 
@@ -44,7 +44,7 @@ const App = () => (
             <Route path="/blog/le-castella" element={<LeCastellaPost />} />
             <Route path="/blog/dog-life-in-italy" element={<DogLifePost />} />
             <Route path="/ciro-map" element={<CiroMap />} />
-            <Route path="/places/pucci-pane" element={<PucciPane />} />
+            <Route path="/places/pucci-pane" element={<PucciPanePage />} />
             <Route path="/stat" element={<Analytics />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
