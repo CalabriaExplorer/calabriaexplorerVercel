@@ -32,6 +32,14 @@ let texts = {};
 let assetsLoaded = false;
 let langLoaded = false;
 
+function updateIphoneMode() {
+  if (window.innerWidth >= 768) {
+    document.body.classList.add('iphone-mode');
+  } else {
+    document.body.classList.remove('iphone-mode');
+  }
+}
+
 function checkReady(){
   if(assetsLoaded && langLoaded) startGame();
 }
@@ -46,6 +54,7 @@ function loadAssets(){
 }
 
 function resize() {
+  updateIphoneMode();
   const bannerHeight = 0; // баннер временно отключён
   width = canvas.width = window.innerWidth;
   height = canvas.height = window.innerHeight - bannerHeight;

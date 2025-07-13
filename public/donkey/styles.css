@@ -105,3 +105,22 @@ canvas {
   background: #fff;
 }
 */
+
+@media (min-width: 768px) {
+  body.iphone-mode #iphone-wrapper {
+    position: relative;
+    width: 430px;
+    height: 932px;
+    margin: 0 auto;
+    background: url('/donkey/iphone_frame.png') no-repeat center center;
+    background-size: contain;
+  }
+
+  body.iphone-mode #game {
+    position: absolute;
+    top: 60px;
+    left: 26px;
+    width: 378px;
+    height: 812px;
+  }
+}
