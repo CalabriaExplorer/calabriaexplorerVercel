@@ -44,12 +44,19 @@ body, html {
 }
 
 /* Fullscreen ad */
-#fullscreenAdContainer iframe {
+#fullscreenAdContainer {
   width: 320px;
   height: 250px;
-  border: none;
-  background: #eee;
   max-width: 90vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#fullscreenAdContainer .adsbygoogle {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 
 /* Play again button */

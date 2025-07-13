@@ -33,3 +33,14 @@ npm run dev
 The interactive map component lives in `src/pages/CiroMap.tsx`. An older
 Next.js variant existed at `pages/ciro-map.tsx` but it is no longer used
 and has been removed.
+
+## Linting
+
+Before running ESLint make sure dependencies are installed.
+
+```bash
+npm install
+npm run lint
+```
+
+Without the install step ESLint may report "Cannot find package '@eslint/js'".
