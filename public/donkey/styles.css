@@ -95,6 +95,7 @@ canvas {
 }
 
 /* Container for bottom ad */
+/*
 .ad-container {
   position: fixed;
   bottom: 0;
@@ -103,3 +104,4 @@ canvas {
   z-index: 1000;
   background: #fff;
 }
+*/
