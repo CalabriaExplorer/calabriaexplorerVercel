@@ -140,6 +140,7 @@ function drawHearts() {
 
 let gameOver=false;
 function loop(ts){
+  occupiedLanes = new Set();
   if(gameOver) return;
   const delta = ts - lastTime;
   lastTime = ts;
@@ -199,7 +200,6 @@ function loop(ts){
   ctx.fillStyle='#000';
   ctx.font='20px sans-serif';
   ctx.fillText(`${texts.score}: ${score}`,10,30);
-  occupiedLanes.clear();
   requestAnimationFrame(loop);
 }
 
