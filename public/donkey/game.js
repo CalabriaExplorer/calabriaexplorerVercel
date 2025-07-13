@@ -21,6 +21,8 @@ let donkeyX = 0;
 let score = 0;
 let lives = 3;
 let bottles = [];
+let bricks = [];
+let occupiedLanes = new Set();
 let lastTime = 0;
 let spawnTimer = 0;
 let spawnInterval = 1000;
@@ -67,7 +69,7 @@ function loadLang() {
 
 function startGame(){
   playBtn.textContent = texts.play_again || 'Play Again';
-  score=0; bottles=[]; lastTime=0; spawnTimer=0; spawnInterval=1000; speed=2; gameOver=false; lives=3; overlay.style.display='none';
+  score = 0; bottles = []; bricks = []; lastTime = 0; spawnTimer = 0; spawnInterval = 1000; speed = 2; gameOver = false; lives = 3; overlay.style.display = 'none';
   donkeyLane=Math.floor(lanes/2);
   donkeyX=laneWidth*donkeyLane+laneWidth/2;
   bgMusic.currentTime=0;
@@ -75,11 +77,31 @@ function startGame(){
   requestAnimationFrame(loop);
 }
 
-function spawnBottle(){
-  const itemWidth = laneWidth*0.6*BOTTLE_SCALE;
-  const lane = Math.floor(Math.random()*lanes);
-  const type = Math.random() < 0.8 ? 'bottle' : 'brick';
-  bottles.push({x: lane*laneWidth+laneWidth/2, y:-itemWidth*2, type});
+function spawnBottle() {
+  const lane = getFreeLane();
+  if (lane === null) return;
+  const bottleWidth = laneWidth * 0.6 * BOTTLE_SCALE;
+  const bottleHeight = bottleWidth * 2;
+  bottles.push({ x: lane * laneWidth + laneWidth / 2, y: -bottleHeight, type: 'bottle' });
+  occupiedLanes.add(lane);
+}
+
+function spawnBrick() {
+  const lane = getFreeLane();
+  if (lane === null) return;
+  const brickWidth = laneWidth * 0.6;
+  const brickHeight = brickWidth;
+  bricks.push({ x: lane * laneWidth + laneWidth / 2, y: -brickHeight, type: 'brick' });
+  occupiedLanes.add(lane);
+}
+
+function getFreeLane() {
+  const available = [];
+  for (let i = 0; i < lanes; i++) {
+    if (!occupiedLanes.has(i)) available.push(i);
+  }
+  if (available.length === 0) return null;
+  return available[Math.floor(Math.random() * available.length)];
 }
 
 function drawBackground() {
@@ -104,21 +126,15 @@ function drawItem(b){
   ctx.drawImage(img, b.x - itemWidth/2, b.y, itemWidth, itemHeight);
 }
 
-function drawHearts(){
-  const heartSrcW = heartsImg.width / 3;
-  const heartSrcH = heartsImg.height;
-  for(let i=0;i<lives;i++){
-    ctx.drawImage(
-      heartsImg,
-      heartSrcW * i,
-      0,
-      heartSrcW,
-      heartSrcH,
-      10 + i * (32 + 10),
-      10,
-      32,
-      32
-    );
+function drawHearts() {
+  const scale = window.innerWidth < 600 ? 0.8 : 1;
+  const heartWidth = 32 * scale;
+  const heartHeight = 32 * scale;
+  const margin = 10 * scale;
+  const startX = 10;
+  const startY = 10;
+  for (let i = 0; i < lives; i++) {
+    ctx.drawImage(heartsImg, startX + i * (heartWidth + margin), startY, heartWidth, heartHeight);
   }
 }
 
@@ -131,49 +147,59 @@ function loop(ts){
   drawBackground();
   drawDonkey();
   drawHearts();
-  for(const b of bottles){
+  for (const b of bottles) {
     b.y += speed;
     drawItem(b);
     const donkeyWidth = laneWidth;
-    const donkeyHeight = donkeyWidth*1.2;
-    if(b.y>height-donkeyHeight-20 && b.y<height-20 && Math.abs(b.x-donkeyX)<25){
-      if(b.type === 'brick'){
-        b.caught = true;
-        lives--;
-        failSound.currentTime = 0;
-        failSound.play();
-        if(lives<=0){
-          endGame();
-          return;
-        }
-      } else {
-        score++;
-        b.caught = true;
-        catchSound.currentTime = 0;
-        catchSound.play();
-      }
-    } else if(b.y>height){
-      if(b.type !== 'brick'){
-        lives--;
-        if(lives<=0){
-          endGame();
-          return;
-        }
+    const donkeyHeight = donkeyWidth * 1.2;
+    if (b.y > height - donkeyHeight - 20 && b.y < height - 20 && Math.abs(b.x - donkeyX) < 25) {
+      score++;
+      b.caught = true;
+      catchSound.currentTime = 0;
+      catchSound.play();
+    } else if (b.y > height) {
+      lives--;
+      if (lives <= 0) {
+        endGame();
+        return;
       }
       b.caught = true;
     }
   }
-  bottles = bottles.filter(b=>!b.caught);
+  bottles = bottles.filter(b => !b.caught);
+
+  for (const br of bricks) {
+    br.y += speed;
+    drawItem(br);
+    const donkeyWidth = laneWidth;
+    const donkeyHeight = donkeyWidth * 1.2;
+    if (br.y > height - donkeyHeight - 20 && br.y < height - 20 && Math.abs(br.x - donkeyX) < 25) {
+      br.caught = true;
+      lives--;
+      failSound.currentTime = 0;
+      failSound.play();
+      if (lives <= 0) {
+        endGame();
+        return;
+      }
+    } else if (br.y > height) {
+      br.caught = true;
+    }
+  }
+  bricks = bricks.filter(br => !br.caught);
+
   spawnTimer += delta;
-  if(spawnTimer>spawnInterval){
+  if (spawnTimer > spawnInterval) {
     spawnBottle();
-    spawnTimer=0;
-    if(spawnInterval>400) spawnInterval-=20;
-    speed+=0.1;
+    if (Math.random() < 0.2) spawnBrick(); // было 30%, стало 20%
+    spawnTimer = 0;
+    if (spawnInterval > 400) spawnInterval -= 20;
+    speed += 0.1;
   }
   ctx.fillStyle='#000';
   ctx.font='20px sans-serif';
   ctx.fillText(`${texts.score}: ${score}`,10,30);
+  occupiedLanes.clear();
   requestAnimationFrame(loop);
 }
 
