@@ -46,7 +46,7 @@ function loadAssets(){
 }
 
 function resize() {
-  const bannerHeight = 50;
+  const bannerHeight = 0; // баннер временно отключён
   width = canvas.width = window.innerWidth;
   height = canvas.height = window.innerHeight - bannerHeight;
   laneWidth = width / lanes;
