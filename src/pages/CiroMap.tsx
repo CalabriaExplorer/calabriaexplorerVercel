@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import {
   MapContainer,
   TileLayer,
@@ -33,6 +34,7 @@ interface Place {
   description_ru: string;
   description_en: string;
   image: string;
+  slug?: string;
 }
 
 const places: Place[] = [
@@ -69,6 +71,18 @@ const places: Place[] = [
     description_en: "Historic Calabrian winery with wine tasting.",
     image: "/images/ippolito.jpg",
   },
+  {
+    id: 4,
+    lat: 39.367667,
+    lng: 17.122746,
+    category: "bakery",
+    name_ru: 'Пекарня "Pucci Pane"',
+    name_en: 'Pucci Pane Bakery',
+    description_ru: "Пекарня, свежие итальянские булочки и не только",
+    description_en: "Bakery with fresh Italian pastries and more",
+    image: "/images/pucci-pane/IMG_6556.jpeg",
+    slug: "pucci-pane",
+  },
 ];
 
 
@@ -76,6 +90,7 @@ const categories: Record<string, { ru: string; en: string }> = {
   supermarket: { ru: "Супермаркеты", en: "Supermarkets" },
   theatre: { ru: "Театр", en: "Theatre" },
   winery: { ru: "Винодельни", en: "Wineries" },
+  bakery: { ru: "Пекарни", en: "Bakeries" },
 };
 
 const CiroMap = () => {
@@ -84,6 +99,7 @@ const CiroMap = () => {
     "supermarket",
     "theatre",
     "winery",
+    "bakery",
   ]);
   const [activePlace, setActivePlace] = useState<number | null>(null);
   const boundary = (boundaryData.features?.[0] ?? null) as Feature | null;
@@ -175,13 +191,17 @@ const CiroMap = () => {
             >
               <Popup>
                 <div className="text-center">
-                  <img
-                    src={place.image}
-                    alt={language === "ru" ? place.name_ru : place.name_en}
-                    className="place-photo mb-2"
-                  />
+                  <Link to={place.slug ? `/places/${place.slug}` : "#"}>
+                    <img
+                      src={place.image}
+                      alt={language === "ru" ? place.name_ru : place.name_en}
+                      className="place-photo mb-2"
+                    />
+                  </Link>
                   <h3 className="font-semibold">
-                    {language === "ru" ? place.name_ru : place.name_en}
+                    <Link to={place.slug ? `/places/${place.slug}` : "#"}>
+                      {language === "ru" ? place.name_ru : place.name_en}
+                    </Link>
                   </h3>
                   <p className="text-sm mt-1">
                     {language === "ru" ? place.description_ru : place.description_en}
@@ -199,14 +219,24 @@ const CiroMap = () => {
             className={`flex gap-4 border rounded p-2 items-center ${activePlace === place.id ? 'border-blue-600' : ''}`}
             onClick={() => handleCardClick(place)}
           >
-            <img
-              src={place.image}
-              alt={language === "ru" ? place.name_ru : place.name_en}
-              className="place-photo"
-            />
+            <Link
+              to={place.slug ? `/places/${place.slug}` : "#"}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={place.image}
+                alt={language === "ru" ? place.name_ru : place.name_en}
+                className="place-photo"
+              />
+            </Link>
             <div>
               <h3 className="font-semibold">
-                {language === "ru" ? place.name_ru : place.name_en}
+                <Link
+                  to={place.slug ? `/places/${place.slug}` : "#"}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {language === "ru" ? place.name_ru : place.name_en}
+                </Link>
               </h3>
               <p className="text-sm">
                 {language === "ru" ? place.description_ru : place.description_en}
