@@ -34,9 +34,15 @@
 }
 
 #logo {
-  height: 35px;
-  width: auto;
-  margin-right: 15px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 80px;
+}
+@media(min-width: 600px){
+  #logo {
+    width: 120px;
+  }
 }
 #bigCroissant{
   position:absolute;
@@ -83,9 +89,9 @@
 </head>
 <body>
 <div id="game">
+ <img id="logo" src="logoPuciPane.png" alt="Pucci Pane logo">
  <div id="bigCroissant">🥐</div>
  <div id="scoreboard">
-  <img id="logo" src="logoPuciPane.png" alt="Pucci Pane logo" />
   <span id="score">0/500</span>
   <span id="missed">0/10</span>
   <span id="timer">0.0000000</span>
