@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Briciole Clicker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Neue', sans-serif;
+      background: #fbe9c6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .logo {
+      max-width: 200px;
+      margin: 1em auto;
+    }
+    h1 {
+      margin: 0;
+      color: #7a420c;
+      font-size: 2.4em;
+      text-align: center;
+    }
+    .counter {
+      background: #fff7dc;
+      border: 2px solid #dcb96a;
+      padding: 0.5em 1em;
+      font-size: 2em;
+      margin: 0.8em;
+      border-radius: 15px;
+    }
+    .crumb {
+      font-size: 4em;
+      cursor: pointer;
+      user-select: none;
+    }
+    .upgrades {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+      margin-top: 1em;
+    }
+    .upgrade-button {
+      padding: 0.5em 1em;
+      font-size: 1em;
+      background: #f6d89d;
+      border: 2px solid #b77b2e;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .footer {
+      margin-top: auto;
+      text-align: center;
+      font-size: 0.95em;
+      color: #6e4b1e;
+      padding: 1em;
+      max-width: 320px;
+    }
+    .lang-buttons {
+      margin-top: 1em;
+    }
+    .lang-buttons button {
+      margin: 0 0.3em;
+      font-size: 0.9em;
+      background: #e2c388;
+      border: none;
+      padding: 0.3em 0.7em;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <img class="logo" src="https://www.puccipane.it/wp-content/uploads/2022/11/logo_pucci_2.png" alt="Pucci Logo">
+  <h1>Briciole Clicker</h1>
+
+  <div class="counter" id="counter">0</div>
+  <div class="crumb" id="crumb">🥐</div>
+
+  <div class="upgrades">
+    <button class="upgrade-button" id="btn1">Nonna Pucci x2 (10)</button>
+    <button class="upgrade-button" id="btn2">Gatto Guardiano x5 (50)</button>
+  </div>
+
+  <div class="lang-buttons">
+    <button data-lang="it">🇮🇹</button>
+    <button data-lang="en">🇬🇧</button>
+    <button data-lang="ru">🇷🇺</button>
+  </div>
+
+  <div class="footer" id="footerText">
+    Gioco ispirato alla storica panetteria Pucci a Cirò Marina<br>
+    <a href="https://www.puccipane.it" target="_blank">Visita il sito Pucci →</a>
+  </div>
+
+  <script>
+    let count = parseInt(localStorage.getItem('crumbCount')) || 0;
+    let multiplier = parseInt(localStorage.getItem('crumbMultiplier')) || 1;
+
+    const counterEl = document.getElementById('counter');
+    const crumbEl = document.getElementById('crumb');
+    const btn1 = document.getElementById('btn1');
+    const btn2 = document.getElementById('btn2');
+
+    function updateCounter() {
+      counterEl.textContent = count;
+    }
+
+    crumbEl.addEventListener('click', () => {
+      count += multiplier;
+      updateState();
+    });
+
+    function buyUpgrade(type) {
+      if (type === 1 && count >= 10 && multiplier < 2) {
+        count -= 10;
+        multiplier = 2;
+      } else if (type === 2 && count >= 50 && multiplier < 5) {
+        count -= 50;
+        multiplier = 5;
+      }
+      updateState();
+    }
+
+    btn1.addEventListener('click', () => buyUpgrade(1));
+    btn2.addEventListener('click', () => buyUpgrade(2));
+
+    function updateState() {
+      updateCounter();
+      localStorage.setItem('crumbCount', count);
+      localStorage.setItem('crumbMultiplier', multiplier);
+    }
+
+    updateCounter();
+
+    const footerTexts = {
+      it: "Gioco ispirato alla storica panetteria Pucci a Cirò Marina<br><a href='https://www.puccipane.it' target='_blank'>Visita il sito Pucci →</a>",
+      en: "A game inspired by the historic Pucci bakery in Cirò Marina<br><a href='https://www.puccipane.it' target='_blank'>Visit Pucci website →</a>",
+      ru: "Игра, вдохновлённая исторической пекарней Pucci в Чиро Марина<br><a href='https://www.puccipane.it' target='_blank'>Сайт пекарни Pucci →</a>"
+    };
+
+    function setLang(lang) {
+      document.getElementById('footerText').innerHTML = footerTexts[lang];
+      localStorage.setItem('crumbLang', lang);
+    }
+
+    document.querySelectorAll('.lang-buttons button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLang(btn.getAttribute('data-lang'));
+      });
+    });
+
+    const userLang = localStorage.getItem('crumbLang') || navigator.language.slice(0,2);
+    setLang(['it','en','ru'].includes(userLang) ? userLang : 'en');
+  </script>
+</body>
+</html>

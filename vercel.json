@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/PucciPane",
+      "destination": "/PucciPane/index.html"
+    },
+    {
+      "source": "/PucciPane/(.*)",
+      "destination": "/PucciPane/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
