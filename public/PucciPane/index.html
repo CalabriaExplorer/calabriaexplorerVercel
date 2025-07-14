@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -78,19 +78,20 @@
 <body>
   <img class="logo" src="https://www.puccipane.it/wp-content/uploads/2022/11/logo_pucci_2.png" alt="Pucci Logo">
   <h1>Briciole Clicker</h1>
+  <p id="instructions">Clicca sul croissant per raccogliere briciole!</p>
 
   <div class="counter" id="counter">0</div>
-  <div class="crumb" id="crumb">🥐</div>
+  <div class="crumb" onclick="addCrumb()">🥐</div>
 
   <div class="upgrades">
-    <button class="upgrade-button" id="btn1">Nonna Pucci x2 (10)</button>
-    <button class="upgrade-button" id="btn2">Gatto Guardiano x5 (50)</button>
+    <button class="upgrade-button" onclick="buyUpgrade(1)" id="btn1">Nonna Pucci x2 (10)</button>
+    <button class="upgrade-button" onclick="buyUpgrade(2)" id="btn2">Gatto Guardiano x5 (50)</button>
   </div>
 
   <div class="lang-buttons">
-    <button data-lang="it">🇮🇹</button>
-    <button data-lang="en">🇬🇧</button>
-    <button data-lang="ru">🇷🇺</button>
+    <button onclick="setLang('it')">🇮🇹</button>
+    <button onclick="setLang('en')">🇬🇧</button>
+    <button onclick="setLang('ru')">🇷🇺</button>
   </div>
 
   <div class="footer" id="footerText">
@@ -103,40 +104,26 @@
     let multiplier = parseInt(localStorage.getItem('crumbMultiplier')) || 1;
 
     const counterEl = document.getElementById('counter');
-    const crumbEl = document.getElementById('crumb');
-    const btn1 = document.getElementById('btn1');
-    const btn2 = document.getElementById('btn2');
+    counterEl.textContent = count;
 
-    function updateCounter() {
+    function addCrumb() {
+      count += multiplier;
       counterEl.textContent = count;
+      localStorage.setItem('crumbCount', count);
     }
 
-    crumbEl.addEventListener('click', () => {
-      count += multiplier;
-      updateState();
-    });
-
     function buyUpgrade(type) {
-      if (type === 1 && count >= 10 && multiplier < 2) {
+      if (type === 1 && count >= 10) {
         count -= 10;
         multiplier = 2;
-      } else if (type === 2 && count >= 50 && multiplier < 5) {
+      } else if (type === 2 && count >= 50) {
         count -= 50;
         multiplier = 5;
       }
-      updateState();
-    }
-
-    btn1.addEventListener('click', () => buyUpgrade(1));
-    btn2.addEventListener('click', () => buyUpgrade(2));
-
-    function updateState() {
-      updateCounter();
+      counterEl.textContent = count;
       localStorage.setItem('crumbCount', count);
       localStorage.setItem('crumbMultiplier', multiplier);
     }
-
-    updateCounter();
 
     const footerTexts = {
       it: "Gioco ispirato alla storica panetteria Pucci a Cirò Marina<br><a href='https://www.puccipane.it' target='_blank'>Visita il sito Pucci →</a>",
@@ -144,19 +131,21 @@
       ru: "Игра, вдохновлённая исторической пекарней Pucci в Чиро Марина<br><a href='https://www.puccipane.it' target='_blank'>Сайт пекарни Pucci →</a>"
     };
 
+    const instructionTexts = {
+      it: "Clicca sul croissant per raccogliere briciole!",
+      en: "Click the croissant to collect crumbs!",
+      ru: "Кликай по круассану, чтобы собирать крошки!"
+    };
+
     function setLang(lang) {
       document.getElementById('footerText').innerHTML = footerTexts[lang];
+      document.getElementById('instructions').textContent = instructionTexts[lang];
       localStorage.setItem('crumbLang', lang);
     }
 
-    document.querySelectorAll('.lang-buttons button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        setLang(btn.getAttribute('data-lang'));
-      });
-    });
-
-    const userLang = localStorage.getItem('crumbLang') || navigator.language.slice(0,2);
-    setLang(['it','en','ru'].includes(userLang) ? userLang : 'en');
+    const userLang = localStorage.getItem('crumbLang') || navigator.language.slice(0, 2);
+    if (['it', 'en', 'ru'].includes(userLang)) setLang(userLang);
+    else setLang('en');
   </script>
 </body>
 </html>
