@@ -98,18 +98,25 @@ const music = new Audio('sounds/music.mp3');
 music.loop = true;
 music.volume = 0.4;
 
-function tryPlayMusic() {
-  if (music && music.paused) {
-    music.play().catch((e) => {
-      console.warn('Не удалось воспроизвести музыку:', e);
+const collectSound = new Audio('sounds/collect.mp3');
+const fireSound = new Audio('sounds/fire.mp3');
+
+function initAudioPlayback() {
+  if (music.paused) {
+    music.play().catch(() => {
+      const resume = () => {
+        music.play();
+        document.removeEventListener('click', resume);
+        document.removeEventListener('touchstart', resume);
+      };
+      document.addEventListener('click', resume);
+      document.addEventListener('touchstart', resume);
     });
   }
 }
-document.addEventListener('pointerdown', tryPlayMusic, { once: true });
-document.addEventListener('touchstart', tryPlayMusic, { once: true });
 
-const collectSound = new Audio('sounds/collect.mp3');
-const fireSound = new Audio('sounds/fire.mp3');
+document.body.addEventListener('click', initAudioPlayback, { once: true });
+document.body.addEventListener('touchstart', initAudioPlayback, { once: true });
 (function(){
  const lang = (navigator.language||'en').slice(0,2);
  const texts = {
