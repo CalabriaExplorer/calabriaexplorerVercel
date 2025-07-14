@@ -88,6 +88,14 @@
  <button id="restartBtn"></button>
 </div>
 <script>
+const music = new Audio('sounds/music.mp3');
+music.loop = true;
+music.volume = 0.4;
+const collectSound = new Audio('sounds/collect.mp3');
+const fireSound = new Audio('sounds/fire.mp3');
+document.body.addEventListener('pointerdown', () => {
+  if (music.paused) music.play();
+}, { once: true });
 (function(){
  const lang = (navigator.language||'en').slice(0,2);
  const texts = {
@@ -124,10 +132,14 @@
      if(gameOver)return;
      clicked=true;
      el.remove();
-     if(isFire){
-       endGame(false);
-     }else{
-       score++;
+    if(isFire){
+      fireSound.currentTime = 0;
+      fireSound.play();
+      endGame(false);
+    }else{
+      collectSound.currentTime = 0;
+      collectSound.play();
+      score++;
        scoreEl.textContent=score+'/500';
        const size=50+score/500*250;
        big.style.fontSize=size+'px';
