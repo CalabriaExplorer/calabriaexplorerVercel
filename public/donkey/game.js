@@ -1,4 +1,4 @@
-const canvas = document.getElementById('game');
+const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const overlay = document.getElementById('overlay');
 const playBtn = document.getElementById('playAgain');
@@ -56,8 +56,13 @@ function loadAssets(){
 function resize() {
   updateIphoneMode();
   const bannerHeight = 0; // баннер временно отключён
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight - bannerHeight;
+  if (window.innerWidth >= 768) {
+    width = canvas.width = 393;
+    height = canvas.height = 852;
+  } else {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight - bannerHeight;
+  }
   laneWidth = width / lanes;
   donkeyX = laneWidth * donkeyLane + laneWidth / 2;
 
