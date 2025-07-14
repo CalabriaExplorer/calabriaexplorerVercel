@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cornetto Clicker</title>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+<style>
+ body {
+   margin:0;
+   font-family:'Comic Neue', cursive;
+   background:#fff4e6;
+   overflow:hidden;
+   text-align:center;
+ }
+ #game{
+   position:relative;
+   width:100%;
+   height:100vh;
+ }
+ #scoreboard{
+   position:absolute;
+   top:10px;
+   left:50%;
+   transform:translateX(-50%);
+   display:flex;
+   gap:15px;
+   font-size:1.2em;
+ }
+ #bigCroissant{
+   position:absolute;
+   left:50%;
+   top:50%;
+   transform:translate(-50%,-50%);
+   font-size:50px;
+   transition:font-size 0.2s ease;
+   pointer-events:none;
+ }
+ .fall{
+   position:absolute;
+   top:-50px;
+   font-size:30px;
+   user-select:none;
+   cursor:pointer;
+   animation:drop linear;
+ }
+ @keyframes drop{
+   to{top:calc(100vh + 50px);}
+ }
+ #final{
+   position:absolute;
+   top:0;
+   left:0;
+   width:100%;
+   height:100%;
+   background:#fff4e6;
+   display:flex;
+   flex-direction:column;
+   align-items:center;
+   justify-content:center;
+   gap:20px;
+   font-size:1.2em;
+   z-index:10;
+ }
+ button{
+   padding:10px 20px;
+   font-family:'Comic Neue',cursive;
+   font-size:1em;
+   cursor:pointer;
+ }
+</style>
+</head>
+<body>
+<div id="game">
+ <div id="bigCroissant">🥐</div>
+ <div id="scoreboard">
+  <span id="score">0/500</span>
+  <span id="missed">0/10</span>
+  <span id="timer">0.0000000</span>
+ </div>
+</div>
+<div id="final" style="display:none;">
+ <div style="font-size:300px;">🥐</div>
+ <p id="finalMessage"></p>
+ <p><span id="finalTime"></span></p>
+ <p><span id="bestTime"></span></p>
+ <button id="shareBtn"></button>
+ <button id="restartBtn"></button>
+</div>
+<script>
+(function(){
+ const lang = (navigator.language||'en').slice(0,2);
+ const texts = {
+   it:{share:'Condividi',restart:'Ricomincia',msg:'Vi aspettiamo da Pucci Pane per i cornetti più freschi e non solo 😃',shareText:t=>`Ho raccolto 500 cornetti in ${t} secondi in Cornetto Clicker!`},
+   en:{share:'Share',restart:'Restart',msg:'Come visit Pucci Pane for the freshest croissants and more 😃',shareText:t=>`I collected 500 croissants in ${t} seconds in Cornetto Clicker!`},
+   ru:{share:'Поделиться',restart:'Начать заново',msg:'Ждём вас в Pucci Pane за самыми свежими круассанами и не только 😃',shareText:t=>`Я собрал 500 круассанов за ${t} секунд в Cornetto Clicker!`}
+ };
+ const t = texts[lang]||texts.en;
+ document.getElementById('shareBtn').textContent=t.share;
+ document.getElementById('restartBtn').textContent=t.restart;
+ let score=0,missed=0,gameOver=false,start=performance.now(),timerId;
+ const scoreEl=document.getElementById('score');
+ const missedEl=document.getElementById('missed');
+ const timerEl=document.getElementById('timer');
+ const big=document.getElementById('bigCroissant');
+ const game=document.getElementById('game');
+ function updateTimer(){
+   const time=((performance.now()-start)/1000).toFixed(7);
+   timerEl.textContent=time;
+   timerId=requestAnimationFrame(updateTimer);
+ }
+ updateTimer();
+ function spawn(){
+   if(gameOver)return;
+   const el=document.createElement('div');
+   el.className='fall';
+   el.style.left=Math.random()*95+'%';
+   const isFire=Math.random()<0.1; // 10% chance
+   el.textContent=isFire?'🔥':'🥐';
+   const duration=3+Math.random()*2;
+   el.style.animationDuration=duration+'s';
+   let clicked=false;
+   el.addEventListener('click',()=>{
+     if(gameOver)return;
+     clicked=true;
+     el.remove();
+     if(isFire){
+       endGame(false);
+     }else{
+       score++;
+       scoreEl.textContent=score+'/500';
+       const size=50+score/500*250;
+       big.style.fontSize=size+'px';
+       if(score>=500){
+         endGame(true);
+       }
+     }
+   });
+   el.addEventListener('animationend',()=>{
+     el.remove();
+     if(!clicked && !isFire){
+       missed++;
+       missedEl.textContent=missed+'/10';
+       if(missed>=10) endGame(false);
+     }
+   });
+   game.appendChild(el);
+   if(!gameOver) setTimeout(spawn,800);
+ }
+ spawn();
+ function endGame(win){
+   if(gameOver)return;gameOver=true;
+   cancelAnimationFrame(timerId);
+   const final=document.getElementById('final');
+   final.style.display='flex';
+   document.getElementById('finalMessage').textContent=win?t.msg:'Game Over';
+   const finalTime=(performance.now()-start)/1000;
+   document.getElementById('finalTime').textContent='Time: '+finalTime.toFixed(7)+'s';
+   let best=localStorage.getItem('cornettoBest');
+   if(win && (!best || finalTime<best)){
+     best=finalTime;
+     localStorage.setItem('cornettoBest',best);
+   }
+   document.getElementById('bestTime').textContent='Best: '+(best?parseFloat(best).toFixed(7)+'s':'-');
+   document.getElementById('shareBtn').onclick=()=>{
+     const text=t.shareText(finalTime.toFixed(7));
+     if(navigator.share){
+       navigator.share({text}).catch(()=>{});
+     }else{
+       navigator.clipboard.writeText(text).then(()=>alert('Copied')); 
+     }
+   };
+   document.getElementById('restartBtn').onclick=()=>location.reload();
+ }
+})();
+</script>
+</body>
+</html>
