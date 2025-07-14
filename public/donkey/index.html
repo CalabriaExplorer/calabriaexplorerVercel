@@ -21,9 +21,9 @@
 <audio id="catchSound" src="sounds/catch.mp3"></audio>
 <audio id="failSound" src="sounds/fail.mp3"></audio>
 <div id="iphone-wrapper">
-<div id="gameContainer">
-<canvas id="game"></canvas>
-<div id="overlay">
+  <img src="Iphone16Pro" id="iphone-frame" alt="iPhone 16 Pro Frame" />
+  <canvas id="gameCanvas" width="393" height="852"></canvas>
+  <div id="overlay">
   <div id="finalScore"></div>
   <div id="fullscreenAdContainer" class="fullscreen-ad-wrapper">
     <ins class="adsbygoogle fullscreen-ad"
@@ -36,8 +36,7 @@
   </div>
   </div>
   <button id="playAgain"></button>
-  </div>
-  </div>
+</div>
   <!-- 🔧 Временно отключаем баннер AdSense -->
   <!--
   <div class="ad-container">
