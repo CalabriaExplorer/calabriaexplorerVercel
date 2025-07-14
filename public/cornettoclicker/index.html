@@ -120,7 +120,7 @@
    const duration=3+Math.random()*2;
    el.style.animationDuration=duration+'s';
    let clicked=false;
-   el.addEventListener('click',()=>{
+   el.addEventListener('pointerdown',()=>{
      if(gameOver)return;
      clicked=true;
      el.remove();

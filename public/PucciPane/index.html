@@ -105,7 +105,7 @@ setInterval(() => {
   emoji.textContent = isBurned ? "🥐🔥" : "🥐";
   emoji.className = "falling";
   emoji.style.left = Math.random() * 90 + "vw";
-  emoji.onclick = () => {
+  emoji.addEventListener('pointerdown', () => {
     if (isBurned) {
       gameOver = true;
       alert("🔥 Game Over! Hai cliccato su un cornetto bruciato.");
@@ -118,7 +118,7 @@ setInterval(() => {
         showFinalScreen();
       }
     }
-  };
+  });
   document.body.appendChild(emoji);
   setTimeout(() => {
     if (document.body.contains(emoji)) {
