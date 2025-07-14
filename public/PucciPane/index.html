@@ -2,48 +2,28 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Briciole Clicker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cornetto Clicker</title>
   <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Comic Neue', sans-serif;
-      background: #fbe9c6;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-    }
-    .logo {
-      max-width: 200px;
-      margin: 1em auto;
-    }
-    h1 {
-      margin: 0;
-      color: #7a420c;
-      font-size: 2.4em;
-      text-align: center;
-    }
-    .counter {
-      background: #fff7dc;
-      border: 2px solid #dcb96a;
-      padding: 0.5em 1em;
-      font-size: 2em;
-      margin: 0.8em;
-      border-radius: 15px;
-    }
-    .crumb {
-      font-size: 4em;
-      cursor: pointer;
-      user-select: none;
+      overflow: hidden;
+      transition: background-image 0.5s ease-in-out;
     }
     .falling {
       position: absolute;
       font-size: 2em;
       cursor: pointer;
-      user-select: none;
       animation: fall 4s linear forwards;
       z-index: 10;
     }
@@ -51,127 +31,107 @@
       from { top: -50px; }
       to { top: 90vh; opacity: 0; }
     }
-    .upgrades {
-      display: flex;
+    #finalScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff4dc;
+      display: none;
       flex-direction: column;
-      gap: 0.5em;
-      margin-top: 1em;
-    }
-    .upgrade-button {
-      padding: 0.5em 1em;
-      font-size: 1em;
-      background: #f6d89d;
-      border: 2px solid #b77b2e;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    .footer {
-      margin-top: auto;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
       text-align: center;
-      font-size: 0.95em;
-      color: #6e4b1e;
-      padding: 1em;
-      max-width: 320px;
+      padding: 2em;
     }
-    .lang-buttons {
-      margin-top: 1em;
+    #finalScreen h2 {
+      font-size: 1.5em;
+      margin-bottom: 1em;
     }
-    .lang-buttons button {
-      margin: 0 0.3em;
-      font-size: 0.9em;
-      background: #e2c388;
-      border: none;
-      padding: 0.3em 0.7em;
-      border-radius: 8px;
+    #bigCroissant {
+      font-size: 6em;
+      margin-bottom: 1em;
+    }
+    .restartBtn {
+      padding: 0.5em 1em;
+      font-size: 1.1em;
+      background: #ffe08c;
+      border: 2px solid #c0892d;
+      border-radius: 10px;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <img class="logo" src="https://www.puccipane.it/wp-content/uploads/2022/11/logo_pucci_2.png" alt="Pucci Logo">
-  <h1>Briciole Clicker</h1>
-  <p id="instructions">Clicca sul croissant per raccogliere briciole!</p>
+<div id="finalScreen">
+  <div id="bigCroissant">🥐</div>
+  <h2 id="finalMessage"></h2>
+  <button class="restartBtn" onclick="restartGame()">Ricomincia</button>
+</div>
 
-  <div class="counter" id="counter">0</div>
-  <div class="crumb" onclick="addCrumb()">🥐</div>
+<script>
+let count = parseInt(localStorage.getItem('crumbCount')) || 0;
+let missed = 0;
+let gameOver = false;
+let lang = localStorage.getItem('crumbLang') || navigator.language.slice(0, 2);
+if (!['it','en','ru'].includes(lang)) lang = 'en';
 
-  <div class="upgrades">
-    <button class="upgrade-button" onclick="buyUpgrade(1)" id="btn1">Nonna Pucci x2 (10)</button>
-    <button class="upgrade-button" onclick="buyUpgrade(2)" id="btn2">Gatto Guardiano x5 (50)</button>
-  </div>
+const messages = {
+  it: "Vi aspettiamo da Pucci Pane per i cornetti più freschi e non solo :)",
+  en: "Come visit Pucci Pane for the freshest croissants and more :)",
+  ru: "Ждём вас в Pucci Pane за самыми свежими круассанами и не только :)",
+};
 
-  <div class="lang-buttons">
-    <button onclick="setLang('it')">🇮🇹</button>
-    <button onclick="setLang('en')">🇬🇧</button>
-    <button onclick="setLang('ru')">🇷🇺</button>
-  </div>
+function showFinalScreen() {
+  document.getElementById('finalMessage').textContent = messages[lang];
+  document.getElementById('finalScreen').style.display = 'flex';
+}
 
-  <div class="footer" id="footerText">
-    Gioco ispirato alla storica panetteria Pucci a Cirò Marina<br>
-    <a href="https://www.puccipane.it" target="_blank">Visita il sito Pucci →</a>
-  </div>
+function restartGame() {
+  count = 0;
+  missed = 0;
+  gameOver = false;
+  localStorage.removeItem('crumbCount');
+  document.getElementById('finalScreen').style.display = 'none';
+  document.location.reload();
+}
 
-  <script>
-    let count = parseInt(localStorage.getItem('crumbCount')) || 0;
-    let multiplier = parseInt(localStorage.getItem('crumbMultiplier')) || 1;
-
-    const counterEl = document.getElementById('counter');
-    counterEl.textContent = count;
-
-    function addCrumb() {
-      count += multiplier;
-      counterEl.textContent = count;
+setInterval(() => {
+  if (gameOver) return;
+  const emoji = document.createElement("div");
+  const isBurned = Math.random() < 0.1;
+  emoji.textContent = isBurned ? "🥐🔥" : "🥐";
+  emoji.className = "falling";
+  emoji.style.left = Math.random() * 90 + "vw";
+  emoji.onclick = () => {
+    if (isBurned) {
+      gameOver = true;
+      alert("🔥 Game Over! Hai cliccato su un cornetto bruciato.");
+      restartGame();
+    } else {
+      count++;
       localStorage.setItem('crumbCount', count);
-    }
-
-    function buyUpgrade(type) {
-      if (type === 1 && count >= 10) {
-        count -= 10;
-        multiplier = 2;
-      } else if (type === 2 && count >= 50) {
-        count -= 50;
-        multiplier = 5;
+      emoji.remove();
+      if (count >= 500) {
+        showFinalScreen();
       }
-      counterEl.textContent = count;
-      localStorage.setItem('crumbCount', count);
-      localStorage.setItem('crumbMultiplier', multiplier);
     }
-
-    const footerTexts = {
-      it: "Gioco ispirato alla storica panetteria Pucci a Cirò Marina<br><a href='https://www.puccipane.it' target='_blank'>Visita il sito Pucci →</a>",
-      en: "A game inspired by the historic Pucci bakery in Cirò Marina<br><a href='https://www.puccipane.it' target='_blank'>Visit Pucci website →</a>",
-      ru: "Игра, вдохновлённая исторической пекарней Pucci в Чиро Марина<br><a href='https://www.puccipane.it' target='_blank'>Сайт пекарни Pucci →</a>"
-    };
-
-    const instructionTexts = {
-      it: "Clicca sul croissant per raccogliere briciole!",
-      en: "Click the croissant to collect crumbs!",
-      ru: "Кликай по круассану, чтобы собирать крошки!"
-    };
-
-    function setLang(lang) {
-      document.getElementById('footerText').innerHTML = footerTexts[lang];
-      document.getElementById('instructions').textContent = instructionTexts[lang];
-      localStorage.setItem('crumbLang', lang);
+  };
+  document.body.appendChild(emoji);
+  setTimeout(() => {
+    if (document.body.contains(emoji)) {
+      emoji.remove();
+      if (!isBurned) missed++;
+      if (missed >= 10) {
+        gameOver = true;
+        alert("❌ Hai mancato troppi cornetti! Game Over.");
+        restartGame();
+      }
     }
-
-    const userLang = localStorage.getItem('crumbLang') || navigator.language.slice(0, 2);
-    if (['it', 'en', 'ru'].includes(userLang)) setLang(userLang);
-    else setLang('en');
-
-    // spawn falling croissants
-    setInterval(() => {
-      const emoji = document.createElement('div');
-      emoji.textContent = '🥐';
-      emoji.className = 'falling';
-      emoji.style.left = Math.random() * 90 + 'vw';
-      emoji.onclick = () => {
-        addCrumb();
-        emoji.remove();
-      };
-      document.body.appendChild(emoji);
-      setTimeout(() => emoji.remove(), 4000);
-    }, 1500);
-  </script>
+  }, 4000);
+}, 1500);
+</script>
 </body>
 </html>
