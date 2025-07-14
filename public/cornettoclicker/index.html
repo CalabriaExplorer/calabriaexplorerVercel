@@ -23,13 +23,17 @@
    top:10px;
    left:50%;
    transform:translateX(-50%);
-   display:flex;
-   gap:15px;
-   font-size:1.2em;
- }
- #bigCroissant{
-   position:absolute;
-   left:50%;
+  display:flex;
+  gap:15px;
+  font-size:1.2em;
+}
+#logo {
+  height: 35px;
+  object-fit: contain;
+}
+#bigCroissant{
+  position:absolute;
+  left:50%;
    top:50%;
    transform:translate(-50%,-50%);
    font-size:50px;
@@ -74,6 +78,7 @@
 <div id="game">
  <div id="bigCroissant">🥐</div>
  <div id="scoreboard">
+  <img id="logo" src="logoPuciPane.png" alt="Pucci Pane" />
   <span id="score">0/500</span>
   <span id="missed">0/10</span>
   <span id="timer">0.0000000</span>
