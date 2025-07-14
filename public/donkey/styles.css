@@ -8,31 +8,35 @@ body, html {
 }
 
 /* \u041e\u0433\u0440\u0430\u043d\u0438\u0447\u0438\u0432\u0430\u0435\u043c \u0432\u044b\u0441\u043e\u0442\u0443 canvas */
-canvas {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-  height: calc(var(--vh, 1vh) * 100 - 60px); /* Уменьшаем высоту на высоту баннера */
-  box-sizing: border-box;
-}
-
-#gameContainer {
+#iphone-wrapper {
   position: relative;
   width: 100%;
   height: calc(var(--vh, 1vh) * 100 - 60px);
-  background: #a3d9ff;
-  touch-action: none;
+  margin: 0 auto;
 }
 
-#game {
-  display: block;
+#iphone-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  display: none;
+}
+
+#gameCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: calc(var(--vh, 1vh) * 100 - 60px);
+  z-index: 2;
 }
 
 @media (max-width: 600px) {
-  #gameContainer,
-  #game {
+  #gameCanvas {
     height: calc(var(--vh, 1vh) * 100 - 60px);
   }
 }
@@ -107,20 +111,15 @@ canvas {
 */
 
 @media (min-width: 768px) {
-  body.iphone-mode #iphone-wrapper {
-    position: relative;
-    width: 430px;
-    height: 932px;
-    margin: 0 auto;
-    background: url('/donkey/iphone_frame.png') no-repeat center center;
-    background-size: contain;
+  body.iphone-mode #iphone-frame {
+    display: block;
   }
-
-  body.iphone-mode #game {
-    position: absolute;
-    top: 60px;
-    left: 26px;
-    width: 378px;
-    height: 812px;
+  body.iphone-mode #iphone-wrapper {
+    width: 393px;
+    height: 852px;
+  }
+  body.iphone-mode #gameCanvas {
+    width: 393px;
+    height: 852px;
   }
 }
