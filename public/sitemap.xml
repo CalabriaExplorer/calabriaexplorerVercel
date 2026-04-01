@@ -94,4 +94,22 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://calabriaexplorer.vercel.app/en/seo-codex" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://calabriaexplorer.vercel.app/" />
   </url>
+  <url>
+    <loc>https://calabriaexplorer.vercel.app/ru/load-test-codex</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://calabriaexplorer.vercel.app/ru/load-test-codex" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://calabriaexplorer.vercel.app/en/load-test-codex" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://calabriaexplorer.vercel.app/load-test-codex" />
+  </url>
+  <url>
+    <loc>https://calabriaexplorer.vercel.app/en/load-test-codex</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://calabriaexplorer.vercel.app/ru/load-test-codex" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://calabriaexplorer.vercel.app/en/load-test-codex" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://calabriaexplorer.vercel.app/load-test-codex" />
+  </url>
 </urlset>

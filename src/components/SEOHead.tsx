@@ -262,12 +262,12 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     // hreflang/alternate
     Array.from(document.querySelectorAll("link[rel='alternate']")).forEach(l => l.remove());
 
+    const normalizedPath = location.pathname.replace(/^\/(en|ru)/, "") || "/";
     const locales = [
-      { code: "ru", hreflang: "ru", url: `${origin}${location.pathname.replace(/^\/en/, "")}` },
-      { code: "en", hreflang: "en", url: `${origin}/en${location.pathname.replace(/^\/en/, "")}` }
+      { hreflang: "ru", url: `${origin}/ru${normalizedPath}` },
+      { hreflang: "en", url: `${origin}/en${normalizedPath}` },
     ];
     locales.forEach(loc => {
-      if (loc.code === language) return;
       const link = document.createElement("link");
       link.rel = "alternate";
       link.hreflang = loc.hreflang;
@@ -277,7 +277,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     const linkX = document.createElement("link");
     linkX.rel = "alternate";
     linkX.hreflang = "x-default";
-    linkX.href = url;
+    linkX.href = `${origin}${normalizedPath}`;
     head.appendChild(linkX);
 
     // robots (ещё раз для безопасности)

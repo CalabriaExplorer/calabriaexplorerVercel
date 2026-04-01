@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import Tours from "./pages/Tours";
 import Melissa from "./pages/Melissa";
@@ -20,6 +20,7 @@ import DogLifePost from "./pages/DogLifePost";
 import WaterOrSwampJuicePost from "./pages/WaterOrSwampJuicePost";
 import CiroMap from "./pages/CiroMap";
 import PucciPanePage from "./pages/places/pucci-pane";
+import LoadTestCodex from "./pages/LoadTestCodex";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,9 @@ const App = () => (
             <Route path="/ciro-map" element={<CiroMap />} />
             <Route path="/places/pucci-pane" element={<PucciPanePage />} />
             <Route path="/stat" element={<Analytics />} />
+            <Route path="/load-test-codex" element={<Navigate to="/ru/load-test-codex" replace />} />
+            <Route path="/ru/load-test-codex" element={<LoadTestCodex />} />
+            <Route path="/en/load-test-codex" element={<LoadTestCodex />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
