@@ -20,6 +20,7 @@ import DogLifePost from "./pages/DogLifePost";
 import WaterOrSwampJuicePost from "./pages/WaterOrSwampJuicePost";
 import CiroMap from "./pages/CiroMap";
 import PucciPanePage from "./pages/places/pucci-pane";
+import LoadTestCodex from "./pages/LoadTestCodex";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,8 @@ const App = () => (
             <Route path="/ciro-map" element={<CiroMap />} />
             <Route path="/places/pucci-pane" element={<PucciPanePage />} />
             <Route path="/stat" element={<Analytics />} />
+            <Route path="/ru/load-test-codex" element={<LoadTestCodex />} />
+            <Route path="/en/load-test-codex" element={<LoadTestCodex />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
