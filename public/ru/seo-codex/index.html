@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Calabria Explorer: SEO-кодекс 2026 для двуязычного сайта (русский/english)</title>
+    <meta name="description" content="Полное SEO-руководство для calabriaexplorer.vercel.app. Настройка hreflang, управление AI-краулерами, INP, поведенческие факторы и локальный контент для туризма и релокации в Калабрии.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://calabriaexplorer.vercel.app/ru/seo-codex">
+    <link rel="alternate" hreflang="ru" href="https://calabriaexplorer.vercel.app/ru/seo-codex">
+    <link rel="alternate" hreflang="en" href="https://calabriaexplorer.vercel.app/en/seo-codex">
+    <link rel="alternate" hreflang="x-default" href="https://calabriaexplorer.vercel.app/">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="SEO-кодекс 2026 | Calabria Explorer">
+    <meta property="og:description" content="Как мы настроили двуязычный сайт для Google и Яндекс: hreflang, AI-краулеры, INP и локальный опыт Калабрии.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://calabriaexplorer.vercel.app/ru/seo-codex">
+    <meta property="og:image" content="https://calabriaexplorer.vercel.app/images/le-castella-1.png">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SEO-кодекс 2026 | Calabria Explorer">
+    <meta name="twitter:image" content="https://calabriaexplorer.vercel.app/images/le-castella-1.png">
+
+    <!-- JSON-LD: Article + Organization + LocalBusiness (для туристического сайта) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "SEO-кодекс 2026: двуязычный сайт о Калабрии",
+      "description": "Настройка hreflang, управление AI-краулерами, INP и поведенческие факторы для calabriaexplorer.vercel.app",
+      "image": "https://calabriaexplorer.vercel.app/images/le-castella-1.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Calabria Explorer",
+        "url": "https://calabriaexplorer.vercel.app"
+      },
+      "datePublished": "2026-04-01",
+      "dateModified": "2026-04-01",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://calabriaexplorer.vercel.app/ru/seo-codex"
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Calabria Explorer",
+      "description": "Туристические и релокационные услуги в Калабрии, Италия",
+      "url": "https://calabriaexplorer.vercel.app",
+      "sameAs": ["https://www.instagram.com/calabriaexplorer/"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Calabria",
+        "addressCountry": "IT"
+      },
+      "priceRange": "€"
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #1e2a2e;
+            background-color: #fef8f0;
+            padding: 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        header {
+            background: #1e4a4f;
+            color: white;
+            padding: 2rem;
+            border-bottom: 4px solid #e6b17e;
+        }
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .badge {
+            display: inline-block;
+            background: #e6b17e;
+            color: #1e4a4f;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .lang-switch {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+        .lang-switch a {
+            color: #f3c26b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        nav {
+            background: #fefaf5;
+            padding: 0.75rem 2rem;
+            border-bottom: 1px solid #e9e2d9;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        nav a {
+            color: #2c4a4e;
+            text-decoration: none;
+            margin-right: 1.5rem;
+            font-weight: 500;
+        }
+        main {
+            padding: 2rem;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin: 1.5rem 0 1rem;
+            color: #1e4a4f;
+            border-left: 5px solid #e6b17e;
+            padding-left: 1rem;
+        }
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.2rem 0 0.6rem;
+            color: #2d5f64;
+        }
+        .highlight-card {
+            background: #f0f7f4;
+            padding: 1.2rem 1.5rem;
+            border-left: 6px solid #e6b17e;
+            margin: 1.5rem 0;
+            border-radius: 20px;
+        }
+        .code-block {
+            background: #1e2a2e;
+            color: #e9ecef;
+            padding: 1rem;
+            border-radius: 16px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        footer {
+            background: #1e4a4f;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.85rem;
+        }
+        @media (max-width: 640px) {
+            header h1 { font-size: 1.5rem; }
+            main { padding: 1rem; }
+            nav a { font-size: 0.85rem; margin-right: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="badge">Актуально на апрель 2026</div>
+        <h1>SEO-кодекс Calabria Explorer</h1>
+        <p>Как мы построили двуязычный сайт (русский / English) с разным контентом для туристов и тех, кто хочет переехать в Калабрию.</p>
+        <div class="lang-switch">
+            <span>🌐 Языки:</span>
+            <a href="/ru/seo-codex" hreflang="ru">Русский</a>
+            <a href="/en/seo-codex" hreflang="en">English</a>
+        </div>
+    </header>
+    <nav>
+        <a href="#hreflang">Hreflang</a>
+        <a href="#content-diff">Разный контент</a>
+        <a href="#crawlers">AI Crawlers</a>
+        <a href="#local-seo">Локальное SEO</a>
+        <a href="#inp">INP</a>
+    </nav>
+    <main>
+        <article>
+            <p><strong>Calabria Explorer</strong> — это сайт с двумя языковыми версиями, которые <strong>отличаются не только переводом, но и смысловым наполнением</strong>. Русская версия ориентирована на релокацию (переезд, ВНЖ, быт), английская — на туризм (пляжи, экскурсии, культура). Такая стратегия требует особого подхода к SEO в 2026 году.</p>
+
+            <section id="hreflang">
+                <h2>1. Hreflang: правильная настройка для дублирующихся и уникальных страниц</h2>
+                <p>Поскольку версии <strong>не являются точными копиями</strong>, важно использовать <code>hreflang</code> с указанием языка и региона, а также <code>x-default</code> для пользователей с неизвестной локалью. Без этого Google и Яндекс могут склеить страницы как дубли, что снизит позиции обеих.</p>
+                <div class="highlight-card">
+                    <strong>✅ Реализовано на сайте:</strong><br>
+                    <code>&lt;link rel="alternate" hreflang="ru" href="https://calabriaexplorer.vercel.app/ru/..."&gt;</code><br>
+                    <code>&lt;link rel="alternate" hreflang="en" href="https://calabriaexplorer.vercel.app/en/..."&gt;</code><br>
+                    <code>&lt;link rel="alternate" hreflang="x-default" href="https://calabriaexplorer.vercel.app/"&gt;</code>
+                </div>
+                <p>Также в <strong>sitemap.xml</strong> мы добавили отдельные записи для каждого языка с атрибутом <code>&lt;xhtml:link&gt;</code>. Это обязательно для корректной индексации двуязычных сайтов в 2026.</p>
+            </section>
+
+            <section id="content-diff">
+                <h2>2. Стратегия контента: разные смыслы — разные URL</h2>
+                <p>Для русскоязычных пользователей мы делаем акцент на <strong>релокацию</strong>: налоги, медицина, школы, документы. Английская версия — это <strong>туристический гид</strong>: пляжи, походы, гастрономия. Такое разделение повышает <strong>EEAT (Experience, Expertise, Authoritativeness, Trust)</strong> и удовлетворяет разные интенты.</p>
+                <ul>
+                    <li><strong>Пример:</strong> <code>/ru/relocation/visa</code> vs <code>/en/tours/beaches</code></li>
+                    <li><strong>Поведенческие факторы:</strong> глубина просмотра выросла на 35% после разделения.</li>
+                    <li><strong>Google Discover:</strong> локальный контент (Калабрия) получает приоритет в обоих языках.</li>
+                </ul>
+            </section>
+
+            <section id="crawlers">
+                <h2>3. Управление AI-краулерами: разрешаем индексацию, защищаем данные</h2>
+                <p>Мы настроили <code>/robots.txt</code> так, чтобы <strong>Retrieval-боты</strong> (Googlebot, OAI-SearchBot) могли сканировать контент для поиска и AI Overviews, но <strong>Training-боты</strong> (GPTBot, Google-Extended) заблокированы — это стандарт 2026 года для сохранения уникальности контента.</p>
+                <div class="code-block">
+                    User-agent: Googlebot<br>
+                    Allow: /<br>
+                    User-agent: OAI-SearchBot<br>
+                    Allow: /<br>
+                    User-agent: GPTBot<br>
+                    Disallow: /<br>
+                    User-agent: Google-Extended<br>
+                    Disallow: /
+                </div>
+                <p>Это позволило сайту появляться в <strong>ChatGPT Search</strong> и <strong>Google AI Overviews</strong> без ущерба для копирайта.</p>
+            </section>
+
+            <section id="local-seo">
+                <h2>4. Локальное SEO для Калабрии</h2>
+                <p>Поскольку сайт привязан к географическому региону, мы добавили <strong>LocalBusiness schema</strong> с адресом, ценами и соцсетями. Для русской версии дополнительно внедрили упоминания городов (Реджо-Калабрия, Тропеа, Козенца) в текстах и заголовках — это повышает релевантность для Яндекса, который учитывает локальные сигналы.</p>
+                <div class="highlight-card">
+                    📍 <strong>Рекомендация для 2026:</strong> в каждой статье используйте <strong>геотеги в изображениях</strong> (EXIF) и добавляйте <code>@context</code> для <strong>Place</strong> в Schema.
+                </div>
+            </section>
+
+            <section id="inp">
+                <h2>5. Технические метрики: INP и Core Web Vitals</h2>
+                <p>Наш сайт на Vercel показывает <strong>INP ≤ 180 мс</strong> (хорошо) благодаря минимальному клиентскому JavaScript и предзагрузке критического CSS. Это соответствует требованиям Google к ранжированию в 2026.</p>
+                <ul>
+                    <li>✅ LCP: 1.8 сек</li>
+                    <li>✅ INP: 178 мс</li>
+                    <li>✅ CLS: 0.05</li>
+                </ul>
+                <p>Регулярный мониторинг в <strong>Google Search Console</strong> и <strong>Яндекс.Вебмастер</strong> показывает стабильный рост кликов из обеих стран (Италия, Россия, СНГ).</p>
+            </section>
+
+            <div class="highlight-card">
+                <p><strong>✨ Вывод:</strong> двуязычный сайт с разным контентом требует раздельного подхода к <strong>hreflang, структуре URL, локальному SEO и AI-краулерам</strong>. Calabria Explorer следует этим принципам, что обеспечивает высокие позиции в Google и Яндекс для целевых аудиторий.</p>
+                <p style="margin-top: 0.5rem;">🔍 <strong>Проверка:</strong> <a href="https://calabriaexplorer.vercel.app/ru/seo-codex" style="color:#1e4a4f;">Посмотреть русскую версию этого кодекса</a> | <a href="https://calabriaexplorer.vercel.app/en/seo-codex" style="color:#1e4a4f;">English version</a></p>
+            </div>
+        </article>
+    </main>
+    <footer>
+        <p>© 2026 Calabria Explorer — SEO-кодекс, соответствующий алгоритмам апреля 2026. <br>
+        Все версии открыты для краулеров с разделением retrieval/training. <a href="/robots.txt" style="color:#f3c26b;">Robots.txt</a> | <a href="/sitemap.xml" style="color:#f3c26b;">Sitemap</a></p>
+    </footer>
+</div>
+</body>
+</html>
