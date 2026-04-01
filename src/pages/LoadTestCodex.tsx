@@ -2,7 +2,7 @@ import SEOHead from "@/components/SEOHead";
 import { useLocation } from "react-router-dom";
 
 const loadTestScript = `#!/usr/bin/env node
-
+// scripts/load-test.mjs
 import { fetch } from 'undici';
 import { performance } from 'perf_hooks';
 
@@ -17,23 +17,17 @@ if (!url || !durationSec || !concurrency) {
   process.exit(1);
 }
 
-let completed = 0;
-let success = 0;
-let failed = 0;
+let completed = 0, success = 0, failed = 0, active = 0, stop = false;
 const latencies = [];
 const errorReasons = new Map();
-let active = 0;
-let stop = false;
 
 const makeRequest = async () => {
   const start = performance.now();
   try {
     const res = await fetch(url, { timeout: 30000 });
-    const latency = performance.now() - start;
-    latencies.push(latency);
-    if (res.ok) {
-      success++;
-    } else {
+    latencies.push(performance.now() - start);
+    if (res.ok) success++;
+    else {
       failed++;
       const reason = \`HTTP \${res.status}\`;
       errorReasons.set(reason, (errorReasons.get(reason) || 0) + 1);
@@ -43,27 +37,21 @@ const makeRequest = async () => {
     const reason = err.code || err.message;
     errorReasons.set(reason, (errorReasons.get(reason) || 0) + 1);
   }
-  completed++;
-  active--;
+
+  completed++; active--;
   if (!stop && (targetTotal === null || completed < targetTotal)) {
-    active++;
-    makeRequest();
+    active++; makeRequest();
   }
 };
 
 const run = async () => {
-  console.log(\`Starting test: \${url} | duration: \${durationSec}s | concurrency: \${concurrency} | targetTotal: \${targetTotal ?? '∞'}\`);
   const startTime = Date.now();
-  for (let i = 0; i < concurrency; i++) {
-    active++;
-    makeRequest();
-  }
+  for (let i = 0; i < concurrency; i++) { active++; makeRequest(); }
 
   const interval = setInterval(() => {
     const elapsed = (Date.now() - startTime) / 1000;
-    console.log(\`[\${elapsed.toFixed(1)}s] completed: \${completed} | success: \${success} | fail: \${failed} | active: \${active}\`);
+    console.log(\`[\${elapsed.toFixed(1)}s] completed=\${completed} success=\${success} failed=\${failed} active=\${active}\`);
     if (targetTotal !== null && completed >= targetTotal) {
-      console.log(\`Target \${targetTotal} requests reached. Stopping.\`);
       stop = true;
       clearInterval(interval);
     }
@@ -72,22 +60,14 @@ const run = async () => {
   setTimeout(() => {
     stop = true;
     clearInterval(interval);
-    console.log('\\n--- Test finished ---');
-    console.log(\`Total requests: \${completed}\`);
-    console.log(\`Success: \${success}\`);
-    console.log(\`Failed: \${failed}\`);
-    if (latencies.length) {
-      latencies.sort((a,b) => a - b);
-      const p50 = latencies[Math.floor(latencies.length * 0.5)];
-      const p95 = latencies[Math.floor(latencies.length * 0.95)];
-      const p99 = latencies[Math.floor(latencies.length * 0.99)];
-      console.log(\`p50: \${p50.toFixed(2)}ms | p95: \${p95.toFixed(2)}ms | p99: \${p99.toFixed(2)}ms\`);
-    }
-    console.log('\\nTop error reasons:');
-    const sortedErrors = [...errorReasons.entries()].sort((a,b) => b[1] - a[1]);
-    for (const [reason, count] of sortedErrors.slice(0, 5)) {
-      console.log(\`  \${reason}: \${count}\`);
-    }
+
+    latencies.sort((a, b) => a - b);
+    const p50 = latencies[Math.floor(latencies.length * 0.5)] || 0;
+    const p95 = latencies[Math.floor(latencies.length * 0.95)] || 0;
+    const p99 = latencies[Math.floor(latencies.length * 0.99)] || 0;
+
+    console.log({ completed, success, failed, p50, p95, p99 });
+    console.log([...errorReasons.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5));
   }, durationSec * 1000);
 };
 
@@ -101,8 +81,8 @@ export default function LoadTestCodex() {
     ? "Performance Codex: Load Testing and Site Optimization"
     : "Codex производительности: нагрузочное тестирование и оптимизация сайта";
   const description = isEn
-    ? "Load-testing playbook for calabriaexplorer.vercel.app: scripts, 20k concurrency results, error analysis, and optimization recommendations."
-    : "Полный кодекс по нагрузочному тестированию сайта calabriaexplorer.vercel.app: скрипты, результаты 20k concurrency, анализ ошибок, рекомендации по оптимизации для высоких нагрузок.";
+    ? "Comprehensive load-testing codex for calabriaexplorer.vercel.app: scripts, 20k-concurrency results, error analysis, and optimization plan."
+    : "Полный кодекс по нагрузочному тестированию сайта calabriaexplorer.vercel.app: скрипты, результаты 20k concurrency, анализ ошибок и план оптимизации.";
   const canonical = `https://calabriaexplorer.vercel.app${isEn ? "/en" : "/ru"}/load-test-codex`;
 
   return (
@@ -111,17 +91,14 @@ export default function LoadTestCodex() {
         title={title}
         description={description}
         type="article"
-        image="https://calabriaexplorer.vercel.app/images/load-test-og.jpg"
+        image="https://calabriaexplorer.vercel.app/images/le-castella-1.png"
         canonical={canonical}
         schema={JSON.stringify({
           "@context": "https://schema.org",
           "@type": "TechArticle",
           headline: title,
           description,
-          author: {
-            "@type": "Organization",
-            name: "Calabria Explorer",
-          },
+          author: { "@type": "Organization", name: "Calabria Explorer" },
           datePublished: "2026-04-01",
           dateModified: "2026-04-01",
           inLanguage: isEn ? "en" : "ru",
@@ -131,80 +108,68 @@ export default function LoadTestCodex() {
       <div className="mx-auto my-4 max-w-6xl overflow-hidden rounded-[28px] bg-white shadow-[0_8px_30px_rgba(0,0,0,0.05)]">
         <header className="bg-[#1e4a4f] p-8 text-white">
           <div className="mb-4 inline-block rounded-[30px] bg-[#e6b17e] px-3 py-1 text-xs font-bold text-[#1e4a4f]">
-            {isEn ? "April 2026 • Load Testing" : "Апрель 2026 • Нагрузочное тестирование"}
+            {isEn ? "April 2026 • Load testing" : "Апрель 2026 • Нагрузочное тестирование"}
           </div>
           <h1 className="mb-2 text-3xl font-bold leading-tight">{title}</h1>
-          <p>
-            {isEn
-              ? "Metrics, scripts and strategies to reach 1M requests on calabriaexplorer.vercel.app"
-              : "Метрики, скрипты и стратегии для достижения 1M запросов на calabriaexplorer.vercel.app"}
-          </p>
+          <p>{isEn ? "Metrics, script and strategy to reach 1M requests." : "Метрики, скрипт и стратегия для достижения 1M запросов."}</p>
         </header>
 
-        <nav className="sticky top-0 z-10 border-b border-[#e9e2d9] bg-[#fefaf5] px-8 py-3">
-          <a className="mr-6 font-medium text-[#2c4a4e]" href="#results">Результаты</a>
-          <a className="mr-6 font-medium text-[#2c4a4e]" href="#script">Скрипт тестирования</a>
-          <a className="mr-6 font-medium text-[#2c4a4e]" href="#analysis">Анализ ошибок</a>
-          <a className="mr-6 font-medium text-[#2c4a4e]" href="#optimization">Оптимизация</a>
-          <a className="font-medium text-[#2c4a4e]" href="#next">Следующие шаги</a>
+        <nav className="sticky top-0 z-10 border-b border-[#e9e2d9] bg-[#fefaf5] px-8 py-3 text-sm md:text-base">
+          <a className="mr-4 font-medium text-[#2c4a4e]" href="#results">{isEn ? "Results" : "Результаты"}</a>
+          <a className="mr-4 font-medium text-[#2c4a4e]" href="#script">{isEn ? "Script" : "Скрипт"}</a>
+          <a className="mr-4 font-medium text-[#2c4a4e]" href="#analysis">{isEn ? "Error analysis" : "Анализ ошибок"}</a>
+          <a className="mr-4 font-medium text-[#2c4a4e]" href="#optimization">{isEn ? "Optimization" : "Оптимизация"}</a>
+          <a className="font-medium text-[#2c4a4e]" href="#next">{isEn ? "Next steps" : "Следующие шаги"}</a>
         </nav>
 
         <main className="bg-[#f5f3ef] p-4 md:p-8">
           <article className="rounded-2xl bg-white p-4 md:p-8">
-            <p>
-              <strong>Calabria Explorer</strong> — двуязычный сайт о Калабрии, построенный на Vercel. Для проверки
-              готовности к высоким нагрузкам были проведены экстремальные тесты: 20 000 одновременных пользователей и
-              попытка достичь 1 000 000 запросов.
-            </p>
-
             <section id="results">
-              <h2 className="mt-6 border-l-[5px] border-[#e6b17e] pl-4 text-3xl text-[#1e4a4f]">1. Результаты нагрузочного тестирования</h2>
-              <p className="mt-3">Тесты запускались на <code>http://127.0.0.1:4173</code> (Vite preview) с помощью <code>scripts/load-test.mjs</code>.</p>
+              <h2 className="mt-4 border-l-[5px] border-[#e6b17e] pl-4 text-2xl text-[#1e4a4f]">1. {isEn ? "Load-test results" : "Результаты нагрузочного тестирования"}</h2>
               <div className="mt-4 overflow-x-auto">
                 <table className="w-full border-collapse">
-                  <thead>
-                    <tr>
-                      <th className="border border-[#ddd] bg-[#e9e2d9] p-2 text-left">Сценарий</th>
-                      <th className="border border-[#ddd] bg-[#e9e2d9] p-2 text-left">Concurrency</th>
-                      <th className="border border-[#ddd] bg-[#e9e2d9] p-2 text-left">Всего запросов</th>
-                      <th className="border border-[#ddd] bg-[#e9e2d9] p-2 text-left">Успешных</th>
-                      <th className="border border-[#ddd] bg-[#e9e2d9] p-2 text-left">Ошибок</th>
-                      <th className="border border-[#ddd] bg-[#e9e2d9] p-2 text-left">p95 latency</th>
-                    </tr>
-                  </thead>
+                  <thead><tr><th className="border p-2">Scenario</th><th className="border p-2">Concurrency</th><th className="border p-2">Total</th><th className="border p-2">Success</th><th className="border p-2">Errors</th><th className="border p-2">p95</th></tr></thead>
                   <tbody>
-                    <tr>
-                      <td className="border border-[#ddd] p-2">Краткий прогон</td>
-                      <td className="border border-[#ddd] p-2">20 000</td>
-                      <td className="border border-[#ddd] p-2">5 090</td>
-                      <td className="border border-[#ddd] p-2">4 982</td>
-                      <td className="border border-[#ddd] p-2">108 (≈2.1%)</td>
-                      <td className="border border-[#ddd] p-2">~18 c</td>
-                    </tr>
-                    <tr>
-                      <td className="border border-[#ddd] p-2">1M target (10 сек)</td>
-                      <td className="border border-[#ddd] p-2">2 000</td>
-                      <td className="border border-[#ddd] p-2">3 776</td>
-                      <td className="border border-[#ddd] p-2">—</td>
-                      <td className="border border-[#ddd] p-2">—</td>
-                      <td className="border border-[#ddd] p-2">—</td>
-                    </tr>
+                    <tr><td className="border p-2">20k short run</td><td className="border p-2">20,000</td><td className="border p-2">5,090</td><td className="border p-2">4,982</td><td className="border p-2">108 (~2.1%)</td><td className="border p-2">~18s</td></tr>
+                    <tr><td className="border p-2">1M target (10s)</td><td className="border p-2">2,000</td><td className="border p-2">3,776</td><td className="border p-2">—</td><td className="border p-2">—</td><td className="border p-2">—</td></tr>
                   </tbody>
                 </table>
               </div>
             </section>
 
             <section id="script">
-              <h2 className="mt-6 border-l-[5px] border-[#e6b17e] pl-4 text-3xl text-[#1e4a4f]">2. Улучшенный скрипт нагрузочного тестирования</h2>
-              <pre className="mt-4 overflow-x-auto rounded-2xl bg-[#1e2a2e] p-4 text-sm text-[#e9ecef]">
-                {loadTestScript}
-              </pre>
+              <h2 className="mt-6 border-l-[5px] border-[#e6b17e] pl-4 text-2xl text-[#1e4a4f]">2. {isEn ? "Improved load-test script" : "Улучшенный скрипт"}</h2>
+              <pre className="mt-4 overflow-x-auto rounded-2xl bg-[#1e2a2e] p-4 text-sm text-[#e9ecef]">{loadTestScript}</pre>
+            </section>
+
+            <section id="analysis">
+              <h2 className="mt-6 border-l-[5px] border-[#e6b17e] pl-4 text-2xl text-[#1e4a4f]">3. {isEn ? "Error analysis" : "Анализ ошибок"}</h2>
+              <ul className="list-disc pl-6">
+                <li>{isEn ? "Connection timeouts and queue saturation" : "Таймауты соединения и насыщение очередей"}</li>
+                <li>{isEn ? "ECONNRESET / socket hang up under burst traffic" : "ECONNRESET / socket hang up под всплеском"}</li>
+                <li>{isEn ? "Node memory pressure under high concurrency" : "Давление на память Node при высокой конкуррентности"}</li>
+              </ul>
+            </section>
+
+            <section id="optimization">
+              <h2 className="mt-6 border-l-[5px] border-[#e6b17e] pl-4 text-2xl text-[#1e4a4f]">4. {isEn ? "Optimization plan" : "План оптимизации"}</h2>
+              <p>{isEn ? "CDN cache headers, ISR/static generation, Edge Functions, background jobs and observability alerts." : "CDN-кэш, ISR/статическая генерация, Edge Functions, фоновые задачи и алерты мониторинга."}</p>
+            </section>
+
+            <section id="next">
+              <h2 className="mt-6 border-l-[5px] border-[#e6b17e] pl-4 text-2xl text-[#1e4a4f]">5. {isEn ? "Next steps" : "Следующие шаги"}</h2>
+              <ol className="list-decimal pl-6">
+                <li>{isEn ? "Run progressive ramp-up on production" : "Запустить ramp-up тест на production"}</li>
+                <li>{isEn ? "Hold 500 RPS for 30 minutes" : "Провести 30-минутный тест на 500 RPS"}</li>
+                <li>{isEn ? "Profile hot paths and repeat after caching" : "Профилировать узкие места и повторить после кэширования"}</li>
+              </ol>
             </section>
           </article>
         </main>
 
         <footer className="bg-[#1e4a4f] p-6 text-center text-sm text-[#cbd5e1]">
-          <p>© 2026 Calabria Explorer — кодекс производительности.</p>
+          <p>© 2026 Calabria Explorer — Performance Codex.</p>
+          <a className="text-[#f3c26b]" href={isEn ? "/ru/load-test-codex" : "/en/load-test-codex"}>{isEn ? "Русская версия" : "English version"}</a>
         </footer>
       </div>
     </>
