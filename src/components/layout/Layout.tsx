@@ -32,8 +32,8 @@ const ThreadsIcon = ({ className }: { className?: string }) => (
     className={className}
     aria-hidden="true"
   >
-    <path d="M10 13c0 2.21 1.79 4 4 4s4-1.79 4-4V9c0-2.21-1.79-4-4-4S10 6.79 10 9v2c0 2.21 1.79 4 4 4a4 4 0 0 0 4-4V9" />
-    <path d="M10 13a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v4a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4" />
+    <path d="M12 4.5a7.5 7.5 0 1 0 7.5 7.5V9.75a2.25 2.25 0 0 0-4.5 0V12a3 3 0 1 1-3-3h1.5" />
+    <path d="M15 9.75V12a1.5 1.5 0 1 1-3 0V9.75a2.25 2.25 0 1 1 4.5 0" />
   </svg>
 );
 
