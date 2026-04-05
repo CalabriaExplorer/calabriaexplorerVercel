@@ -157,6 +157,17 @@ const translations = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const readLanguageCookie = (): Language | null => {
+  if (typeof document === "undefined") return null;
+  const raw = document.cookie
+    .split(";")
+    .map((item) => item.trim())
+    .find((item) => item.startsWith("preferred-language="));
+  if (!raw) return null;
+  const value = raw.split("=")[1];
+  return value === "ru" || value === "en" ? value : null;
+};
+
 const getLanguageFromUrl = (): Language | null => {
   if (typeof window === "undefined") return null;
 
@@ -179,13 +190,21 @@ const getInitialLanguage = (): Language => {
   if (urlLanguage) return urlLanguage;
 
   if (typeof window !== "undefined") {
+    const cookieLanguage = readLanguageCookie();
+    if (cookieLanguage) {
+      return cookieLanguage;
+    }
+
     const saved = window.localStorage.getItem("preferred-language");
     if (saved === "ru" || saved === "en") {
       return saved;
     }
 
-    const acceptLanguage = window.navigator.language.toLowerCase();
-    if (acceptLanguage.startsWith("ru")) {
+    const browserLanguages = window.navigator.languages?.length
+      ? window.navigator.languages
+      : [window.navigator.language];
+    const hasRussian = browserLanguages.some((lang) => lang.toLowerCase().startsWith("ru"));
+    if (hasRussian) {
       return "ru";
     }
   }
@@ -202,8 +221,11 @@ export const LanguageProvider: React.FC<{children: ReactNode}> = ({ children }) 
     window.localStorage.setItem("preferred-language", nextLanguage);
     document.cookie = `preferred-language=${nextLanguage}; path=/; max-age=31536000; samesite=lax`;
 
+    const isPathLocalized = /^\/(ru|en)(\/|$)/.test(window.location.pathname);
     const params = new URLSearchParams(window.location.search);
-    params.set("lang", nextLanguage);
+    if (!isPathLocalized) {
+      params.set("lang", nextLanguage);
+    }
     const nextQuery = params.toString();
     const nextUrl = `${window.location.pathname}${nextQuery ? `?${nextQuery}` : ""}${window.location.hash}`;
     window.history.replaceState({}, "", nextUrl);
