@@ -28,7 +28,37 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/en/social",
+      "destination": "/ru/social",
+      "permanent": true
+    },
+    {
+      "source": "/en/official-channels",
+      "destination": "/ru/social",
+      "permanent": true
+    },
+    {
+      "source": "/social",
+      "destination": "/ru/social",
+      "permanent": true
+    },
+    {
+      "source": "/ru/official-channels",
+      "destination": "/ru/social",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/ru/social",
+      "destination": "/ru/social.html"
+    },
+    {
+      "source": "/ru/social/",
+      "destination": "/ru/social.html"
+    },
     {
       "source": "/PucciPane",
       "destination": "/PucciPane/index.html"
