@@ -38,26 +38,12 @@
       "source": "/en/official-channels",
       "destination": "/ru/social",
       "permanent": true
-    },
-    {
-      "source": "/social",
-      "destination": "/ru/social",
-      "permanent": true
-    },
-    {
-      "source": "/ru/official-channels",
-      "destination": "/ru/social",
-      "permanent": true
     }
   ],
   "rewrites": [
     {
       "source": "/ru/social",
-      "destination": "/ru/social.html"
-    },
-    {
-      "source": "/ru/social/",
-      "destination": "/ru/social.html"
+      "destination": "/ru/social/index.html"
     },
     {
       "source": "/PucciPane",

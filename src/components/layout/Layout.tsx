@@ -100,10 +100,16 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
     }
   };
 
-  // Определяем canonical
+  // Определяем canonical и hreflang URL без query-параметра ?lang=
   const canonicalUrl = typeof window !== "undefined"
-    ? `${window.location.origin}${window.location.pathname}?lang=${language}`
+    ? `${window.location.origin}${window.location.pathname}`
     : undefined;
+  const languagePath = typeof window !== "undefined" ? window.location.pathname.replace(/^\/(en|ru)(?=\/|$)/, "") || "/" : "/";
+  const alternateUrls = {
+    en: `/en${languagePath === "/" ? "" : languagePath}`,
+    ru: `/ru${languagePath === "/" ? "" : languagePath}`,
+    xDefault: "/",
+  };
 
   // Schema.org: по title и pathname определяем тип schema
   const isBlogPost = title && /blog/i.test(title) && typeof window !== "undefined" && window.location.pathname.startsWith("/blog/");
@@ -180,6 +186,7 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
         title={title || "Calabria Explorer"}
         description={description || "Travel in Calabria, Italy: Tours, guides, relocation support."}
         canonical={canonicalUrl}
+        alternateUrls={alternateUrls}
         image={image}
         schema={schema}
         preloadImages={preloadImages}
