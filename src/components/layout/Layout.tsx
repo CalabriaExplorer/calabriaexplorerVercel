@@ -22,12 +22,16 @@ const ThreadsIcon = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    fill="currentColor"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     className={className}
     aria-hidden="true"
   >
-    <path d="M16.5 4.5c-2.5 0-4.5 2-4.5 4.5v6c0 2.5 2 4.5 4.5 4.5s4.5-2 4.5-4.5v-2h-3v2c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V9c0-1.7 1.3-3 3-3s3 1.3 3 3v3h3V9c0-2.5-2-4.5-4.5-4.5z" />
-    <circle cx="6.5" cy="14.5" r="2.5" />
+    <path d="M10 13c0 2.21 1.79 4 4 4s4-1.79 4-4V9c0-2.21-1.79-4-4-4S10 6.79 10 9v2c0 2.21 1.79 4 4 4a4 4 0 0 0 4-4V9" />
+    <path d="M10 13a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v4a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4" />
   </svg>
 );
 
@@ -69,7 +73,7 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
           label: "Follow us on Instagram"
         },
         {
-          href: "https://www.threads.com/@maria_nedvizimost_calabria",
+          href: "https://www.threads.net/@maria_nedvizimost_calabria",
           icon: ThreadsIcon,
           label: "Threads"
         }
@@ -82,7 +86,7 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
           label: "Подписывайтесь в Instagram"
         },
         {
-          href: "https://www.threads.com/@maria_nedvizimost_calabria",
+          href: "https://www.threads.net/@maria_nedvizimost_calabria",
           icon: ThreadsIcon,
           label: "Threads"
         },
