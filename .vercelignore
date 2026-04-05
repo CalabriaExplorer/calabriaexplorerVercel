@@ -1,0 +1,6 @@
+# Исключаем middleware-файлы Next.js для Vite-приложения,
+# чтобы Vercel не пытался собрать Edge Function с next/server.
+middleware.ts
+middleware.js
+src/middleware.ts
+src/middleware.js
