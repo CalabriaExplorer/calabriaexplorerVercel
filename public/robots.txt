@@ -1,4 +1,3 @@
-
 User-agent: *
 Allow: /
 Disallow: /api/
@@ -8,23 +7,17 @@ Disallow: /src/
 
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
 
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Yandex
-Allow: /
-Crawl-delay: 1
-
-User-agent: facebookexternalhit
+User-agent: YandexBot
 Allow: /
 
-User-agent: Twitterbot
+User-agent: GPTBot
 Allow: /
 
-User-agent: LinkedInBot
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://calabriaexplorer.vercel.app/sitemap.xml

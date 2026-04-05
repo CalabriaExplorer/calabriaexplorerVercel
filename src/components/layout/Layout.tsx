@@ -101,8 +101,8 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
   };
 
   // Определяем canonical
-  const canonicalUrl = typeof window !== "undefined" 
-    ? window.location.origin + window.location.pathname 
+  const canonicalUrl = typeof window !== "undefined"
+    ? `${window.location.origin}${window.location.pathname}?lang=${language}`
     : undefined;
 
   // Schema.org: по title и pathname определяем тип schema
