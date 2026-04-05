@@ -28,7 +28,23 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/en/social",
+      "destination": "/ru/social",
+      "permanent": true
+    },
+    {
+      "source": "/en/official-channels",
+      "destination": "/ru/social",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/ru/social",
+      "destination": "/ru/social/index.html"
+    },
     {
       "source": "/PucciPane",
       "destination": "/PucciPane/index.html"
