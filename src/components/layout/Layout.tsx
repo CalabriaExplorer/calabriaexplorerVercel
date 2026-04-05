@@ -21,6 +21,8 @@ interface LayoutProps {
 const ThreadsIcon = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -30,8 +32,8 @@ const ThreadsIcon = ({ className }: { className?: string }) => (
     className={className}
     aria-hidden="true"
   >
-    <path d="M10 13c0 2.21 1.79 4 4 4s4-1.79 4-4V9c0-2.21-1.79-4-4-4S10 6.79 10 9v2c0 2.21 1.79 4 4 4a4 4 0 0 0 4-4V9" />
-    <path d="M10 13a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v4a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4" />
+    <path d="M12 4.5a7.5 7.5 0 1 0 7.5 7.5V9.75a2.25 2.25 0 0 0-4.5 0V12a3 3 0 1 1-3-3h1.5" />
+    <path d="M15 9.75V12a1.5 1.5 0 1 1-3 0V9.75a2.25 2.25 0 1 1 4.5 0" />
   </svg>
 );
 
@@ -117,8 +119,19 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
         {
           href: "https://dzen.ru/id/66f27f02053e7469931f7e54",
           icon: ({ className }: { className?: string }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className={className} aria-hidden="true">
-              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 8.16c-.169-.196-.41-.307-.67-.307-.495 0-.896.401-.896.896 0 .495.401.896.896.896s.896-.401.896-.896c0-.26-.111-.501-.226-.589zM12 18.72c-3.708 0-6.72-3.012-6.72-6.72S8.292 5.28 12 5.28s6.72 3.012 6.72 6.72-3.012 6.72-6.72 6.72zm0-11.52c-2.65 0-4.8 2.15-4.8 4.8s2.15 4.8 4.8 4.8 4.8-2.15 4.8-4.8-2.15-4.8-4.8-4.8zm0 7.68c-1.591 0-2.88-1.289-2.88-2.88S10.409 9.12 12 9.12s2.88 1.289 2.88 2.88-1.289 2.88-2.88 2.88z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className={className}
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="9" />
+              <circle cx="12" cy="12" r="3" />
             </svg>
           ),
           label: "Читайте в Дзен"
@@ -347,7 +360,7 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
                     href={social.href} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="text-gray-300 hover:text-white" 
+                    className="text-white/90 hover:text-white" 
                     aria-label={social.label}
                   >
                     <social.icon className="w-6 h-6" aria-hidden="true" />
