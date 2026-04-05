@@ -7,6 +7,13 @@ body, html {
   background: #f0f0f0;
 }
 
+.game-title {
+  margin: 12px 0 8px;
+  text-align: center;
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
 /* \u041e\u0433\u0440\u0430\u043d\u0438\u0447\u0438\u0432\u0430\u0435\u043c \u0432\u044b\u0441\u043e\u0442\u0443 canvas */
 #iphone-wrapper {
   position: relative;
