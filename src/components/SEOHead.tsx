@@ -45,7 +45,8 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   // canonical без query-параметров пагинации/сортировки
   const cleanPath = location.pathname;
   const origin = typeof window !== "undefined" ? window.location.origin : "";
-  const url = canonical || absoluteUrl(cleanPath);
+  const languageQuery = language === "ru" ? "?lang=ru" : "?lang=en";
+  const url = canonical || absoluteUrl(`${cleanPath}${languageQuery}`);
 
   // Google Analytics (gtag.js)
   React.useEffect(() => {
@@ -97,7 +98,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   // Canonical — убираем параметры page/sort/utm
   React.useEffect(() => {
     let canonicalTag = document.querySelector("link[rel='canonical']");
-    const canonicalHref = url.replace(/\?(page|sort|utm_.*?)=[^&]+(&|$)/g, "");
+    const canonicalHref = url.replace(/([?&])(page|sort|utm_[^=]*)=[^&]*(&|$)/g, "$1").replace(/[?&]$/, "");
     if (!canonicalTag) {
       canonicalTag = document.createElement("link");
       (canonicalTag as HTMLLinkElement).rel = "canonical";
@@ -262,10 +263,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     // hreflang/alternate
     Array.from(document.querySelectorAll("link[rel='alternate']")).forEach(l => l.remove());
 
-    const normalizedPath = location.pathname.replace(/^\/(en|ru)/, "") || "/";
+    const normalizedPath = location.pathname.replace(/^\/(en|ru)(\/|$)/, "/") || "/";
     const locales = [
-      { hreflang: "ru", url: `${origin}/ru${normalizedPath}` },
-      { hreflang: "en", url: `${origin}/en${normalizedPath}` },
+      { hreflang: "ru", url: `${origin}${normalizedPath}?lang=ru` },
+      { hreflang: "en", url: `${origin}${normalizedPath}?lang=en` },
     ];
     locales.forEach(loc => {
       const link = document.createElement("link");
