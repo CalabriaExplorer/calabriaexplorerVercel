@@ -204,3 +204,14 @@
     background-position: -200% 0;
   }
 }
+
+.text-container {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+h1,
+h2 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+}

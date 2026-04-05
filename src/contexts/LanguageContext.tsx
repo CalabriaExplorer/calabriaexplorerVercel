@@ -8,6 +8,7 @@ type Language = "en" | "ru";
 interface LanguageContextType {
   language: Language;
   setLanguage: (language: Language) => void;
+  switchLanguage: (language: Language, currentPath?: string) => string;
   t: (key: string) => string;
 }
 
@@ -176,16 +177,11 @@ const getLanguageFromUrl = (): Language | null => {
     return firstSegment;
   }
 
-  const params = new URLSearchParams(window.location.search);
-  const langQuery = params.get("lang");
-  if (langQuery === "ru" || langQuery === "en") {
-    return langQuery;
-  }
-
   return null;
 };
 
 const getInitialLanguage = (): Language => {
+  // Priority: URL prefix → cookie → localStorage → Accept-Language
   const urlLanguage = getLanguageFromUrl();
   if (urlLanguage) return urlLanguage;
 
@@ -220,21 +216,23 @@ export const LanguageProvider: React.FC<{children: ReactNode}> = ({ children }) 
 
     window.localStorage.setItem("preferred-language", nextLanguage);
     document.cookie = `preferred-language=${nextLanguage}; path=/; max-age=31536000; samesite=lax`;
+  }, []);
 
-    const isPathLocalized = /^\/(ru|en)(\/|$)/.test(window.location.pathname);
-    const params = new URLSearchParams(window.location.search);
-    if (!isPathLocalized) {
-      params.set("lang", nextLanguage);
-    }
-    const nextQuery = params.toString();
-    const nextUrl = `${window.location.pathname}${nextQuery ? `?${nextQuery}` : ""}${window.location.hash}`;
-    window.history.replaceState({}, "", nextUrl);
+  const switchLanguage = useCallback((nextLanguage: Language, currentPath?: string) => {
+    const path = currentPath ?? (typeof window !== "undefined" ? window.location.pathname : "/");
+    const noPrefixPath = path.replace(/^\/(en|ru)(?=\/|$)/, "") || "/";
+    const normalizedPath = noPrefixPath.startsWith("/") ? noPrefixPath : `/${noPrefixPath}`;
+    return `/${nextLanguage}${normalizedPath === "/" ? "" : normalizedPath}`;
   }, []);
 
   const setLanguage = useCallback((nextLanguage: Language) => {
     setLanguageState(nextLanguage);
     persistLanguage(nextLanguage);
-  }, [persistLanguage]);
+    if (typeof window !== "undefined") {
+      const nextPath = switchLanguage(nextLanguage, window.location.pathname);
+      window.history.replaceState({}, "", `${nextPath}${window.location.search}${window.location.hash}`);
+    }
+  }, [persistLanguage, switchLanguage]);
 
   useEffect(() => {
     const urlLanguage = getLanguageFromUrl();
@@ -252,7 +250,7 @@ export const LanguageProvider: React.FC<{children: ReactNode}> = ({ children }) 
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, switchLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );

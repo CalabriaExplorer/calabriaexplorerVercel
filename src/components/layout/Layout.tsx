@@ -18,6 +18,19 @@ interface LayoutProps {
   preloadImages?: string[];
 }
 
+const ThreadsIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M16.5 4.5c-2.5 0-4.5 2-4.5 4.5v6c0 2.5 2 4.5 4.5 4.5s4.5-2 4.5-4.5v-2h-3v2c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V9c0-1.7 1.3-3 3-3s3 1.3 3 3v3h3V9c0-2.5-2-4.5-4.5-4.5z" />
+    <circle cx="6.5" cy="14.5" r="2.5" />
+  </svg>
+);
+
 const Layout = ({ children, colorScheme = "default", title, description, image, preloadImages }: LayoutProps) => {
   const { language, setLanguage, t } = useLanguage();
   
@@ -54,6 +67,11 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
           href: "https://www.instagram.com/maria_nedvizimost_calabria?igsh=b3h1aHBzeWhpeG4z",
           icon: Instagram,
           label: "Follow us on Instagram"
+        },
+        {
+          href: "https://www.threads.com/@maria_nedvizimost_calabria",
+          icon: ThreadsIcon,
+          label: "Threads"
         }
       ];
     } else {
@@ -62,6 +80,11 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
           href: "https://www.instagram.com/maria_nedvizimost_calabria?igsh=b3h1aHBzeWhpeG4z",
           icon: Instagram,
           label: "Подписывайтесь в Instagram"
+        },
+        {
+          href: "https://www.threads.com/@maria_nedvizimost_calabria",
+          icon: ThreadsIcon,
+          label: "Threads"
         },
         {
           href: "https://t.me/s/CiroMarinaVibe",
@@ -100,10 +123,16 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
     }
   };
 
-  // Определяем canonical
+  // Определяем canonical и hreflang URL без query-параметра ?lang=
   const canonicalUrl = typeof window !== "undefined"
-    ? `${window.location.origin}${window.location.pathname}?lang=${language}`
+    ? `${window.location.origin}${window.location.pathname}`
     : undefined;
+  const languagePath = typeof window !== "undefined" ? window.location.pathname.replace(/^\/(en|ru)(?=\/|$)/, "") || "/" : "/";
+  const alternateUrls = {
+    en: `/en${languagePath === "/" ? "" : languagePath}`,
+    ru: `/ru${languagePath === "/" ? "" : languagePath}`,
+    xDefault: "/",
+  };
 
   // Schema.org: по title и pathname определяем тип schema
   const isBlogPost = title && /blog/i.test(title) && typeof window !== "undefined" && window.location.pathname.startsWith("/blog/");
@@ -180,6 +209,7 @@ const Layout = ({ children, colorScheme = "default", title, description, image, 
         title={title || "Calabria Explorer"}
         description={description || "Travel in Calabria, Italy: Tours, guides, relocation support."}
         canonical={canonicalUrl}
+        alternateUrls={alternateUrls}
         image={image}
         schema={schema}
         preloadImages={preloadImages}
