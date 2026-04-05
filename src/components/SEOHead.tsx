@@ -42,11 +42,20 @@ const SEOHead: React.FC<SEOHeadProps> = ({
 }) => {
   const location = useLocation();
   const { language } = useLanguage();
-  // canonical без query-параметров пагинации/сортировки
+  const stripLanguagePrefix = (path: string) => path.replace(/^\/(en|ru)(?=\/|$)/, "") || "/";
   const cleanPath = location.pathname;
   const origin = typeof window !== "undefined" ? window.location.origin : "";
-  const languageQuery = language === "ru" ? "?lang=ru" : "?lang=en";
-  const url = canonical || absoluteUrl(`${cleanPath}${languageQuery}`);
+  const isPathLocalized = /^\/(en|ru)(\/|$)/.test(cleanPath);
+  const toLocalizedUrl = (targetLanguage: "en" | "ru") => {
+    if (isPathLocalized) {
+      return `${origin}${cleanPath.replace(/^\/(en|ru)(?=\/|$)/, `/${targetLanguage}`)}`;
+    }
+    const params = new URLSearchParams(location.search);
+    params.set("lang", targetLanguage);
+    const query = params.toString();
+    return `${origin}${cleanPath}${query ? `?${query}` : ""}`;
+  };
+  const url = canonical || (isPathLocalized ? `${origin}${cleanPath}` : toLocalizedUrl(language));
 
   // Google Analytics (gtag.js)
   React.useEffect(() => {
@@ -187,6 +196,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
 
   // Meta теги (SPA-навигация)
   React.useEffect(() => {
+    document.documentElement.lang = language;
     if (title) document.title = title;
     if (description) {
       let descTag = document.querySelector("meta[name='description']");
@@ -207,7 +217,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       document.head.appendChild(robotsTag);
     }
     (robotsTag as HTMLMetaElement).content = robotsCnt;
-  }, [title, description, noIndex, location.search]);
+  }, [title, description, noIndex, location.search, language]);
 
   // OG / Twitter / hreflang и theme-color
   React.useEffect(() => {
@@ -263,10 +273,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     // hreflang/alternate
     Array.from(document.querySelectorAll("link[rel='alternate']")).forEach(l => l.remove());
 
-    const normalizedPath = location.pathname.replace(/^\/(en|ru)(\/|$)/, "/") || "/";
+    const normalizedPath = stripLanguagePrefix(location.pathname);
     const locales = [
-      { hreflang: "ru", url: `${origin}${normalizedPath}?lang=ru` },
-      { hreflang: "en", url: `${origin}${normalizedPath}?lang=en` },
+      { hreflang: "ru", url: toLocalizedUrl("ru") },
+      { hreflang: "en", url: toLocalizedUrl("en") },
     ];
     locales.forEach(loc => {
       const link = document.createElement("link");
