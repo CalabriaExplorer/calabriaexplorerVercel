@@ -1,16 +1,29 @@
+# Calabria Explorer robots policy (updated 2026-05-08)
+# Search indexing bots
 User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
 Allow: /
 
 User-agent: YandexBot
 Allow: /
 
-User-agent: GPTBot
+# AI retrieval bots used for search answers
+User-agent: OAI-SearchBot
 Allow: /
 
-User-agent: ClaudeBot
+User-agent: PerplexityBot
 Allow: /
+
+# AI training bots (blocked)
+User-agent: GPTBot
+Disallow: /
 
 User-agent: Google-Extended
-Allow: /
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
 
 Sitemap: https://calabriaexplorer.vercel.app/sitemap.xml
